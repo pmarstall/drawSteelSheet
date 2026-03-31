@@ -1,8 +1,8 @@
 {
   "html": "drawsteel.html",
   "css": "drawsteel.css",
-  "authors": "",
+  "authors": "Patrick Marstall",
   "roll20userid": "",
   "preview": "",
-  "instructions": "Draw Steel character sheet for MCDM's Draw Steel TTRPG. Use the 'Player Character' tab for PCs and the 'NPC' tab for monsters and NPCs. In any ability row, expand 'Power Roll' to set the characteristic, bonus, and tier outcome text, then click 'Roll 2d10' to execute the roll."
+  "instructions": "Draw Steel character sheet for use with MCDM's Draw Steel TTRPG."
 }
