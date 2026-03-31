@@ -1,0 +1,1007 @@
+<!-- Draw Steel Character Sheet for Roll20 — MCDM Productions -->
+ 
+<div class="sheet-main">
+ 
+  <!-- ═══════════════════════════════════════
+       TAB NAVIGATION
+       Uses implicit label+input association.
+       CSS :has() drives show/hide.
+  ════════════════════════════════════════ -->
+  <div class="sheet-tab-nav">
+    <label class="sheet-tab-btn">
+      <input type="radio" name="attr_sheet_tab" value="pc" checked>
+      <span>Player Character</span>
+    </label>
+    <label class="sheet-tab-btn">
+      <input type="radio" name="attr_sheet_tab" value="npc">
+      <span>NPC</span>
+    </label>
+  </div>
+ 
+  <!-- ═══════════════════════════════════════
+       PLAYER CHARACTER TAB
+  ════════════════════════════════════════ -->
+  <div class="sheet-pc-tab">
+ 
+    <!-- HEADER -->
+    <div class="sheet-section sheet-header">
+      <div class="sheet-field sheet-field-name">
+        <label>Character Name</label>
+        <input type="text" name="attr_character_name" placeholder="Character Name">
+      </div>
+      <div class="sheet-field-row">
+        <div class="sheet-field">
+          <label>Player</label>
+          <input type="text" name="attr_player_name">
+        </div>
+        <div class="sheet-field">
+          <label>Ancestry</label>
+          <input type="text" name="attr_ancestry">
+        </div>
+        <div class="sheet-field">
+          <label>Class</label>
+          <input type="text" name="attr_class">
+        </div>
+        <div class="sheet-field">
+          <label>Subclass</label>
+          <input type="text" name="attr_subclass">
+        </div>
+        <div class="sheet-field sheet-field-narrow">
+          <label>Level</label>
+          <input type="number" name="attr_level" value="1" min="1" max="10">
+        </div>
+      </div>
+      <div class="sheet-field-row">
+        <div class="sheet-field">
+          <label>Title</label>
+          <input type="text" name="attr_title">
+        </div>
+        <div class="sheet-field">
+          <label>Pronouns</label>
+          <input type="text" name="attr_pronouns">
+        </div>
+      </div>
+    </div>
+ 
+    <!-- CHARACTERISTICS -->
+    <div class="sheet-section">
+      <h2>Characteristics</h2>
+      <div class="sheet-char-grid">
+        <div class="sheet-char-cell">
+          <label>MGT</label>
+          <input type="number" name="attr_might" value="0" min="-5" max="5">
+          <span class="sheet-char-label-full">Might</span>
+        </div>
+        <div class="sheet-char-cell">
+          <label>AGL</label>
+          <input type="number" name="attr_agility" value="0" min="-5" max="5">
+          <span class="sheet-char-label-full">Agility</span>
+        </div>
+        <div class="sheet-char-cell">
+          <label>REA</label>
+          <input type="number" name="attr_reason" value="0" min="-5" max="5">
+          <span class="sheet-char-label-full">Reason</span>
+        </div>
+        <div class="sheet-char-cell">
+          <label>INU</label>
+          <input type="number" name="attr_intuition" value="0" min="-5" max="5">
+          <span class="sheet-char-label-full">Intuition</span>
+        </div>
+        <div class="sheet-char-cell">
+          <label>PRS</label>
+          <input type="number" name="attr_presence" value="0" min="-5" max="5">
+          <span class="sheet-char-label-full">Presence</span>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- COMBAT STATS -->
+    <div class="sheet-section">
+      <h2>Combat Stats</h2>
+      <div class="sheet-combat-grid">
+        <div class="sheet-stat-block">
+          <label>Stamina</label>
+          <div class="sheet-fraction">
+            <input type="number" name="attr_stamina" value="0" min="0" placeholder="Cur">
+            <span class="sheet-fraction-sep">/</span>
+            <input type="number" name="attr_stamina_max" value="0" min="0" placeholder="Max">
+          </div>
+        </div>
+        <div class="sheet-stat-block">
+          <label>Recovery Value</label>
+          <input type="number" name="attr_recovery_value" value="0" readonly class="sheet-readonly">
+        </div>
+        <div class="sheet-stat-block">
+          <label>Recoveries</label>
+          <div class="sheet-fraction">
+            <input type="number" name="attr_recoveries" value="0" min="0" placeholder="Cur">
+            <span class="sheet-fraction-sep">/</span>
+            <input type="number" name="attr_recoveries_max" value="0" min="0" placeholder="Max">
+          </div>
+        </div>
+        <div class="sheet-stat-block">
+          <label>Speed</label>
+          <input type="number" name="attr_speed" value="0" min="0">
+        </div>
+        <div class="sheet-stat-block">
+          <label>Stability</label>
+          <input type="number" name="attr_stability" value="0" min="0">
+        </div>
+        <div class="sheet-stat-block">
+          <label>Size</label>
+          <input type="text" name="attr_size" placeholder="1M">
+        </div>
+      </div>
+    </div>
+ 
+    <!-- HEROIC RESOURCES -->
+    <div class="sheet-section">
+      <h2>Heroic Resources</h2>
+      <div class="sheet-resources-grid">
+        <div class="sheet-resource-row">
+          <input type="text" name="attr_resource1_name" placeholder="Resource Name (e.g. Rage)" class="sheet-resource-name">
+          <div class="sheet-fraction">
+            <input type="number" name="attr_resource1_current" value="0" min="0">
+            <span class="sheet-fraction-sep">/</span>
+            <input type="number" name="attr_resource1_max" value="0" min="0">
+          </div>
+        </div>
+        <div class="sheet-resource-row">
+          <input type="text" name="attr_resource2_name" placeholder="Resource Name (optional)" class="sheet-resource-name">
+          <div class="sheet-fraction">
+            <input type="number" name="attr_resource2_current" value="0" min="0">
+            <span class="sheet-fraction-sep">/</span>
+            <input type="number" name="attr_resource2_max" value="0" min="0">
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- CONDITIONS & EQUIPMENT -->
+    <div class="sheet-section-row">
+      <div class="sheet-section sheet-half">
+        <h2>Conditions</h2>
+        <textarea name="attr_conditions" placeholder="Active conditions (Bleeding, Dazed, Frightened, Grabbed, Prone, Restrained, Slowed, Taunted, Weakened)..."></textarea>
+      </div>
+      <div class="sheet-section sheet-half">
+        <h2>Equipment</h2>
+        <textarea name="attr_equipment" placeholder="Weapons, armor, gear..."></textarea>
+      </div>
+    </div>
+ 
+    <!-- SKILLS -->
+    <div class="sheet-section">
+      <h2>Skills</h2>
+      <div class="sheet-skills-grid">
+        <div class="sheet-skill-block">
+          <label>Might Skills</label>
+          <textarea name="attr_skills_might" placeholder="Lift, Climb, Endure..."></textarea>
+        </div>
+        <div class="sheet-skill-block">
+          <label>Agility Skills</label>
+          <textarea name="attr_skills_agility" placeholder="Hide, Jump, Tumble..."></textarea>
+        </div>
+        <div class="sheet-skill-block">
+          <label>Reason Skills</label>
+          <textarea name="attr_skills_reason" placeholder="Lore, Monsters, Magic..."></textarea>
+        </div>
+        <div class="sheet-skill-block">
+          <label>Intuition Skills</label>
+          <textarea name="attr_skills_intuition" placeholder="Alertness, Nature, Track..."></textarea>
+        </div>
+        <div class="sheet-skill-block">
+          <label>Presence Skills</label>
+          <textarea name="attr_skills_presence" placeholder="Brag, Lie, Lead..."></textarea>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- ───────────── ACTIONS ───────────── -->
+    <div class="sheet-section sheet-abilities-section">
+      <h2>Actions</h2>
+      <fieldset class="repeating_actions">
+        <div class="sheet-ability-row">
+          <div class="sheet-ability-header">
+            <input type="text" name="attr_ability_name" placeholder="Ability Name" class="sheet-ability-name">
+            <input type="text" name="attr_ability_cost" placeholder="Cost" class="sheet-ability-cost">
+            <input type="text" name="attr_ability_keywords" placeholder="Keywords (Attack, Magic, Ranged...)" class="sheet-ability-keywords">
+          </div>
+          <div class="sheet-ability-meta">
+            <div class="sheet-field-inline">
+              <label>Distance</label>
+              <input type="text" name="attr_ability_distance" placeholder="Melee 1 / Ranged 10">
+            </div>
+            <div class="sheet-field-inline">
+              <label>Target</label>
+              <input type="text" name="attr_ability_target" placeholder="1 creature">
+            </div>
+            <div class="sheet-field-inline">
+              <label>Trigger</label>
+              <input type="text" name="attr_ability_trigger" placeholder="(triggered actions only)">
+            </div>
+          </div>
+          <div class="sheet-field">
+            <label>Effect</label>
+            <textarea name="attr_ability_effect" placeholder="Ability effect text..."></textarea>
+          </div>
+          <details class="sheet-powerroll-details">
+            <summary>&#9660; Power Roll</summary>
+            <div class="sheet-powerroll-body">
+              <div class="sheet-pr-config-row">
+                <div class="sheet-pr-config">
+                  <label>Characteristic</label>
+                  <select name="attr_pr_characteristic">
+                    <option value="might">MGT — Might</option>
+                    <option value="agility">AGL — Agility</option>
+                    <option value="reason">REA — Reason</option>
+                    <option value="intuition">INU — Intuition</option>
+                    <option value="presence">PRS — Presence</option>
+                  </select>
+                </div>
+                <div class="sheet-pr-config">
+                  <label>Extra Bonus</label>
+                  <input type="number" name="attr_pr_bonus" value="0">
+                </div>
+                <input type="hidden" name="attr_pr_char_value" value="0">
+                <button type="roll" class="sheet-roll-btn" name="roll_powerroll"
+                  value="&{template:default} {{name=@{ability_name} — Power Roll}} {{Roll=[[2d10+@{pr_char_value}+@{pr_bonus}]]}} {{Tier 1 (11 or less)=@{pr_tier1}}} {{Tier 2 (12-16)=@{pr_tier2}}} {{Tier 3 (17+)=@{pr_tier3}}}">
+                  Roll 2d10
+                </button>
+              </div>
+              <div class="sheet-pr-tiers">
+                <div class="sheet-pr-tier sheet-tier1">
+                  <label>&#8804;11 — Tier 1</label>
+                  <textarea name="attr_pr_tier1" placeholder="Tier 1 result..."></textarea>
+                </div>
+                <div class="sheet-pr-tier sheet-tier2">
+                  <label>12–16 — Tier 2</label>
+                  <textarea name="attr_pr_tier2" placeholder="Tier 2 result..."></textarea>
+                </div>
+                <div class="sheet-pr-tier sheet-tier3">
+                  <label>17+ — Tier 3</label>
+                  <textarea name="attr_pr_tier3" placeholder="Tier 3 result..."></textarea>
+                </div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </fieldset>
+    </div>
+ 
+    <!-- ───────────── MANEUVERS ───────────── -->
+    <div class="sheet-section sheet-abilities-section">
+      <h2>Maneuvers</h2>
+      <fieldset class="repeating_maneuvers">
+        <div class="sheet-ability-row">
+          <div class="sheet-ability-header">
+            <input type="text" name="attr_ability_name" placeholder="Ability Name" class="sheet-ability-name">
+            <input type="text" name="attr_ability_cost" placeholder="Cost" class="sheet-ability-cost">
+            <input type="text" name="attr_ability_keywords" placeholder="Keywords" class="sheet-ability-keywords">
+          </div>
+          <div class="sheet-ability-meta">
+            <div class="sheet-field-inline">
+              <label>Distance</label>
+              <input type="text" name="attr_ability_distance" placeholder="Melee 1 / Ranged 10">
+            </div>
+            <div class="sheet-field-inline">
+              <label>Target</label>
+              <input type="text" name="attr_ability_target" placeholder="1 creature">
+            </div>
+            <div class="sheet-field-inline">
+              <label>Trigger</label>
+              <input type="text" name="attr_ability_trigger" placeholder="(triggered actions only)">
+            </div>
+          </div>
+          <div class="sheet-field">
+            <label>Effect</label>
+            <textarea name="attr_ability_effect" placeholder="Ability effect text..."></textarea>
+          </div>
+          <details class="sheet-powerroll-details">
+            <summary>&#9660; Power Roll</summary>
+            <div class="sheet-powerroll-body">
+              <div class="sheet-pr-config-row">
+                <div class="sheet-pr-config">
+                  <label>Characteristic</label>
+                  <select name="attr_pr_characteristic">
+                    <option value="might">MGT — Might</option>
+                    <option value="agility">AGL — Agility</option>
+                    <option value="reason">REA — Reason</option>
+                    <option value="intuition">INU — Intuition</option>
+                    <option value="presence">PRS — Presence</option>
+                  </select>
+                </div>
+                <div class="sheet-pr-config">
+                  <label>Extra Bonus</label>
+                  <input type="number" name="attr_pr_bonus" value="0">
+                </div>
+                <input type="hidden" name="attr_pr_char_value" value="0">
+                <button type="roll" class="sheet-roll-btn" name="roll_powerroll"
+                  value="&{template:default} {{name=@{ability_name} — Power Roll}} {{Roll=[[2d10+@{pr_char_value}+@{pr_bonus}]]}} {{Tier 1 (11 or less)=@{pr_tier1}}} {{Tier 2 (12-16)=@{pr_tier2}}} {{Tier 3 (17+)=@{pr_tier3}}}">
+                  Roll 2d10
+                </button>
+              </div>
+              <div class="sheet-pr-tiers">
+                <div class="sheet-pr-tier sheet-tier1">
+                  <label>&#8804;11 — Tier 1</label>
+                  <textarea name="attr_pr_tier1" placeholder="Tier 1 result..."></textarea>
+                </div>
+                <div class="sheet-pr-tier sheet-tier2">
+                  <label>12–16 — Tier 2</label>
+                  <textarea name="attr_pr_tier2" placeholder="Tier 2 result..."></textarea>
+                </div>
+                <div class="sheet-pr-tier sheet-tier3">
+                  <label>17+ — Tier 3</label>
+                  <textarea name="attr_pr_tier3" placeholder="Tier 3 result..."></textarea>
+                </div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </fieldset>
+    </div>
+ 
+    <!-- ───────────── TRIGGERED ACTIONS ───────────── -->
+    <div class="sheet-section sheet-abilities-section">
+      <h2>Triggered Actions</h2>
+      <fieldset class="repeating_triggered">
+        <div class="sheet-ability-row">
+          <div class="sheet-ability-header">
+            <input type="text" name="attr_ability_name" placeholder="Ability Name" class="sheet-ability-name">
+            <input type="text" name="attr_ability_cost" placeholder="Cost" class="sheet-ability-cost">
+            <input type="text" name="attr_ability_keywords" placeholder="Keywords" class="sheet-ability-keywords">
+          </div>
+          <div class="sheet-ability-meta">
+            <div class="sheet-field-inline">
+              <label>Distance</label>
+              <input type="text" name="attr_ability_distance" placeholder="Melee 1 / Ranged 10">
+            </div>
+            <div class="sheet-field-inline">
+              <label>Target</label>
+              <input type="text" name="attr_ability_target" placeholder="1 creature">
+            </div>
+            <div class="sheet-field-inline sheet-field-trigger">
+              <label>Trigger</label>
+              <input type="text" name="attr_ability_trigger" placeholder="When does this trigger?">
+            </div>
+          </div>
+          <div class="sheet-field">
+            <label>Effect</label>
+            <textarea name="attr_ability_effect" placeholder="Ability effect text..."></textarea>
+          </div>
+          <details class="sheet-powerroll-details">
+            <summary>&#9660; Power Roll</summary>
+            <div class="sheet-powerroll-body">
+              <div class="sheet-pr-config-row">
+                <div class="sheet-pr-config">
+                  <label>Characteristic</label>
+                  <select name="attr_pr_characteristic">
+                    <option value="might">MGT — Might</option>
+                    <option value="agility">AGL — Agility</option>
+                    <option value="reason">REA — Reason</option>
+                    <option value="intuition">INU — Intuition</option>
+                    <option value="presence">PRS — Presence</option>
+                  </select>
+                </div>
+                <div class="sheet-pr-config">
+                  <label>Extra Bonus</label>
+                  <input type="number" name="attr_pr_bonus" value="0">
+                </div>
+                <input type="hidden" name="attr_pr_char_value" value="0">
+                <button type="roll" class="sheet-roll-btn" name="roll_powerroll"
+                  value="&{template:default} {{name=@{ability_name} — Power Roll}} {{Roll=[[2d10+@{pr_char_value}+@{pr_bonus}]]}} {{Tier 1 (11 or less)=@{pr_tier1}}} {{Tier 2 (12-16)=@{pr_tier2}}} {{Tier 3 (17+)=@{pr_tier3}}}">
+                  Roll 2d10
+                </button>
+              </div>
+              <div class="sheet-pr-tiers">
+                <div class="sheet-pr-tier sheet-tier1">
+                  <label>&#8804;11 — Tier 1</label>
+                  <textarea name="attr_pr_tier1" placeholder="Tier 1 result..."></textarea>
+                </div>
+                <div class="sheet-pr-tier sheet-tier2">
+                  <label>12–16 — Tier 2</label>
+                  <textarea name="attr_pr_tier2" placeholder="Tier 2 result..."></textarea>
+                </div>
+                <div class="sheet-pr-tier sheet-tier3">
+                  <label>17+ — Tier 3</label>
+                  <textarea name="attr_pr_tier3" placeholder="Tier 3 result..."></textarea>
+                </div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </fieldset>
+    </div>
+ 
+    <!-- ───────────── FREE TRIGGERED ACTIONS ───────────── -->
+    <div class="sheet-section sheet-abilities-section">
+      <h2>Free Triggered Actions</h2>
+      <fieldset class="repeating_freetriggered">
+        <div class="sheet-ability-row">
+          <div class="sheet-ability-header">
+            <input type="text" name="attr_ability_name" placeholder="Ability Name" class="sheet-ability-name">
+            <input type="text" name="attr_ability_cost" placeholder="Cost" class="sheet-ability-cost">
+            <input type="text" name="attr_ability_keywords" placeholder="Keywords" class="sheet-ability-keywords">
+          </div>
+          <div class="sheet-ability-meta">
+            <div class="sheet-field-inline">
+              <label>Distance</label>
+              <input type="text" name="attr_ability_distance" placeholder="Melee 1 / Ranged 10">
+            </div>
+            <div class="sheet-field-inline">
+              <label>Target</label>
+              <input type="text" name="attr_ability_target" placeholder="1 creature">
+            </div>
+            <div class="sheet-field-inline sheet-field-trigger">
+              <label>Trigger</label>
+              <input type="text" name="attr_ability_trigger" placeholder="When does this trigger?">
+            </div>
+          </div>
+          <div class="sheet-field">
+            <label>Effect</label>
+            <textarea name="attr_ability_effect" placeholder="Ability effect text..."></textarea>
+          </div>
+          <details class="sheet-powerroll-details">
+            <summary>&#9660; Power Roll</summary>
+            <div class="sheet-powerroll-body">
+              <div class="sheet-pr-config-row">
+                <div class="sheet-pr-config">
+                  <label>Characteristic</label>
+                  <select name="attr_pr_characteristic">
+                    <option value="might">MGT — Might</option>
+                    <option value="agility">AGL — Agility</option>
+                    <option value="reason">REA — Reason</option>
+                    <option value="intuition">INU — Intuition</option>
+                    <option value="presence">PRS — Presence</option>
+                  </select>
+                </div>
+                <div class="sheet-pr-config">
+                  <label>Extra Bonus</label>
+                  <input type="number" name="attr_pr_bonus" value="0">
+                </div>
+                <input type="hidden" name="attr_pr_char_value" value="0">
+                <button type="roll" class="sheet-roll-btn" name="roll_powerroll"
+                  value="&{template:default} {{name=@{ability_name} — Power Roll}} {{Roll=[[2d10+@{pr_char_value}+@{pr_bonus}]]}} {{Tier 1 (11 or less)=@{pr_tier1}}} {{Tier 2 (12-16)=@{pr_tier2}}} {{Tier 3 (17+)=@{pr_tier3}}}">
+                  Roll 2d10
+                </button>
+              </div>
+              <div class="sheet-pr-tiers">
+                <div class="sheet-pr-tier sheet-tier1">
+                  <label>&#8804;11 — Tier 1</label>
+                  <textarea name="attr_pr_tier1" placeholder="Tier 1 result..."></textarea>
+                </div>
+                <div class="sheet-pr-tier sheet-tier2">
+                  <label>12–16 — Tier 2</label>
+                  <textarea name="attr_pr_tier2" placeholder="Tier 2 result..."></textarea>
+                </div>
+                <div class="sheet-pr-tier sheet-tier3">
+                  <label>17+ — Tier 3</label>
+                  <textarea name="attr_pr_tier3" placeholder="Tier 3 result..."></textarea>
+                </div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </fieldset>
+    </div>
+ 
+    <!-- NOTES -->
+    <div class="sheet-section">
+      <h2>Notes</h2>
+      <textarea name="attr_notes" placeholder="Campaign notes, backstory, connections..."></textarea>
+    </div>
+ 
+  </div><!-- end .sheet-pc-tab -->
+ 
+ 
+  <!-- ═══════════════════════════════════════
+       NPC TAB
+  ════════════════════════════════════════ -->
+  <div class="sheet-npc-tab">
+ 
+    <!-- NPC HEADER -->
+    <div class="sheet-section sheet-header">
+      <div class="sheet-field sheet-field-name">
+        <label>NPC Name</label>
+        <input type="text" name="attr_npc_name" placeholder="NPC Name">
+      </div>
+      <div class="sheet-field-row">
+        <div class="sheet-field sheet-field-narrow">
+          <label>Level</label>
+          <input type="number" name="attr_npc_level" value="1" min="1">
+        </div>
+        <div class="sheet-field">
+          <label>Role</label>
+          <select name="attr_npc_role">
+            <option value="">— Role —</option>
+            <option value="Ambusher">Ambusher</option>
+            <option value="Brute">Brute</option>
+            <option value="Controller">Controller</option>
+            <option value="Defender">Defender</option>
+            <option value="Harrier">Harrier</option>
+            <option value="Hexer">Hexer</option>
+            <option value="Leader">Leader</option>
+            <option value="Mount">Mount</option>
+            <option value="Solo">Solo</option>
+            <option value="Support">Support</option>
+          </select>
+        </div>
+        <div class="sheet-field">
+          <label>Type</label>
+          <select name="attr_npc_type">
+            <option value="">— Type —</option>
+            <option value="Minion">Minion</option>
+            <option value="Standard">Standard</option>
+            <option value="Elite">Elite</option>
+            <option value="Leader">Leader</option>
+            <option value="Solo">Solo</option>
+          </select>
+        </div>
+        <div class="sheet-field">
+          <label>Keywords</label>
+          <input type="text" name="attr_npc_keywords" placeholder="Animal, Beast, Humanoid...">
+        </div>
+        <div class="sheet-field sheet-field-narrow">
+          <label>EV</label>
+          <input type="number" name="attr_npc_ev" value="0" min="0" title="Encounter Value">
+        </div>
+      </div>
+    </div>
+ 
+    <!-- NPC CHARACTERISTICS -->
+    <div class="sheet-section">
+      <h2>Characteristics</h2>
+      <div class="sheet-char-grid">
+        <div class="sheet-char-cell">
+          <label>MGT</label>
+          <input type="number" name="attr_npc_might" value="0" min="-5" max="5">
+          <span class="sheet-char-label-full">Might</span>
+        </div>
+        <div class="sheet-char-cell">
+          <label>AGL</label>
+          <input type="number" name="attr_npc_agility" value="0" min="-5" max="5">
+          <span class="sheet-char-label-full">Agility</span>
+        </div>
+        <div class="sheet-char-cell">
+          <label>REA</label>
+          <input type="number" name="attr_npc_reason" value="0" min="-5" max="5">
+          <span class="sheet-char-label-full">Reason</span>
+        </div>
+        <div class="sheet-char-cell">
+          <label>INU</label>
+          <input type="number" name="attr_npc_intuition" value="0" min="-5" max="5">
+          <span class="sheet-char-label-full">Intuition</span>
+        </div>
+        <div class="sheet-char-cell">
+          <label>PRS</label>
+          <input type="number" name="attr_npc_presence" value="0" min="-5" max="5">
+          <span class="sheet-char-label-full">Presence</span>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- NPC COMBAT STATS -->
+    <div class="sheet-section">
+      <h2>Combat Stats</h2>
+      <div class="sheet-combat-grid">
+        <div class="sheet-stat-block">
+          <label>Stamina</label>
+          <div class="sheet-fraction">
+            <input type="number" name="attr_npc_stamina" value="0" min="0" placeholder="Cur">
+            <span class="sheet-fraction-sep">/</span>
+            <input type="number" name="attr_npc_stamina_max" value="0" min="0" placeholder="Max">
+          </div>
+        </div>
+        <div class="sheet-stat-block">
+          <label>Speed</label>
+          <input type="number" name="attr_npc_speed" value="0" min="0">
+        </div>
+        <div class="sheet-stat-block">
+          <label>Stability</label>
+          <input type="number" name="attr_npc_stability" value="0" min="0">
+        </div>
+        <div class="sheet-stat-block">
+          <label>Size</label>
+          <input type="text" name="attr_npc_size" placeholder="1M">
+        </div>
+      </div>
+    </div>
+ 
+    <!-- NPC IMMUNITIES / WEAKNESSES -->
+    <div class="sheet-section-row">
+      <div class="sheet-section sheet-half">
+        <h2>Immunities</h2>
+        <textarea name="attr_npc_immunities" placeholder="Fire, Poison, Psychic..."></textarea>
+      </div>
+      <div class="sheet-section sheet-half">
+        <h2>Weaknesses</h2>
+        <textarea name="attr_npc_weaknesses" placeholder="Cold, Holy..."></textarea>
+      </div>
+    </div>
+ 
+    <!-- ───────────── NPC ACTIONS ───────────── -->
+    <div class="sheet-section sheet-abilities-section">
+      <h2>Actions</h2>
+      <fieldset class="repeating_npcactions">
+        <div class="sheet-ability-row">
+          <div class="sheet-ability-header">
+            <input type="text" name="attr_ability_name" placeholder="Ability Name" class="sheet-ability-name">
+            <input type="text" name="attr_ability_cost" placeholder="Cost" class="sheet-ability-cost">
+            <input type="text" name="attr_ability_keywords" placeholder="Keywords" class="sheet-ability-keywords">
+          </div>
+          <div class="sheet-ability-meta">
+            <div class="sheet-field-inline">
+              <label>Distance</label>
+              <input type="text" name="attr_ability_distance" placeholder="Melee 1 / Ranged 10">
+            </div>
+            <div class="sheet-field-inline">
+              <label>Target</label>
+              <input type="text" name="attr_ability_target" placeholder="1 creature">
+            </div>
+            <div class="sheet-field-inline">
+              <label>Trigger</label>
+              <input type="text" name="attr_ability_trigger" placeholder="(triggered actions only)">
+            </div>
+          </div>
+          <div class="sheet-field">
+            <label>Effect</label>
+            <textarea name="attr_ability_effect" placeholder="Ability effect text..."></textarea>
+          </div>
+          <details class="sheet-powerroll-details">
+            <summary>&#9660; Power Roll</summary>
+            <div class="sheet-powerroll-body">
+              <div class="sheet-pr-config-row">
+                <div class="sheet-pr-config">
+                  <label>Characteristic</label>
+                  <select name="attr_pr_characteristic">
+                    <option value="npc_might">MGT — Might</option>
+                    <option value="npc_agility">AGL — Agility</option>
+                    <option value="npc_reason">REA — Reason</option>
+                    <option value="npc_intuition">INU — Intuition</option>
+                    <option value="npc_presence">PRS — Presence</option>
+                  </select>
+                </div>
+                <div class="sheet-pr-config">
+                  <label>Extra Bonus</label>
+                  <input type="number" name="attr_pr_bonus" value="0">
+                </div>
+                <input type="hidden" name="attr_pr_char_value" value="0">
+                <button type="roll" class="sheet-roll-btn" name="roll_powerroll"
+                  value="&{template:default} {{name=@{ability_name} — Power Roll}} {{Roll=[[2d10+@{pr_char_value}+@{pr_bonus}]]}} {{Tier 1 (11 or less)=@{pr_tier1}}} {{Tier 2 (12-16)=@{pr_tier2}}} {{Tier 3 (17+)=@{pr_tier3}}}">
+                  Roll 2d10
+                </button>
+              </div>
+              <div class="sheet-pr-tiers">
+                <div class="sheet-pr-tier sheet-tier1">
+                  <label>&#8804;11 — Tier 1</label>
+                  <textarea name="attr_pr_tier1" placeholder="Tier 1 result..."></textarea>
+                </div>
+                <div class="sheet-pr-tier sheet-tier2">
+                  <label>12–16 — Tier 2</label>
+                  <textarea name="attr_pr_tier2" placeholder="Tier 2 result..."></textarea>
+                </div>
+                <div class="sheet-pr-tier sheet-tier3">
+                  <label>17+ — Tier 3</label>
+                  <textarea name="attr_pr_tier3" placeholder="Tier 3 result..."></textarea>
+                </div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </fieldset>
+    </div>
+ 
+    <!-- ───────────── NPC MANEUVERS ───────────── -->
+    <div class="sheet-section sheet-abilities-section">
+      <h2>Maneuvers</h2>
+      <fieldset class="repeating_npcmaneuvers">
+        <div class="sheet-ability-row">
+          <div class="sheet-ability-header">
+            <input type="text" name="attr_ability_name" placeholder="Ability Name" class="sheet-ability-name">
+            <input type="text" name="attr_ability_cost" placeholder="Cost" class="sheet-ability-cost">
+            <input type="text" name="attr_ability_keywords" placeholder="Keywords" class="sheet-ability-keywords">
+          </div>
+          <div class="sheet-ability-meta">
+            <div class="sheet-field-inline">
+              <label>Distance</label>
+              <input type="text" name="attr_ability_distance" placeholder="Melee 1 / Ranged 10">
+            </div>
+            <div class="sheet-field-inline">
+              <label>Target</label>
+              <input type="text" name="attr_ability_target" placeholder="1 creature">
+            </div>
+            <div class="sheet-field-inline">
+              <label>Trigger</label>
+              <input type="text" name="attr_ability_trigger" placeholder="(triggered actions only)">
+            </div>
+          </div>
+          <div class="sheet-field">
+            <label>Effect</label>
+            <textarea name="attr_ability_effect" placeholder="Ability effect text..."></textarea>
+          </div>
+          <details class="sheet-powerroll-details">
+            <summary>&#9660; Power Roll</summary>
+            <div class="sheet-powerroll-body">
+              <div class="sheet-pr-config-row">
+                <div class="sheet-pr-config">
+                  <label>Characteristic</label>
+                  <select name="attr_pr_characteristic">
+                    <option value="npc_might">MGT — Might</option>
+                    <option value="npc_agility">AGL — Agility</option>
+                    <option value="npc_reason">REA — Reason</option>
+                    <option value="npc_intuition">INU — Intuition</option>
+                    <option value="npc_presence">PRS — Presence</option>
+                  </select>
+                </div>
+                <div class="sheet-pr-config">
+                  <label>Extra Bonus</label>
+                  <input type="number" name="attr_pr_bonus" value="0">
+                </div>
+                <input type="hidden" name="attr_pr_char_value" value="0">
+                <button type="roll" class="sheet-roll-btn" name="roll_powerroll"
+                  value="&{template:default} {{name=@{ability_name} — Power Roll}} {{Roll=[[2d10+@{pr_char_value}+@{pr_bonus}]]}} {{Tier 1 (11 or less)=@{pr_tier1}}} {{Tier 2 (12-16)=@{pr_tier2}}} {{Tier 3 (17+)=@{pr_tier3}}}">
+                  Roll 2d10
+                </button>
+              </div>
+              <div class="sheet-pr-tiers">
+                <div class="sheet-pr-tier sheet-tier1">
+                  <label>&#8804;11 — Tier 1</label>
+                  <textarea name="attr_pr_tier1" placeholder="Tier 1 result..."></textarea>
+                </div>
+                <div class="sheet-pr-tier sheet-tier2">
+                  <label>12–16 — Tier 2</label>
+                  <textarea name="attr_pr_tier2" placeholder="Tier 2 result..."></textarea>
+                </div>
+                <div class="sheet-pr-tier sheet-tier3">
+                  <label>17+ — Tier 3</label>
+                  <textarea name="attr_pr_tier3" placeholder="Tier 3 result..."></textarea>
+                </div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </fieldset>
+    </div>
+ 
+    <!-- ───────────── NPC TRIGGERED ACTIONS ───────────── -->
+    <div class="sheet-section sheet-abilities-section">
+      <h2>Triggered Actions</h2>
+      <fieldset class="repeating_npctriggered">
+        <div class="sheet-ability-row">
+          <div class="sheet-ability-header">
+            <input type="text" name="attr_ability_name" placeholder="Ability Name" class="sheet-ability-name">
+            <input type="text" name="attr_ability_cost" placeholder="Cost" class="sheet-ability-cost">
+            <input type="text" name="attr_ability_keywords" placeholder="Keywords" class="sheet-ability-keywords">
+          </div>
+          <div class="sheet-ability-meta">
+            <div class="sheet-field-inline">
+              <label>Distance</label>
+              <input type="text" name="attr_ability_distance" placeholder="Melee 1 / Ranged 10">
+            </div>
+            <div class="sheet-field-inline">
+              <label>Target</label>
+              <input type="text" name="attr_ability_target" placeholder="1 creature">
+            </div>
+            <div class="sheet-field-inline sheet-field-trigger">
+              <label>Trigger</label>
+              <input type="text" name="attr_ability_trigger" placeholder="When does this trigger?">
+            </div>
+          </div>
+          <div class="sheet-field">
+            <label>Effect</label>
+            <textarea name="attr_ability_effect" placeholder="Ability effect text..."></textarea>
+          </div>
+          <details class="sheet-powerroll-details">
+            <summary>&#9660; Power Roll</summary>
+            <div class="sheet-powerroll-body">
+              <div class="sheet-pr-config-row">
+                <div class="sheet-pr-config">
+                  <label>Characteristic</label>
+                  <select name="attr_pr_characteristic">
+                    <option value="npc_might">MGT — Might</option>
+                    <option value="npc_agility">AGL — Agility</option>
+                    <option value="npc_reason">REA — Reason</option>
+                    <option value="npc_intuition">INU — Intuition</option>
+                    <option value="npc_presence">PRS — Presence</option>
+                  </select>
+                </div>
+                <div class="sheet-pr-config">
+                  <label>Extra Bonus</label>
+                  <input type="number" name="attr_pr_bonus" value="0">
+                </div>
+                <input type="hidden" name="attr_pr_char_value" value="0">
+                <button type="roll" class="sheet-roll-btn" name="roll_powerroll"
+                  value="&{template:default} {{name=@{ability_name} — Power Roll}} {{Roll=[[2d10+@{pr_char_value}+@{pr_bonus}]]}} {{Tier 1 (11 or less)=@{pr_tier1}}} {{Tier 2 (12-16)=@{pr_tier2}}} {{Tier 3 (17+)=@{pr_tier3}}}">
+                  Roll 2d10
+                </button>
+              </div>
+              <div class="sheet-pr-tiers">
+                <div class="sheet-pr-tier sheet-tier1">
+                  <label>&#8804;11 — Tier 1</label>
+                  <textarea name="attr_pr_tier1" placeholder="Tier 1 result..."></textarea>
+                </div>
+                <div class="sheet-pr-tier sheet-tier2">
+                  <label>12–16 — Tier 2</label>
+                  <textarea name="attr_pr_tier2" placeholder="Tier 2 result..."></textarea>
+                </div>
+                <div class="sheet-pr-tier sheet-tier3">
+                  <label>17+ — Tier 3</label>
+                  <textarea name="attr_pr_tier3" placeholder="Tier 3 result..."></textarea>
+                </div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </fieldset>
+    </div>
+ 
+    <!-- ───────────── NPC FREE TRIGGERED ACTIONS ───────────── -->
+    <div class="sheet-section sheet-abilities-section">
+      <h2>Free Triggered Actions</h2>
+      <fieldset class="repeating_npcfreetriggered">
+        <div class="sheet-ability-row">
+          <div class="sheet-ability-header">
+            <input type="text" name="attr_ability_name" placeholder="Ability Name" class="sheet-ability-name">
+            <input type="text" name="attr_ability_cost" placeholder="Cost" class="sheet-ability-cost">
+            <input type="text" name="attr_ability_keywords" placeholder="Keywords" class="sheet-ability-keywords">
+          </div>
+          <div class="sheet-ability-meta">
+            <div class="sheet-field-inline">
+              <label>Distance</label>
+              <input type="text" name="attr_ability_distance" placeholder="Melee 1 / Ranged 10">
+            </div>
+            <div class="sheet-field-inline">
+              <label>Target</label>
+              <input type="text" name="attr_ability_target" placeholder="1 creature">
+            </div>
+            <div class="sheet-field-inline sheet-field-trigger">
+              <label>Trigger</label>
+              <input type="text" name="attr_ability_trigger" placeholder="When does this trigger?">
+            </div>
+          </div>
+          <div class="sheet-field">
+            <label>Effect</label>
+            <textarea name="attr_ability_effect" placeholder="Ability effect text..."></textarea>
+          </div>
+          <details class="sheet-powerroll-details">
+            <summary>&#9660; Power Roll</summary>
+            <div class="sheet-powerroll-body">
+              <div class="sheet-pr-config-row">
+                <div class="sheet-pr-config">
+                  <label>Characteristic</label>
+                  <select name="attr_pr_characteristic">
+                    <option value="npc_might">MGT — Might</option>
+                    <option value="npc_agility">AGL — Agility</option>
+                    <option value="npc_reason">REA — Reason</option>
+                    <option value="npc_intuition">INU — Intuition</option>
+                    <option value="npc_presence">PRS — Presence</option>
+                  </select>
+                </div>
+                <div class="sheet-pr-config">
+                  <label>Extra Bonus</label>
+                  <input type="number" name="attr_pr_bonus" value="0">
+                </div>
+                <input type="hidden" name="attr_pr_char_value" value="0">
+                <button type="roll" class="sheet-roll-btn" name="roll_powerroll"
+                  value="&{template:default} {{name=@{ability_name} — Power Roll}} {{Roll=[[2d10+@{pr_char_value}+@{pr_bonus}]]}} {{Tier 1 (11 or less)=@{pr_tier1}}} {{Tier 2 (12-16)=@{pr_tier2}}} {{Tier 3 (17+)=@{pr_tier3}}}">
+                  Roll 2d10
+                </button>
+              </div>
+              <div class="sheet-pr-tiers">
+                <div class="sheet-pr-tier sheet-tier1">
+                  <label>&#8804;11 — Tier 1</label>
+                  <textarea name="attr_pr_tier1" placeholder="Tier 1 result..."></textarea>
+                </div>
+                <div class="sheet-pr-tier sheet-tier2">
+                  <label>12–16 — Tier 2</label>
+                  <textarea name="attr_pr_tier2" placeholder="Tier 2 result..."></textarea>
+                </div>
+                <div class="sheet-pr-tier sheet-tier3">
+                  <label>17+ — Tier 3</label>
+                  <textarea name="attr_pr_tier3" placeholder="Tier 3 result..."></textarea>
+                </div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </fieldset>
+    </div>
+ 
+    <!-- NPC NOTES -->
+    <div class="sheet-section">
+      <h2>Notes</h2>
+      <textarea name="attr_npc_notes" placeholder="GM notes, lore, tactics..."></textarea>
+    </div>
+ 
+  </div><!-- end .sheet-npc-tab -->
+ 
+</div><!-- end .sheet-main -->
+ 
+ 
+<!-- ═══════════════════════════════════════
+     SHEET WORKERS
+════════════════════════════════════════ -->
+<script type="text/worker">
+ 
+  // ── Helper: update pr_char_value for a single repeating row ──────────────
+  function resolveCharForRow(sourceAttr, charKey, charVals) {
+    var val = parseInt(charVals[charKey]) || 0;
+    var destAttr = sourceAttr.replace('pr_characteristic', 'pr_char_value');
+    var update = {};
+    update[destAttr] = val;
+    setAttrs(update, { silent: true });
+  }
+ 
+  // ── Recovery Value (stamina_max / 3, rounded down) ────────────────────────
+  on('change:stamina_max sheet:opened', function() {
+    getAttrs(['stamina_max'], function(v) {
+      setAttrs({ recovery_value: Math.floor((parseInt(v.stamina_max) || 0) / 3) });
+    });
+  });
+ 
+  // ── PC: resolve characteristic score when pr_characteristic changes ───────
+  var pcSections = ['actions', 'maneuvers', 'triggered', 'freetriggered'];
+  var pcChars    = ['might', 'agility', 'reason', 'intuition', 'presence'];
+ 
+  pcSections.forEach(function(section) {
+    on('change:repeating_' + section + ':pr_characteristic', function(e) {
+      var charKey = e.newValue;
+      if (!charKey) { return; }
+      getAttrs([charKey], function(v) {
+        resolveCharForRow(e.sourceAttribute, charKey, v);
+      });
+    });
+  });
+ 
+  // When a PC characteristic score changes, propagate to all rows
+  on(pcChars.map(function(c) { return 'change:' + c; }).join(' '), function() {
+    getAttrs(pcChars, function(charVals) {
+      pcSections.forEach(function(section) {
+        getSectionIDs(section, function(ids) {
+          ids.forEach(function(id) {
+            var prefix = 'repeating_' + section + '_' + id + '_';
+            getAttrs([prefix + 'pr_characteristic'], function(v) {
+              var key = v[prefix + 'pr_characteristic'];
+              if (key && charVals.hasOwnProperty(key)) {
+                resolveCharForRow(prefix + 'pr_characteristic', key, charVals);
+              }
+            });
+          });
+        });
+      });
+    });
+  });
+ 
+  // ── NPC: resolve characteristic score when pr_characteristic changes ──────
+  var npcSections = ['npcactions', 'npcmaneuvers', 'npctriggered', 'npcfreetriggered'];
+  var npcChars    = ['npc_might', 'npc_agility', 'npc_reason', 'npc_intuition', 'npc_presence'];
+ 
+  npcSections.forEach(function(section) {
+    on('change:repeating_' + section + ':pr_characteristic', function(e) {
+      var charKey = e.newValue;  // e.g. "npc_might"
+      if (!charKey) { return; }
+      getAttrs([charKey], function(v) {
+        resolveCharForRow(e.sourceAttribute, charKey, v);
+      });
+    });
+  });
+ 
+  // When an NPC characteristic score changes, propagate to all rows
+  on(npcChars.map(function(c) { return 'change:' + c; }).join(' '), function() {
+    getAttrs(npcChars, function(charVals) {
+      npcSections.forEach(function(section) {
+        getSectionIDs(section, function(ids) {
+          ids.forEach(function(id) {
+            var prefix = 'repeating_' + section + '_' + id + '_';
+            getAttrs([prefix + 'pr_characteristic'], function(v) {
+              var key = v[prefix + 'pr_characteristic'];
+              if (key && charVals.hasOwnProperty(key)) {
+                resolveCharForRow(prefix + 'pr_characteristic', key, charVals);
+              }
+            });
+          });
+        });
+      });
+    });
+  });
+ 
+</script>
