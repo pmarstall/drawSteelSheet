@@ -1,0 +1,749 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   Draw Steel Character Sheet for Roll20
+   ═══════════════════════════════════════════════════════════════════════
+ 
+   COLOR STRATEGY
+   All colors are CSS custom properties. Light mode is the default.
+   Dark mode is triggered by Roll20's "night-mode" body class OR the
+   OS-level prefers-color-scheme media query.
+ 
+   BRANDING COLORS (consistent across both modes)
+     Gold accent:  #c8a84b
+     Stamina red:  #c0392b (light) / #e05050 (dark — brighter on dark bg)
+     Tier 1:       #5a8a5a (green tones)
+     Tier 2:       #8a7a3a (amber tones)
+     Tier 3:       #7a3a8a (purple tones)
+   ═══════════════════════════════════════════════════════════════════════ */
+ 
+/* ── LIGHT MODE (default) ──────────────────────────────────────────────── */
+.sheet-main {
+  --ds-bg:              #f5f0e8;
+  --ds-bg-section:      #ffffff;
+  --ds-bg-inset:        #faf7f2;
+  --ds-bg-header:       #f0e8d4;
+  --ds-text:            #2a2218;
+  --ds-text-muted:      #6a5a48;
+  --ds-text-label:      #4a3c2e;
+  --ds-border:          #c8b89a;
+  --ds-border-light:    #e0d4be;
+  --ds-accent:          #c8a84b;
+  --ds-accent-text:     #7a5820;
+  --ds-accent-bg:       #f5e8c0;
+  --ds-damage:          #c0392b;
+  --ds-input-bg:        #ffffff;
+  --ds-input-border:    #bfad90;
+  --ds-shadow:          rgba(0, 0, 0, 0.10);
+  --ds-pr-bg:           #f0e8d8;
+  --ds-pr-border:       #c8b07a;
+  --ds-tier1-bg:        #edf5ed;
+  --ds-tier1-label:     #2e6b2e;
+  --ds-tier2-bg:        #f5f0e0;
+  --ds-tier2-label:     #6b5a10;
+  --ds-tier3-bg:        #f0ecf5;
+  --ds-tier3-label:     #5a2e7a;
+  --ds-tab-active:      #c8a84b;
+  --ds-tab-bg:          #ece4d4;
+  --ds-tab-hover:       #ddd0b8;
+  --ds-readonly-bg:     #ede8df;
+  --ds-roll-btn-bg:     #c8a84b;
+  --ds-roll-btn-text:   #2a1e08;
+  --ds-roll-btn-hover:  #b89438;
+}
+ 
+/* ── DARK MODE — Roll20 night-mode class ──────────────────────────────── */
+body.night-mode .sheet-main {
+  --ds-bg:              #1a1a1a;
+  --ds-bg-section:      #252525;
+  --ds-bg-inset:        #1e1e1e;
+  --ds-bg-header:       #2e2820;
+  --ds-text:            #e8e4dc;
+  --ds-text-muted:      #a09080;
+  --ds-text-label:      #c0b090;
+  --ds-border:          #4a4030;
+  --ds-border-light:    #383028;
+  --ds-accent:          #c8a84b;
+  --ds-accent-text:     #c8a84b;
+  --ds-accent-bg:       #2e2410;
+  --ds-damage:          #e05050;
+  --ds-input-bg:        #1e1e1e;
+  --ds-input-border:    #5a5040;
+  --ds-shadow:          rgba(0, 0, 0, 0.40);
+  --ds-pr-bg:           #201c14;
+  --ds-pr-border:       #5a4820;
+  --ds-tier1-bg:        #162016;
+  --ds-tier1-label:     #6ab86a;
+  --ds-tier2-bg:        #201c08;
+  --ds-tier2-label:     #c8b050;
+  --ds-tier3-bg:        #1c1428;
+  --ds-tier3-label:     #a87ac8;
+  --ds-tab-active:      #c8a84b;
+  --ds-tab-bg:          #2a2418;
+  --ds-tab-hover:       #3a3020;
+  --ds-readonly-bg:     #1a1814;
+  --ds-roll-btn-bg:     #c8a84b;
+  --ds-roll-btn-text:   #1a1200;
+  --ds-roll-btn-hover:  #dab858;
+}
+ 
+/* ── OS-LEVEL dark mode fallback (when Roll20 hasn't toggled) ─────────── */
+@media (prefers-color-scheme: dark) {
+  .sheet-main {
+    --ds-bg:              #1a1a1a;
+    --ds-bg-section:      #252525;
+    --ds-bg-inset:        #1e1e1e;
+    --ds-bg-header:       #2e2820;
+    --ds-text:            #e8e4dc;
+    --ds-text-muted:      #a09080;
+    --ds-text-label:      #c0b090;
+    --ds-border:          #4a4030;
+    --ds-border-light:    #383028;
+    --ds-accent:          #c8a84b;
+    --ds-accent-text:     #c8a84b;
+    --ds-accent-bg:       #2e2410;
+    --ds-damage:          #e05050;
+    --ds-input-bg:        #1e1e1e;
+    --ds-input-border:    #5a5040;
+    --ds-shadow:          rgba(0, 0, 0, 0.40);
+    --ds-pr-bg:           #201c14;
+    --ds-pr-border:       #5a4820;
+    --ds-tier1-bg:        #162016;
+    --ds-tier1-label:     #6ab86a;
+    --ds-tier2-bg:        #201c08;
+    --ds-tier2-label:     #c8b050;
+    --ds-tier3-bg:        #1c1428;
+    --ds-tier3-label:     #a87ac8;
+    --ds-tab-active:      #c8a84b;
+    --ds-tab-bg:          #2a2418;
+    --ds-tab-hover:       #3a3020;
+    --ds-readonly-bg:     #1a1814;
+    --ds-roll-btn-bg:     #c8a84b;
+    --ds-roll-btn-text:   #1a1200;
+    --ds-roll-btn-hover:  #dab858;
+  }
+}
+ 
+ 
+/* ══════════════════════════════════════════════════════════════════════
+   BASE / RESET
+══════════════════════════════════════════════════════════════════════ */
+.sheet-main {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 13px;
+  background: var(--ds-bg);
+  color: var(--ds-text);
+  padding: 8px;
+  box-sizing: border-box;
+  max-width: 900px;
+}
+ 
+.sheet-main * {
+  box-sizing: border-box;
+}
+ 
+.sheet-main h2 {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ds-accent-text);
+  margin: 0 0 8px 0;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--ds-accent);
+}
+ 
+.sheet-main label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ds-text-label);
+  display: block;
+  margin-bottom: 2px;
+}
+ 
+.sheet-main input[type="text"],
+.sheet-main input[type="number"],
+.sheet-main select,
+.sheet-main textarea {
+  background: var(--ds-input-bg);
+  color: var(--ds-text);
+  border: 1px solid var(--ds-input-border);
+  border-radius: 3px;
+  padding: 4px 6px;
+  font-size: 13px;
+  font-family: inherit;
+  width: 100%;
+  transition: border-color 0.15s;
+}
+ 
+.sheet-main input[type="text"]:focus,
+.sheet-main input[type="number"]:focus,
+.sheet-main select:focus,
+.sheet-main textarea:focus {
+  outline: none;
+  border-color: var(--ds-accent);
+}
+ 
+.sheet-main input.sheet-readonly {
+  background: var(--ds-readonly-bg);
+  color: var(--ds-text-muted);
+  cursor: default;
+}
+ 
+.sheet-main textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+ 
+.sheet-main select {
+  cursor: pointer;
+}
+ 
+ 
+/* ══════════════════════════════════════════════════════════════════════
+   TAB NAVIGATION
+══════════════════════════════════════════════════════════════════════ */
+.sheet-tab-nav {
+  display: flex;
+  background: var(--ds-tab-bg);
+  border-bottom: 2px solid var(--ds-border);
+  margin-bottom: 10px;
+  border-radius: 4px 4px 0 0;
+  overflow: hidden;
+}
+ 
+.sheet-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 22px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ds-text-muted);
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: background 0.15s, color 0.15s;
+  user-select: none;
+}
+ 
+.sheet-tab-btn:hover {
+  background: var(--ds-tab-hover);
+  color: var(--ds-text);
+}
+ 
+/* Hide the actual radio button — clicking the label activates it */
+.sheet-tab-btn input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+}
+ 
+/* Active tab: driven by :has() — the label whose radio is checked */
+.sheet-tab-btn:has(input:checked) {
+  color: var(--ds-text);
+  border-bottom-color: var(--ds-tab-active);
+  background: var(--ds-bg-section);
+}
+ 
+/* Tab content visibility — driven by :has() on the parent wrapper */
+.sheet-pc-tab,
+.sheet-npc-tab {
+  display: none;
+}
+ 
+.sheet-main:has(input[name="attr_sheet_tab"][value="pc"]:checked) .sheet-pc-tab {
+  display: block;
+}
+ 
+.sheet-main:has(input[name="attr_sheet_tab"][value="npc"]:checked) .sheet-npc-tab {
+  display: block;
+}
+ 
+ 
+/* ══════════════════════════════════════════════════════════════════════
+   SECTION CONTAINERS
+══════════════════════════════════════════════════════════════════════ */
+.sheet-section {
+  background: var(--ds-bg-section);
+  border: 1px solid var(--ds-border);
+  border-radius: 4px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 3px var(--ds-shadow);
+}
+ 
+/* Side-by-side half-width sections */
+.sheet-section-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+ 
+.sheet-section.sheet-half {
+  flex: 1;
+  margin-bottom: 0;
+}
+ 
+/* Header section gets a slightly warmer background */
+.sheet-section.sheet-header {
+  background: var(--ds-bg-header);
+}
+ 
+ 
+/* ══════════════════════════════════════════════════════════════════════
+   FIELD LAYOUT
+══════════════════════════════════════════════════════════════════════ */
+.sheet-field {
+  display: flex;
+  flex-direction: column;
+}
+ 
+.sheet-field-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+ 
+.sheet-field-row .sheet-field {
+  flex: 1;
+  min-width: 100px;
+}
+ 
+.sheet-field-row .sheet-field.sheet-field-narrow {
+  flex: 0 0 64px;
+}
+ 
+/* Large character name field */
+.sheet-field.sheet-field-name input {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 6px 8px;
+}
+ 
+/* Inline label+input (horizontal layout for compact rows) */
+.sheet-field-inline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  min-width: 140px;
+}
+ 
+.sheet-field-inline label {
+  margin: 0;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+ 
+.sheet-field-inline input {
+  flex: 1;
+}
+ 
+/* Trigger field gets a bit more space */
+.sheet-field-inline.sheet-field-trigger {
+  flex: 2;
+}
+ 
+ 
+/* ══════════════════════════════════════════════════════════════════════
+   CHARACTERISTICS GRID
+══════════════════════════════════════════════════════════════════════ */
+.sheet-char-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+ 
+.sheet-char-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--ds-bg-inset);
+  border: 1px solid var(--ds-border-light);
+  border-radius: 4px;
+  padding: 8px 6px 6px;
+}
+ 
+.sheet-char-cell label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--ds-accent-text);
+  text-align: center;
+  margin-bottom: 4px;
+}
+ 
+.sheet-char-cell input[type="number"] {
+  width: 60px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 4px;
+  border-radius: 4px;
+}
+ 
+.sheet-char-label-full {
+  font-size: 9px;
+  color: var(--ds-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 3px;
+}
+ 
+ 
+/* ══════════════════════════════════════════════════════════════════════
+   COMBAT STATS GRID
+══════════════════════════════════════════════════════════════════════ */
+.sheet-combat-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+ 
+.sheet-stat-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--ds-bg-inset);
+  border: 1px solid var(--ds-border-light);
+  border-radius: 4px;
+  padding: 6px 10px;
+  min-width: 90px;
+  flex: 1;
+}
+ 
+.sheet-stat-block label {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 4px;
+}
+ 
+.sheet-stat-block input[type="number"],
+.sheet-stat-block input[type="text"] {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  width: 80px;
+  padding: 4px;
+}
+ 
+/* Stamina gets damage color */
+.sheet-stat-block:first-child label {
+  color: var(--ds-damage);
+}
+ 
+/* Fraction display (current / max) */
+.sheet-fraction {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+ 
+.sheet-fraction input {
+  width: 56px !important;
+  text-align: center;
+}
+ 
+.sheet-fraction-sep {
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--ds-text-muted);
+  line-height: 1;
+}
+ 
+ 
+/* ══════════════════════════════════════════════════════════════════════
+   HEROIC RESOURCES
+══════════════════════════════════════════════════════════════════════ */
+.sheet-resources-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+ 
+.sheet-resource-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+ 
+.sheet-resource-name {
+  flex: 1;
+}
+ 
+.sheet-resource-row .sheet-fraction {
+  flex-shrink: 0;
+}
+ 
+ 
+/* ══════════════════════════════════════════════════════════════════════
+   SKILLS GRID
+══════════════════════════════════════════════════════════════════════ */
+.sheet-skills-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+ 
+.sheet-skill-block textarea {
+  min-height: 70px;
+  font-size: 12px;
+}
+ 
+ 
+/* ══════════════════════════════════════════════════════════════════════
+   ABILITIES (REPEATING SECTIONS)
+══════════════════════════════════════════════════════════════════════ */
+.sheet-abilities-section {
+  /* Extra bottom padding so Roll20's Add button doesn't overlap content */
+  padding-bottom: 14px;
+}
+ 
+.sheet-ability-row {
+  padding: 8px;
+  background: var(--ds-bg-inset);
+  border: 1px solid var(--ds-border-light);
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+ 
+/* Name / Cost / Keywords header row */
+.sheet-ability-header {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+ 
+.sheet-ability-name {
+  flex: 2;
+  font-weight: 600;
+  font-size: 14px;
+  min-width: 140px;
+}
+ 
+.sheet-ability-cost {
+  flex: 1;
+  min-width: 80px;
+}
+ 
+.sheet-ability-keywords {
+  flex: 2;
+  min-width: 120px;
+  font-size: 12px;
+}
+ 
+/* Distance / Target / Trigger row */
+.sheet-ability-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+ 
+/* Effect textarea */
+.sheet-ability-row .sheet-field {
+  margin-bottom: 6px;
+}
+ 
+.sheet-ability-row .sheet-field textarea {
+  min-height: 50px;
+}
+ 
+ 
+/* ══════════════════════════════════════════════════════════════════════
+   POWER ROLL COLLAPSIBLE
+══════════════════════════════════════════════════════════════════════ */
+.sheet-powerroll-details {
+  margin-top: 4px;
+  border: 1px solid var(--ds-pr-border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+ 
+.sheet-powerroll-details summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 6px 10px;
+  background: var(--ds-pr-bg);
+  color: var(--ds-accent-text);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  user-select: none;
+  border-bottom: 1px solid transparent;
+  transition: background 0.15s;
+}
+ 
+.sheet-powerroll-details summary::-webkit-details-marker {
+  display: none;
+}
+ 
+.sheet-powerroll-details summary::marker {
+  display: none;
+}
+ 
+.sheet-powerroll-details:hover summary {
+  background: var(--ds-accent-bg);
+}
+ 
+.sheet-powerroll-details[open] summary {
+  border-bottom-color: var(--ds-pr-border);
+}
+ 
+.sheet-powerroll-body {
+  background: var(--ds-pr-bg);
+  padding: 8px;
+}
+ 
+/* Config row: characteristic select + bonus + roll button */
+.sheet-pr-config-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: flex-end;
+  margin-bottom: 8px;
+}
+ 
+.sheet-pr-config {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 100px;
+}
+ 
+.sheet-pr-config label {
+  color: var(--ds-text-label);
+}
+ 
+/* Tier result fields — three columns */
+.sheet-pr-tiers {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px;
+}
+ 
+.sheet-pr-tier {
+  display: flex;
+  flex-direction: column;
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid var(--ds-border-light);
+}
+ 
+.sheet-pr-tier label {
+  padding: 3px 6px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+ 
+.sheet-pr-tier textarea {
+  border: none;
+  border-top: 1px solid var(--ds-border-light);
+  border-radius: 0;
+  min-height: 54px;
+  font-size: 12px;
+  resize: vertical;
+  background: var(--ds-input-bg);
+}
+ 
+/* Tier 1 — green */
+.sheet-tier1 {
+  background: var(--ds-tier1-bg);
+}
+.sheet-tier1 label {
+  background: var(--ds-tier1-bg);
+  color: var(--ds-tier1-label);
+}
+.sheet-tier1 textarea {
+  background: var(--ds-tier1-bg);
+  color: var(--ds-text);
+  border-color: var(--ds-tier1-label);
+}
+ 
+/* Tier 2 — amber */
+.sheet-tier2 {
+  background: var(--ds-tier2-bg);
+}
+.sheet-tier2 label {
+  background: var(--ds-tier2-bg);
+  color: var(--ds-tier2-label);
+}
+.sheet-tier2 textarea {
+  background: var(--ds-tier2-bg);
+  color: var(--ds-text);
+  border-color: var(--ds-tier2-label);
+}
+ 
+/* Tier 3 — purple */
+.sheet-tier3 {
+  background: var(--ds-tier3-bg);
+}
+.sheet-tier3 label {
+  background: var(--ds-tier3-bg);
+  color: var(--ds-tier3-label);
+}
+.sheet-tier3 textarea {
+  background: var(--ds-tier3-bg);
+  color: var(--ds-text);
+  border-color: var(--ds-tier3-label);
+}
+ 
+ 
+/* ══════════════════════════════════════════════════════════════════════
+   ROLL BUTTON
+══════════════════════════════════════════════════════════════════════ */
+.sheet-roll-btn,
+button.sheet-roll-btn {
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--ds-roll-btn-bg);
+  color: var(--ds-roll-btn-text);
+  border: none;
+  border-radius: 4px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  align-self: flex-end;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px var(--ds-shadow);
+  transition: background 0.15s, box-shadow 0.15s;
+}
+ 
+.sheet-roll-btn:hover,
+button.sheet-roll-btn:hover {
+  background: var(--ds-roll-btn-hover);
+  box-shadow: 0 2px 6px var(--ds-shadow);
+}
+ 
+ 
+/* ══════════════════════════════════════════════════════════════════════
+   RESPONSIVE — narrow screens
+══════════════════════════════════════════════════════════════════════ */
+@media (max-width: 600px) {
+  .sheet-char-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+ 
+  .sheet-skills-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+ 
+  .sheet-pr-tiers {
+    grid-template-columns: 1fr;
+  }
+ 
+  .sheet-section-row {
+    flex-direction: column;
+  }
+}
