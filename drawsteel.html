@@ -27,12 +27,16 @@
     <div class="sheet-section sheet-header">
       <div class="sheet-field sheet-field-name">
         <label>Character Name</label>
-        <input type="text" name="attr_character_name" placeholder="Character Name">
+        <input type="text" name="attr_characterName" placeholder="Character Name">
+      </div>
+      <div class="sheet-field">
+        <label>Character Formal Name</label>
+        <input type="text" name="attr_characterLongName" placeholder="Formal/Full Name">
       </div>
       <div class="sheet-field-row">
         <div class="sheet-field">
           <label>Player</label>
-          <input type="text" name="attr_player_name">
+          <input type="text" name="attr_playerName">
         </div>
         <div class="sheet-field">
           <label>Ancestry</label>
@@ -43,22 +47,12 @@
           <input type="text" name="attr_class">
         </div>
         <div class="sheet-field">
-          <label>Subclass</label>
+          <label>Subclass/Domain/School</label>
           <input type="text" name="attr_subclass">
         </div>
         <div class="sheet-field sheet-field-narrow">
           <label>Level</label>
           <input type="number" name="attr_level" value="1" min="1" max="10">
-        </div>
-      </div>
-      <div class="sheet-field-row">
-        <div class="sheet-field">
-          <label>Title</label>
-          <input type="text" name="attr_title">
-        </div>
-        <div class="sheet-field">
-          <label>Pronouns</label>
-          <input type="text" name="attr_pronouns">
         </div>
       </div>
     </div>
@@ -69,27 +63,27 @@
       <div class="sheet-char-grid">
         <div class="sheet-char-cell">
           <label>MGT</label>
-          <input type="number" name="attr_might" value="0" min="-5" max="5">
+          <input type="number" name="attr_mgt" value="0" min="-5" max="5">
           <span class="sheet-char-label-full">Might</span>
         </div>
         <div class="sheet-char-cell">
           <label>AGL</label>
-          <input type="number" name="attr_agility" value="0" min="-5" max="5">
+          <input type="number" name="attr_agl" value="0" min="-5" max="5">
           <span class="sheet-char-label-full">Agility</span>
         </div>
         <div class="sheet-char-cell">
           <label>REA</label>
-          <input type="number" name="attr_reason" value="0" min="-5" max="5">
+          <input type="number" name="attr_rea" value="0" min="-5" max="5">
           <span class="sheet-char-label-full">Reason</span>
         </div>
         <div class="sheet-char-cell">
           <label>INU</label>
-          <input type="number" name="attr_intuition" value="0" min="-5" max="5">
+          <input type="number" name="attr_inu" value="0" min="-5" max="5">
           <span class="sheet-char-label-full">Intuition</span>
         </div>
         <div class="sheet-char-cell">
           <label>PRS</label>
-          <input type="number" name="attr_presence" value="0" min="-5" max="5">
+          <input type="number" name="attr_prs" value="0" min="-5" max="5">
           <span class="sheet-char-label-full">Presence</span>
         </div>
       </div>
