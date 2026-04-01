@@ -84,9 +84,8 @@
       </div>
     </div>
 
-        <!-- EDGE / BANE -->
+    <!-- EDGE / BANE -->
     <div class="sheet-section">
-      <h2>Edge / Bane</h2>
       <div class="sheet-eb-wrapper">
         <label class="sheet-eb-option">
           <input type="radio" name="attr_edge_bane" value="-2">
@@ -113,27 +112,20 @@
  
     <!-- COMBAT STATS -->
     <div class="sheet-section">
+      <input type="number" name="attr_recovery_value" value="0" readonly class="sheet-main-hidden">
       <h2>Combat Stats</h2>
       <div class="sheet-combat-grid">
-        <div class="sheet-stat-block">
+        <div class="sheet-stat-block sheet-stat-stamina">
           <label>Stamina</label>
-          <div class="sheet-fraction">
-            <div class="stamina-shield">
-              <input type="number" name="attr_stamina" value="0" min="-999" placeholder="Cur" aria-label="Current stamina">
-            </div>
-            <span class="sheet-fraction-sep">/</span>
+          <div class="sheet-fraction sheet-fraction-vertical">
+            <input type="number" name="attr_stamina" value="0" min="-999" placeholder="Cur" aria-label="Current stamina">
             <input type="number" name="attr_stamina_max" value="0" min="0" placeholder="Max">
           </div>
         </div>
-        <div class="sheet-stat-block">
-          <label>Recovery Value</label>
-          <input type="number" name="attr_recovery_value" value="0" readonly class="sheet-readonly">
-        </div>
-        <div class="sheet-stat-block">
+        <div class="sheet-stat-block sheet-stat-recoveries">
           <label>Recoveries</label>
-          <div class="sheet-fraction">
+          <div class="sheet-fraction sheet-fraction-vertical">
             <input type="number" name="attr_recoveries" value="0" min="0" placeholder="Cur">
-            <span class="sheet-fraction-sep">/</span>
             <input type="number" name="attr_recoveries_max" value="0" min="0" placeholder="Max">
           </div>
         </div>
@@ -597,6 +589,9 @@
       </div>
     </div>
  
+    <!-- EDGE / BANE -->
+    
+
     <!-- NPC COMBAT STATS -->
     <div class="sheet-section">
       <h2>Combat Stats</h2>
@@ -605,8 +600,6 @@
           <label>Stamina</label>
           <div class="sheet-fraction">
             <input type="number" name="attr_npc_stamina" value="0" min="0" placeholder="Cur">
-            <span class="sheet-fraction-sep">/</span>
-            <input type="number" name="attr_npc_stamina_max" value="0" min="0" placeholder="Max">
           </div>
         </div>
         <div class="sheet-stat-block">
@@ -1022,28 +1015,107 @@
     });
   });
 
-  // Stamina shield color state management
-  function updateStaminaShield() {
-    getAttrs(['stamina', 'stamina_max'], function(values) {
-      var cur = parseFloat(values.stamina) || 0;
-      var max = parseFloat(values.stamina_max) || 0;
-      var shieldClass = 'stamina-shield--normal';
 
-      if (cur < 0) {
-        shieldClass = 'stamina-shield--low';
-      } else if (max > 0 && cur < max / 2) {
-        shieldClass = 'stamina-shield--half';
-      }
 
-      var shield = document.querySelector('.stamina-shield');
-      if (shield) {
-        shield.classList.remove('stamina-shield--normal', 'stamina-shield--half', 'stamina-shield--low');
-        shield.classList.add(shieldClass);
-      }
-    });
-  }
+  //////////////////////////////////////////////////////////
+  // Recalc Stamina
+  //////////////////////////////////////////////////////////
 
-  on('change:stamina change:stamina_max', updateStaminaShield);
-  updateStaminaShield();
+  on('change:stamina_max change:recoveries_max change:stamina', function() {
+      console.log('Max Stamina Triggered');
+      // Change the half-stamina control
+      getAttrs(["stamina_max", "recoveries_max", "stamina"], function(values){
+          let hsta =Math.round(values["stamina_max"]/2);
+          let hrec = Math.round(values["recoveries_max"]/2);
+          let windstam = "Less than " + hsta;
+          let dyingstam = "0 to -" + hsta;
+
+          if (values["stamina"] <= hsta) {
+              setAttrs({iswinded: "on"});
+          }else{
+              setAttrs({iswinded: 0});
+          }
+
+          if(values["stamina"] <= 0){
+              setAttrs({isdying: "on"});
+          }else{
+              setAttrs({isdying: 0});     
+          }
+
+          console.log("Half stamina is "+hsta);
+          setAttrs({halfstamina: hsta, halfrecoveries: hrec, windedstamina: windstam, dyingstamina: dyingstam});
+      });
+  });
+
+  //////////////////////////////////////////////////////////
+  //  Take a Recovery
+  //////////////////////////////////////////////////////////
+
+  on ('clicked:recovery', (event) => {
+      console.log("Recovery Clicked");
+
+      // Set and reset the stamina and recoveries
+      getAttrs(["stamina_max", 
+              "recoveries_max", 
+              "stamina", 
+              "recoveries"], function(values){
+          let hstam =Math.round(values["stamina_max"]/2);
+          let newstam = parseInt(values["stamina"]) + hstam;
+          let availRecs = parseInt(values["recoveries"])
+          console.log ("New Stamina is "+newstam);
+          console.log (availRecs + " recoveries available");
+          if (newstam > values["stamina_max"]){newstam = parseInt(values["stamina_max"])};
+          console.log ("New Stamina (after max check) is "+newstam);
+
+          // Edge condition checks
+          if(availRecs < 1){
+              console.log("No recoveries left");
+              return 0;
+          }
+          if(parseInt(values["stamina"]) == parseInt(values["stamina_max"])){
+              console.log("Stamina is already at max values");
+              return 0;
+          }
+
+          // Reduce the number of recoveries
+          availRecs = availRecs - 1;
+
+          //Set the new htmlAttributes
+          setAttrs({stamina: newstam, recoveries: availRecs});
+      });
+  });
+
+  //////////////////////////////////////////////////////////
+  //  Take a Respite
+  //////////////////////////////////////////////////////////
+
+  on ('clicked:respite', (event) => {
+      console.log("Respite Clicked");
+
+      // Set and reset the stamina and recoveries
+      getAttrs(["maxstamina", 
+              "maxrecoveries", 
+              "stamina", 
+              "maxrecoveries", 
+              "victories",
+              "xp"], function(values){
+          let maxStam = parseInt(values["maxstamina"]);
+          let maxRecs = parseInt(values["maxrecoveries"]);
+          let vicPts = parseInt(values["victories"]);
+          let xpVal = parseInt(values["xp"]);
+
+          // Set some values to zero
+          setAttrs({surges: 0, resources: 0});
+
+          // Set recoveries and stamina to max
+          setAttrs({stamina: maxStam, recoveries: maxRecs});
+
+          // Add victories to XP and set victories to 0
+          xpVal = xpVal + vicPts;
+          console.log("New XP is "+xpVal);
+          setAttrs({xp: xpVal, victories: 0});
+
+      });
+  });
 
 </script>

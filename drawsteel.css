@@ -48,6 +48,17 @@
   --ds-roll-btn-bg:     #c8a84b;
   --ds-roll-btn-text:   #2a1e08;
   --ds-roll-btn-hover:  #b89438;
+  /* Edge/Bane slider colors */
+  --ds-highlight-double-negative: #cc2222;
+  --ds-highlight-single-negative: #e88888;  
+  --ds-highlight-neutral:         var(--ds-bg-section);
+  --ds-highlight-single-positive: #88cc88;
+  --ds-highlight-double-positive: #22aa22;
+  --ds-highlight-border-double-negative: #aa1111;
+  --ds-highlight-border-single-negative: #cc5555; 
+  --ds-highlight-border-neutral:         var(--ds-border);
+  --ds-highlight-border-single-positive: #55aa55;
+  --ds-highlight-border-double-positive: #118811;
 }
  
 /* ── DARK MODE — Roll20 night-mode class ──────────────────────────────── */
@@ -197,6 +208,10 @@ body.night-mode .sheet-main {
  
 .sheet-main select {
   cursor: pointer;
+}
+
+.sheet-main-hidden {
+  display: none;
 }
  
  
@@ -442,58 +457,43 @@ body.night-mode .sheet-main {
   gap: 4px;
 }
  
-.stamina-shield {
-  position: relative;
-  display: flex;
+/* Vertical layout for stamina and recoveries */
+.sheet-fraction-vertical {
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 32px;
+  gap: 6px;
 }
 
-.stamina-shield::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  clip-path: polygon(50% 0%, 84% 22%, 100% 60%, 50% 100%, 0% 60%, 16% 22%);
-  border-radius: 6px;
-  z-index: 0;
-  border: 2px solid transparent;
-  background: var(--ds-bg-inset);
+/* Stamina current input - larger */
+.sheet-stat-stamina .sheet-fraction-vertical > input:first-of-type {
+  width: 48px !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
 }
 
-.stamina-shield--normal::before {
-  border-color: var(--ds-border);
-  background: var(--ds-bg-inset);
-}
 
-.stamina-shield--half::before {
-  border-color: #e88888;
-  background: rgba(232, 136, 136, 0.24);
-}
-
-.stamina-shield--low::before {
-  border-color: #cc2222;
-  background: rgba(204, 34, 34, 0.30);
-}
-
-.sheet-fraction .stamina-shield input {
-  position: relative;
-  z-index: 1;
+/* Stamina max input - smaller, below current */
+.sheet-stat-stamina .sheet-fraction-vertical input[name="attr_stamina_max"] {
   width: 32px !important;
-  border: none;
-  padding: 2px;
-  margin: 0;
-  background: transparent;
-  font-weight: 700;
-  text-align: center;
-  color: inherit;
+  font-size: 11px !important;
+  padding: 2px !important;
 }
 
-.sheet-fraction input[name="attr_stamina_max"] {
-  width: 38px !important;
+/* Recoveries current input - larger */
+.sheet-stat-recoveries .sheet-fraction-vertical > input:first-of-type {
+  width: 48px !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
 }
- 
+
+/* Recoveries max input - smaller, below current */
+.sheet-stat-recoveries .sheet-fraction-vertical input[name="attr_recoveries_max"] {
+  width: 32px !important;
+  font-size: 11px !important;
+  padding: 2px !important;
+}
+
+/* General fraction input styles (for non-vertical layouts) */
 .sheet-fraction input {
   width: 56px !important;
   text-align: center;
@@ -812,11 +812,11 @@ button.sheet-roll-btn:hover {
 }
 
 /* Track background changes to match selected value */
-.sheet-eb-wrapper:has([value="-2"]:checked) { background: #cc2222; border-color: #aa1111; }
-.sheet-eb-wrapper:has([value="-1"]:checked) { background: #e88888; border-color: #cc5555; }
-.sheet-eb-wrapper:has([value="0"]:checked)  { background: var(--ds-bg-section); }
-.sheet-eb-wrapper:has([value="1"]:checked)  { background: #88cc88; border-color: #55aa55; }
-.sheet-eb-wrapper:has([value="2"]:checked)  { background: #22aa22; border-color: #118811; }
+.sheet-eb-wrapper:has([value="-2"]:checked) { background: var(--ds-highlight-double-negative); border-color: var(--ds-highlight-border-double-negative); }
+.sheet-eb-wrapper:has([value="-1"]:checked) { background: var(--ds-highlight-single-negative); border-color: var(--ds-highlight-border-single-negative); }
+.sheet-eb-wrapper:has([value="0"]:checked)  { background: var(--ds-highlight-neutral); border-color: var(--ds-highlight-border-neutral); }
+.sheet-eb-wrapper:has([value="1"]:checked)  { background: var(--ds-highlight-single-positive); border-color: var(--ds-highlight-border-single-positive); }
+.sheet-eb-wrapper:has([value="2"]:checked)  { background: var(--ds-highlight-double-positive); border-color: var(--ds-highlight-border-double-positive); }
 
 .sheet-eb-option {
   flex: 1;
@@ -862,11 +862,11 @@ button.sheet-roll-btn:hover {
 }
 
 /* Selected option gets full color, bold text, and larger size */
-.sheet-eb-option:has([value="-2"]:checked) { background: #cc2222; color: #ffffff; font-size: 12px; }
-.sheet-eb-option:has([value="-1"]:checked) { background: #e88888; color: #5a0000; font-size: 12px; }
-.sheet-eb-option:has([value="0"]:checked)  { background: var(--ds-bg-inset); color: var(--ds-text); font-weight: 700; font-size: 12px; }
-.sheet-eb-option:has([value="1"]:checked)  { background: #88cc88; color: #003a00; font-size: 12px; }
-.sheet-eb-option:has([value="2"]:checked)  { background: #22aa22; color: #ffffff; font-size: 12px; }
+.sheet-eb-option:has([value="-2"]:checked) { background: var(--ds-highlight-double-negative); color: #ffffff; font-size: 12px; }
+.sheet-eb-option:has([value="-1"]:checked) { background: var(--ds-highlight-single-negative); color: #5a0000; font-size: 12px; }
+.sheet-eb-option:has([value="0"]:checked)  { background: var(--ds-highlight-neutral); color: var(--ds-text); font-weight: 700; font-size: 12px; }
+.sheet-eb-option:has([value="1"]:checked)  { background: var(--ds-highlight-single-positive); color: #003a00; font-size: 12px; }
+.sheet-eb-option:has([value="2"]:checked)  { background: var(--ds-highlight-double-positive); color: #ffffff; font-size: 12px; }
 
 /* Hover effect for unselected options */
 .sheet-eb-option:hover:has(:not(:checked)) {
