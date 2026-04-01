@@ -62,30 +62,52 @@
       <h2>Characteristics</h2>
       <div class="sheet-char-grid">
         <div class="sheet-char-cell">
-          <label>MGT</label>
+          <label>MIGHT</label>
           <input type="number" name="attr_mgt" value="0" min="-5" max="5">
-          <span class="sheet-char-label-full">Might</span>
         </div>
         <div class="sheet-char-cell">
-          <label>AGL</label>
+          <label>AGILITY</label>
           <input type="number" name="attr_agl" value="0" min="-5" max="5">
-          <span class="sheet-char-label-full">Agility</span>
         </div>
         <div class="sheet-char-cell">
-          <label>REA</label>
+          <label>REASON</label>
           <input type="number" name="attr_rea" value="0" min="-5" max="5">
-          <span class="sheet-char-label-full">Reason</span>
         </div>
         <div class="sheet-char-cell">
-          <label>INU</label>
+          <label>INTUITION</label>
           <input type="number" name="attr_inu" value="0" min="-5" max="5">
-          <span class="sheet-char-label-full">Intuition</span>
         </div>
         <div class="sheet-char-cell">
-          <label>PRS</label>
+          <label>PRESENCE</label>
           <input type="number" name="attr_prs" value="0" min="-5" max="5">
-          <span class="sheet-char-label-full">Presence</span>
         </div>
+      </div>
+    </div>
+
+        <!-- EDGE / BANE -->
+    <div class="sheet-section">
+      <h2>Edge / Bane</h2>
+      <div class="sheet-eb-wrapper">
+        <label class="sheet-eb-option">
+          <input type="radio" name="attr_edge_bane" value="-2">
+          <span>Double Bane</span>
+        </label>
+        <label class="sheet-eb-option">
+          <input type="radio" name="attr_edge_bane" value="-1">
+          <span>Bane</span>
+        </label>
+        <label class="sheet-eb-option">
+          <input type="radio" name="attr_edge_bane" value="0" checked>
+          <span>None</span>
+        </label>
+        <label class="sheet-eb-option">
+          <input type="radio" name="attr_edge_bane" value="1">
+          <span>Edge</span>
+        </label>
+        <label class="sheet-eb-option">
+          <input type="radio" name="attr_edge_bane" value="2">
+          <span>Double Edge</span>
+        </label>
       </div>
     </div>
  
@@ -96,7 +118,9 @@
         <div class="sheet-stat-block">
           <label>Stamina</label>
           <div class="sheet-fraction">
-            <input type="number" name="attr_stamina" value="0" min="0" placeholder="Cur">
+            <div class="stamina-shield">
+              <input type="number" name="attr_stamina" value="0" min="-999" placeholder="Cur" aria-label="Current stamina">
+            </div>
             <span class="sheet-fraction-sep">/</span>
             <input type="number" name="attr_stamina_max" value="0" min="0" placeholder="Max">
           </div>
@@ -150,7 +174,7 @@
         </div>
       </div>
     </div>
- 
+
     <!-- CONDITIONS & EQUIPMENT -->
     <div class="sheet-section-row">
       <div class="sheet-section sheet-half">
@@ -997,5 +1021,29 @@
       });
     });
   });
- 
+
+  // Stamina shield color state management
+  function updateStaminaShield() {
+    getAttrs(['stamina', 'stamina_max'], function(values) {
+      var cur = parseFloat(values.stamina) || 0;
+      var max = parseFloat(values.stamina_max) || 0;
+      var shieldClass = 'stamina-shield--normal';
+
+      if (cur < 0) {
+        shieldClass = 'stamina-shield--low';
+      } else if (max > 0 && cur < max / 2) {
+        shieldClass = 'stamina-shield--half';
+      }
+
+      var shield = document.querySelector('.stamina-shield');
+      if (shield) {
+        shield.classList.remove('stamina-shield--normal', 'stamina-shield--half', 'stamina-shield--low');
+        shield.classList.add(shieldClass);
+      }
+    });
+  }
+
+  on('change:stamina change:stamina_max', updateStaminaShield);
+  updateStaminaShield();
+
 </script>

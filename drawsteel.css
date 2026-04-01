@@ -141,13 +141,13 @@ body.night-mode .sheet-main {
 }
  
 .sheet-main h2 {
-  font-size: 13px;
+  font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--ds-accent-text);
   margin: 0 0 8px 0;
-  padding-bottom: 4px;
+  padding-bottom: 2px;
   border-bottom: 1px solid var(--ds-accent);
 }
  
@@ -440,6 +440,58 @@ body.night-mode .sheet-main {
   display: flex;
   align-items: center;
   gap: 4px;
+}
+ 
+.stamina-shield {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 32px;
+}
+
+.stamina-shield::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(50% 0%, 84% 22%, 100% 60%, 50% 100%, 0% 60%, 16% 22%);
+  border-radius: 6px;
+  z-index: 0;
+  border: 2px solid transparent;
+  background: var(--ds-bg-inset);
+}
+
+.stamina-shield--normal::before {
+  border-color: var(--ds-border);
+  background: var(--ds-bg-inset);
+}
+
+.stamina-shield--half::before {
+  border-color: #e88888;
+  background: rgba(232, 136, 136, 0.24);
+}
+
+.stamina-shield--low::before {
+  border-color: #cc2222;
+  background: rgba(204, 34, 34, 0.30);
+}
+
+.sheet-fraction .stamina-shield input {
+  position: relative;
+  z-index: 1;
+  width: 32px !important;
+  border: none;
+  padding: 2px;
+  margin: 0;
+  background: transparent;
+  font-weight: 700;
+  text-align: center;
+  color: inherit;
+}
+
+.sheet-fraction input[name="attr_stamina_max"] {
+  width: 38px !important;
 }
  
 .sheet-fraction input {
@@ -746,4 +798,77 @@ button.sheet-roll-btn:hover {
   .sheet-section-row {
     flex-direction: column;
   }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   EDGE / BANE SLIDER
+══════════════════════════════════════════════════════════════════════ */
+.sheet-eb-wrapper {
+  display: flex;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--ds-border);
+  transition: background 0.2s;
+}
+
+/* Track background changes to match selected value */
+.sheet-eb-wrapper:has([value="-2"]:checked) { background: #cc2222; border-color: #aa1111; }
+.sheet-eb-wrapper:has([value="-1"]:checked) { background: #e88888; border-color: #cc5555; }
+.sheet-eb-wrapper:has([value="0"]:checked)  { background: var(--ds-bg-section); }
+.sheet-eb-wrapper:has([value="1"]:checked)  { background: #88cc88; border-color: #55aa55; }
+.sheet-eb-wrapper:has([value="2"]:checked)  { background: #22aa22; border-color: #118811; }
+
+.sheet-eb-option {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 4px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ds-text);
+  border-right: 1px solid var(--ds-border);
+  transition: background 0.15s, color 0.15s, font-size 0.15s;
+  user-select: none;
+}
+
+.sheet-eb-option:last-child {
+  border-right: none;
+}
+
+/* Hide the native radio button */
+.sheet-eb-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Unselected options get a subtle inset background */
+.sheet-eb-option:has([value="-2"]) { background: rgba(204, 34, 34, 0.12); }
+.sheet-eb-option:has([value="-1"]) { background: rgba(232, 136, 136, 0.12); }
+.sheet-eb-option:has([value="0"])  { background: transparent; }
+.sheet-eb-option:has([value="1"])  { background: rgba(136, 204, 136, 0.12); }
+.sheet-eb-option:has([value="2"])  { background: rgba(34, 170, 34, 0.12); }
+
+/* Shrink unselected options when something is chosen */
+.sheet-eb-option:has(:not(:checked)) {
+  font-size: 8px;
+}
+
+/* Selected option gets full color, bold text, and larger size */
+.sheet-eb-option:has([value="-2"]:checked) { background: #cc2222; color: #ffffff; font-size: 12px; }
+.sheet-eb-option:has([value="-1"]:checked) { background: #e88888; color: #5a0000; font-size: 12px; }
+.sheet-eb-option:has([value="0"]:checked)  { background: var(--ds-bg-inset); color: var(--ds-text); font-weight: 700; font-size: 12px; }
+.sheet-eb-option:has([value="1"]:checked)  { background: #88cc88; color: #003a00; font-size: 12px; }
+.sheet-eb-option:has([value="2"]:checked)  { background: #22aa22; color: #ffffff; font-size: 12px; }
+
+/* Hover effect for unselected options */
+.sheet-eb-option:hover:has(:not(:checked)) {
+  filter: brightness(1.1);
 }
