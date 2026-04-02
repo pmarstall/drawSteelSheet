@@ -75,26 +75,25 @@
  
     <!-- CHARACTERISTICS -->
     <div class="sheet-section">
-      <h2>Characteristics</h2>
       <div class="sheet-char-grid">
         <div class="sheet-char-cell">
-          <label>MIGHT</label>
+          <button type="action" name="act_abilitiestest" class="attrib-button" value="MGT">Might</button>
           <input type="number" name="attr_mgt" value="0" min="-5" max="5">
         </div>
         <div class="sheet-char-cell">
-          <label>AGILITY</label>
+          <button type="action" name="act_abilitiestest" class="attrib-button" value="AGL">Agility</button>
           <input type="number" name="attr_agl" value="0" min="-5" max="5">
         </div>
         <div class="sheet-char-cell">
-          <label>REASON</label>
+          <button type="action" name="act_abilitiestest" class="attrib-button" value="REA">Reason</button>
           <input type="number" name="attr_rea" value="0" min="-5" max="5">
         </div>
         <div class="sheet-char-cell">
-          <label>INTUITION</label>
+          <button type="action" name="act_abilitiestest" class="attrib-button" value="INU">Intuition</button>
           <input type="number" name="attr_inu" value="0" min="-5" max="5">
         </div>
         <div class="sheet-char-cell">
-          <label>PRESENCE</label>
+          <button type="action" name="act_abilitiestest" class="attrib-button" value="PRS">Presence</button>
           <input type="number" name="attr_prs" value="0" min="-5" max="5">
         </div>
       </div>
@@ -129,7 +128,6 @@
     <!-- COMBAT STATS -->
     <div class="sheet-section">
       <input type="number" name="attr_recovery_value" value="0" readonly class="sheet-main-hidden">
-      <h2>Combat Stats</h2>
       <div class="sheet-combat-grid">
         <div class="sheet-stat-block sheet-stat-stamina">
           <label>Stamina</label>
@@ -178,141 +176,102 @@
  
     <!-- RECOVERY BUTTONS -->
     <div class="sheet-recovery-buttons">
-      <button type="button" class="sheet-recovery-btn">Recovery</button>
-      <button type="button" class="sheet-respite-btn">Respite</button>
+      <button type="action" name="act_recovery" class="sheet-recovery-btn">Recovery</button>
+      <button type="action" name="act_respite" class="sheet-respite-btn">Respite</button>
     </div>
  
-    <!-- HEROIC RESOURCES -->
-    <div class="sheet-section">
-      <h2>Heroic Resources</h2>
-      <div class="sheet-resources-grid">
-        <div class="sheet-resource-row">
-          <input type="text" name="attr_resource1_name" placeholder="Resource Name (e.g. Rage)" class="sheet-resource-name">
-          <div class="sheet-fraction">
-            <input type="number" name="attr_resource1_current" value="0" min="0">
-            <span class="sheet-fraction-sep">/</span>
-            <input type="number" name="attr_resource1_max" value="0" min="0">
-          </div>
-        </div>
-        <div class="sheet-resource-row">
-          <input type="text" name="attr_resource2_name" placeholder="Resource Name (optional)" class="sheet-resource-name">
-          <div class="sheet-fraction">
-            <input type="number" name="attr_resource2_current" value="0" min="0">
-            <span class="sheet-fraction-sep">/</span>
-            <input type="number" name="attr_resource2_max" value="0" min="0">
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- CONDITIONS & EQUIPMENT -->
-    <div class="sheet-section-row">
-      <div class="sheet-section sheet-half">
-        <h2>Conditions</h2>
-        <textarea name="attr_conditions" placeholder="Active conditions (Bleeding, Dazed, Frightened, Grabbed, Prone, Restrained, Slowed, Taunted, Weakened)..."></textarea>
-      </div>
-      <div class="sheet-section sheet-half">
-        <h2>Equipment</h2>
-        <textarea name="attr_equipment" placeholder="Weapons, armor, gear..."></textarea>
-      </div>
-    </div>
- 
-    <!-- SKILLS -->
-    <div class="sheet-section">
-      <h2>Skills</h2>
-      <div class="sheet-skills-grid">
-        <div class="sheet-skill-block">
-          <label>Might Skills</label>
-          <textarea name="attr_skills_might" placeholder="Lift, Climb, Endure..."></textarea>
-        </div>
-        <div class="sheet-skill-block">
-          <label>Agility Skills</label>
-          <textarea name="attr_skills_agility" placeholder="Hide, Jump, Tumble..."></textarea>
-        </div>
-        <div class="sheet-skill-block">
-          <label>Reason Skills</label>
-          <textarea name="attr_skills_reason" placeholder="Lore, Monsters, Magic..."></textarea>
-        </div>
-        <div class="sheet-skill-block">
-          <label>Intuition Skills</label>
-          <textarea name="attr_skills_intuition" placeholder="Alertness, Nature, Track..."></textarea>
-        </div>
-        <div class="sheet-skill-block">
-          <label>Presence Skills</label>
-          <textarea name="attr_skills_presence" placeholder="Brag, Lie, Lead..."></textarea>
-        </div>
-      </div>
-    </div>
+    
  
     <!-- ───────────── ACTIONS ───────────── -->
     <div class="sheet-section sheet-abilities-section">
       <h2>Actions</h2>
       <fieldset class="repeating_actions">
-        <div class="sheet-ability-row">
-          <div class="sheet-ability-header">
-            <input type="text" name="attr_ability_name" placeholder="Ability Name" class="sheet-ability-name">
-            <input type="text" name="attr_ability_cost" placeholder="Cost" class="sheet-ability-cost">
-            <input type="text" name="attr_ability_keywords" placeholder="Keywords (Attack, Magic, Ranged...)" class="sheet-ability-keywords">
-          </div>
-          <div class="sheet-ability-meta">
-            <div class="sheet-field-inline">
-              <label>Distance</label>
-              <input type="text" name="attr_ability_distance" placeholder="Melee 1 / Ranged 10">
+        <details class="sheet-action-details">
+          <summary>
+            &#9660; 
+            <input type="text" name="attr_atknamedisp" value="@{atkname}" class="" disabled="true">
+            <input type="text" name="attr_atknamedisp" value="@{atksource}" class="" disabled="true">
+            <input type="text" name="attr_atknamedisp" value="@{atkcost}" class="" disabled="true">
+            <button type="roll" class="sheet-roll-btn" name="roll_atkroll"
+              value="&{template:default} {{name=@{ability_name} — Power Roll}} {{Roll=[[2d10+@{pr_char_value}+@{pr_bonus}]]}} {{Tier 1 (11 or less)=@{pr_tier1}}} {{Tier 2 (12-16)=@{pr_tier2}}} {{Tier 3 (17+)=@{pr_tier3}}}">
+              &#x2B22; Roll
+            </button>
+            <button type="roll" class="sheet-roll-btn sheet-no-default-icon" name="roll_atkchat"
+              value="&{template:default} {{name=@{ability_name} — Power Roll}} {{Roll=[[2d10+@{pr_char_value}+@{pr_bonus}]]}} {{Tier 1 (11 or less)=@{pr_tier1}}} {{Tier 2 (12-16)=@{pr_tier2}}} {{Tier 3 (17+)=@{pr_tier3}}}">
+              &#x1F5E8; Info
+            </button>
+          </summary>
+          
+          <div class="sheet-ability-row">
+            <div class="sheet-ability-header">
+              <input type="text" name="attr_atkname" placeholder="Ability Name" class="sheet-ability-name">
+              <input type="text" name="attr_atkcost" placeholder="Cost" class="sheet-ability-cost">
+              <input type="text" name="attr_atkkeywords" placeholder="Keywords (Attack, Magic, Ranged...)" class="sheet-ability-keywords">
             </div>
-            <div class="sheet-field-inline">
-              <label>Target</label>
-              <input type="text" name="attr_ability_target" placeholder="1 creature">
-            </div>
-            <div class="sheet-field-inline">
-              <label>Trigger</label>
-              <input type="text" name="attr_ability_trigger" placeholder="(triggered actions only)">
-            </div>
-          </div>
-          <div class="sheet-field">
-            <label>Effect</label>
-            <textarea name="attr_ability_effect" placeholder="Ability effect text..."></textarea>
-          </div>
-          <details class="sheet-powerroll-details">
-            <summary>&#9660; Power Roll</summary>
-            <div class="sheet-powerroll-body">
-              <div class="sheet-pr-config-row">
-                <div class="sheet-pr-config">
-                  <label>Characteristic</label>
-                  <select name="attr_pr_characteristic">
-                    <option value="might">MGT — Might</option>
-                    <option value="agility">AGL — Agility</option>
-                    <option value="reason">REA — Reason</option>
-                    <option value="intuition">INU — Intuition</option>
-                    <option value="presence">PRS — Presence</option>
-                  </select>
-                </div>
-                <div class="sheet-pr-config">
-                  <label>Extra Bonus</label>
-                  <input type="number" name="attr_pr_bonus" value="0">
-                </div>
-                <input type="hidden" name="attr_pr_char_value" value="0">
-                <button type="roll" class="sheet-roll-btn" name="roll_powerroll"
-                  value="&{template:default} {{name=@{ability_name} — Power Roll}} {{Roll=[[2d10+@{pr_char_value}+@{pr_bonus}]]}} {{Tier 1 (11 or less)=@{pr_tier1}}} {{Tier 2 (12-16)=@{pr_tier2}}} {{Tier 3 (17+)=@{pr_tier3}}}">
-                  Roll 2d10
-                </button>
+            <div class="sheet-ability-meta">
+              <div class="sheet-field">
+                <label>Distance</label>
+                <input type="text" name="attr_atkdistance" placeholder="Melee 1 / Ranged 10">
               </div>
-              <div class="sheet-pr-tiers">
-                <div class="sheet-pr-tier sheet-tier1">
-                  <label>&#8804;11 — Tier 1</label>
-                  <textarea name="attr_pr_tier1" placeholder="Tier 1 result..."></textarea>
-                </div>
-                <div class="sheet-pr-tier sheet-tier2">
-                  <label>12–16 — Tier 2</label>
-                  <textarea name="attr_pr_tier2" placeholder="Tier 2 result..."></textarea>
-                </div>
-                <div class="sheet-pr-tier sheet-tier3">
-                  <label>17+ — Tier 3</label>
-                  <textarea name="attr_pr_tier3" placeholder="Tier 3 result..."></textarea>
-                </div>
+              <div class="sheet-field">
+                <label>Target</label>
+                <input type="text" name="attr_atktarget" placeholder="1 creature">
+              </div>
+              <div class="sheet-field">
+                <label>Source</label>
+                    <select name="attr_atksource">
+                      <option value="None">None</option>
+                      <option value="Signature">Signature</option>
+                      <option value="Class">Class</option>
+                      <option value="Equipment">Equipment</option>
+                      <option value="Race">Race</option>
+                      <option value="Other">Other</option>
+                    </select>
               </div>
             </div>
-          </details>
-        </div>
+            <div class="sheet-field">
+              <label>Effect</label>
+              <textarea name="attr_atkeffect" placeholder="Ability effect text..."></textarea>
+            </div>
+            <details class="sheet-powerroll-details">
+              <summary>&#9660; Power Roll</summary>
+              <div class="sheet-powerroll-body">
+                <div class="sheet-pr-config-row">
+                  <div class="sheet-pr-config">
+                    <label>Characteristic</label>
+                    <select name="attr_mods">
+                      <option value="none">None</option>
+                      <option value="might">Might</option>
+                      <option value="agility">Agility</option>
+                      <option value="reason">Reason</option>
+                      <option value="intuition">Intuition</option>
+                      <option value="presence">Presence</option>
+                    </select>
+                  </div>
+                  <input type="hidden" name="attr_pr_char_value" value="0">
+                  
+                </div>
+                <div class="sheet-pr-tiers">
+                  <div class="sheet-pr-tier sheet-tier1">
+                    <label>Tier I (&#8804;11)</label>
+                    <input type="text" name="attr_atktier1dmg" placeholder="Tier 1 Damage..." class="">
+                    <textarea name="attr_atktier1desc" placeholder="Tier 1 Special Effects..."></textarea>
+                  </div>
+                  <div class="sheet-pr-tier sheet-tier2">
+                    <label>Tier II (12-16)</label>
+                    <input type="text" name="attr_atktier2dmg" placeholder="Tier 2 Damage..." class="">
+                    <textarea name="attr_atktier2desc" placeholder="Tier 2 Special Effects..."></textarea>
+                  </div>
+                  <div class="sheet-pr-tier sheet-tier3">
+                    <label>Tier III (17+)</label>
+                    <input type="text" name="attr_atktier3dmg" placeholder="Tier 3 Damage..." class="">
+                    <textarea name="attr_atktier3desc" placeholder="Tier 3 Special Effects..."></textarea>
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+        </details>
       </fieldset>
     </div>
  
@@ -363,7 +322,7 @@
                   <input type="number" name="attr_pr_bonus" value="0">
                 </div>
                 <input type="hidden" name="attr_pr_char_value" value="0">
-                <button type="roll" class="sheet-roll-btn" name="roll_powerroll"
+                <button type="roll" class="sheet-roll-btn no-dice-icon" name="roll_powerroll"
                   value="&{template:default} {{name=@{ability_name} — Power Roll}} {{Roll=[[2d10+@{pr_char_value}+@{pr_bonus}]]}} {{Tier 1 (11 or less)=@{pr_tier1}}} {{Tier 2 (12-16)=@{pr_tier2}}} {{Tier 3 (17+)=@{pr_tier3}}}">
                   Roll 2d10
                 </button>
@@ -530,6 +489,45 @@
           </details>
         </div>
       </fieldset>
+    </div>
+
+    <!-- CONDITIONS & EQUIPMENT -->
+    <div class="sheet-section-row">
+      <div class="sheet-section sheet-half">
+        <h2>Conditions</h2>
+        <textarea name="attr_conditions" placeholder="Active conditions (Bleeding, Dazed, Frightened, Grabbed, Prone, Restrained, Slowed, Taunted, Weakened)..."></textarea>
+      </div>
+      <div class="sheet-section sheet-half">
+        <h2>Equipment</h2>
+        <textarea name="attr_equipment" placeholder="Weapons, armor, gear..."></textarea>
+      </div>
+    </div>
+ 
+    <!-- SKILLS -->
+    <div class="sheet-section">
+      <h2>Skills</h2>
+      <div class="sheet-skills-grid">
+        <div class="sheet-skill-block">
+          <label>Might Skills</label>
+          <textarea name="attr_skills_might" placeholder="Lift, Climb, Endure..."></textarea>
+        </div>
+        <div class="sheet-skill-block">
+          <label>Agility Skills</label>
+          <textarea name="attr_skills_agility" placeholder="Hide, Jump, Tumble..."></textarea>
+        </div>
+        <div class="sheet-skill-block">
+          <label>Reason Skills</label>
+          <textarea name="attr_skills_reason" placeholder="Lore, Monsters, Magic..."></textarea>
+        </div>
+        <div class="sheet-skill-block">
+          <label>Intuition Skills</label>
+          <textarea name="attr_skills_intuition" placeholder="Alertness, Nature, Track..."></textarea>
+        </div>
+        <div class="sheet-skill-block">
+          <label>Presence Skills</label>
+          <textarea name="attr_skills_presence" placeholder="Brag, Lie, Lead..."></textarea>
+        </div>
+      </div>
     </div>
  
     <!-- NOTES -->
@@ -714,7 +712,7 @@
                   <input type="number" name="attr_pr_bonus" value="0">
                 </div>
                 <input type="hidden" name="attr_pr_char_value" value="0">
-                <button type="roll" class="sheet-roll-btn" name="roll_powerroll"
+                <button type="roll" class="sheet-roll-btn no-dice-icon" name="roll_powerroll"
                   value="&{template:default} {{name=@{ability_name} — Power Roll}} {{Roll=[[2d10+@{pr_char_value}+@{pr_bonus}]]}} {{Tier 1 (11 or less)=@{pr_tier1}}} {{Tier 2 (12-16)=@{pr_tier2}}} {{Tier 3 (17+)=@{pr_tier3}}}">
                   Roll 2d10
                 </button>
@@ -786,7 +784,7 @@
                   <input type="number" name="attr_pr_bonus" value="0">
                 </div>
                 <input type="hidden" name="attr_pr_char_value" value="0">
-                <button type="roll" class="sheet-roll-btn" name="roll_powerroll"
+                <button type="roll" class="sheet-roll-btn no-dice-icon" name="roll_powerroll"
                   value="&{template:default} {{name=@{ability_name} — Power Roll}} {{Roll=[[2d10+@{pr_char_value}+@{pr_bonus}]]}} {{Tier 1 (11 or less)=@{pr_tier1}}} {{Tier 2 (12-16)=@{pr_tier2}}} {{Tier 3 (17+)=@{pr_tier3}}}">
                   Roll 2d10
                 </button>
@@ -858,7 +856,7 @@
                   <input type="number" name="attr_pr_bonus" value="0">
                 </div>
                 <input type="hidden" name="attr_pr_char_value" value="0">
-                <button type="roll" class="sheet-roll-btn" name="roll_powerroll"
+                <button type="roll" class="sheet-roll-btn no-dice-icon" name="roll_powerroll"
                   value="&{template:default} {{name=@{ability_name} — Power Roll}} {{Roll=[[2d10+@{pr_char_value}+@{pr_bonus}]]}} {{Tier 1 (11 or less)=@{pr_tier1}}} {{Tier 2 (12-16)=@{pr_tier2}}} {{Tier 3 (17+)=@{pr_tier3}}}">
                   Roll 2d10
                 </button>
@@ -930,7 +928,7 @@
                   <input type="number" name="attr_pr_bonus" value="0">
                 </div>
                 <input type="hidden" name="attr_pr_char_value" value="0">
-                <button type="roll" class="sheet-roll-btn" name="roll_powerroll"
+                <button type="roll" class="sheet-roll-btn no-dice-icon" name="roll_powerroll"
                   value="&{template:default} {{name=@{ability_name} — Power Roll}} {{Roll=[[2d10+@{pr_char_value}+@{pr_bonus}]]}} {{Tier 1 (11 or less)=@{pr_tier1}}} {{Tier 2 (12-16)=@{pr_tier2}}} {{Tier 3 (17+)=@{pr_tier3}}}">
                   Roll 2d10
                 </button>
@@ -1131,14 +1129,13 @@
       console.log("Respite Clicked");
 
       // Set and reset the stamina and recoveries
-      getAttrs(["maxstamina", 
-              "maxrecoveries", 
+      getAttrs(["stamina_max", 
+              "recoveries_max", 
               "stamina", 
-              "maxrecoveries", 
               "victories",
               "xp"], function(values){
-          let maxStam = parseInt(values["maxstamina"]);
-          let maxRecs = parseInt(values["maxrecoveries"]);
+          let maxStam = parseInt(values["stamina_max"]);
+          let maxRecs = parseInt(values["recoveries_max"]);
           let vicPts = parseInt(values["victories"]);
           let xpVal = parseInt(values["xp"]);
 
@@ -1155,5 +1152,59 @@
 
       });
   });
+
+  ////////////////////////////////////////////////////////////////
+    //  Abilities Test Roll!
+    ////////////////////////////////////////////////////////////////
+
+    on ('clicked:abilitiestest', (event) => {
+        testRoll(event.htmlAttributes.value);
+    });
+    
+    
+    const testRoll = (rollExp) => {
+
+        console.log(rollExp);
+
+        // construct the die roll
+        let rollVal = "[[2d10 + @{"+rollExp+"} ["+rollExp+"]";
+        let baneVal = "";
+        let edgeVal = "";
+        let totalRoll = "";
+        let diffMod ="";
+
+        getAttrs(["edge_bane"], 
+        function(values) {
+            if(values["edge_bane"] == "-1"){
+                rollVal = rollVal + " + 2 [Edge]"
+            } else if (values["edge_bane"] == "1"){
+                rollVal = rollVal + " - 2 [Bane]";
+            } 
+            
+            // Add the Skill Modifier
+            rollVal = rollVal + " + ?{Appropriate Skill? | No,0 | Yes,2 }[Skill]";
+    
+            rollVal = rollVal +"]]";
+
+            diffMod = "?{Difficulty | None, [[0]] | Easy, [[1]] | Medium, [[2]] | Hard, [[3]]}";
+    
+            // Construct the roll
+            totalRoll = "&{template:default}{{char-name=@{characterName}}}{{roll-type="+rollExp+" Test}}{{roll="+rollVal+"}}{{difficulty="+diffMod+"}}{{critical=[[0]]}}";
+    
+            console.log("Roll text = " + totalRoll);
+
+            // Get rid of edge and bane
+            // TODO: make this cleaner by not including edge/bane in the roll at all and just applying it as a modifier in the results processing 
+            //edgeOff();
+
+            startRoll(totalRoll, (results) => {
+                console.log("In Generic startRoll");
+                rolldata = {};
+                //rolldata.critical = isCrit(results.results.roll.dice[0], results.results.roll.dice[1]);
+                finishRoll(results.rollId, rolldata);
+            });
+        });
+
+    } 
 
 </script>
