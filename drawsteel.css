@@ -304,6 +304,17 @@ body.night-mode .sheet-main {
 /* Header section gets a slightly warmer background */
 .sheet-section.sheet-header {
   background: var(--ds-bg-header);
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 8px 10px;
+}
+ 
+.sheet-header-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
  
  
@@ -477,6 +488,44 @@ body.night-mode .sheet-main {
   width: 32px !important;
   font-size: 11px !important;
   padding: 2px !important;
+}
+
+/* Stamina winded state */
+.sheet-stat-stamina:has(input[name="attr_iswinded"]:checked) {
+  background: var(--ds-highlight-single-negative);
+  border-color: var(--ds-highlight-border-single-negative);
+}
+
+/* The winded and dying indicators are mutually exclusive, so we can hide them when the other is active */
+.sheet-stamina-winded{
+  font-size: x-small;
+  display: none;
+}
+
+.sheet-stamina-dying{
+  font-size: x-small;
+  display: none;
+}
+
+/* Show winded indicator when winded checkbox is checked */
+.sheet-stat-stamina:has(input[name="attr_iswinded"]:checked) .sheet-stamina-winded {
+  display: inline;
+}
+
+/* Show dying indicator when dying checkbox is checked */
+.sheet-stat-stamina:has(input[name="attr_isdying"]:checked) .sheet-stamina-dying {
+  display: inline;
+}
+
+/* Hide winded indicator when dying checkbox is checked */
+.sheet-stat-stamina:has(input[name="attr_isdying"]:checked) .sheet-stamina-winded {
+  display: none;
+}
+
+/* Stamina dying state */
+.sheet-stat-stamina:has(input[name="attr_isdying"]:checked) {
+  background: var(--ds-highlight-double-negative);
+  border-color: var(--ds-highlight-border-double-negative);
 }
 
 /* Recoveries current input - larger */
@@ -775,6 +824,62 @@ button.sheet-roll-btn {
 .sheet-roll-btn:hover,
 button.sheet-roll-btn:hover {
   background: var(--ds-roll-btn-hover);
+  box-shadow: 0 2px 6px var(--ds-shadow);
+}
+ 
+ 
+/* ══════════════════════════════════════════════════════════════════════
+   RECOVERY BUTTONS
+══════════════════════════════════════════════════════════════════════ */
+.sheet-recovery-buttons {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0;
+  justify-content: center;
+}
+ 
+.sheet-recovery-btn,
+.sheet-respite-btn {
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px var(--ds-shadow);
+  transition: background 0.15s, box-shadow 0.15s;
+  flex: 1;
+  max-width: 120px;
+}
+ 
+/* Recovery button - healing theme */
+.sheet-recovery-btn {
+  background: var(--ds-tier1-bg);
+  color: var(--ds-tier1-label);
+  border: 1px solid var(--ds-tier1-label);
+}
+ 
+.sheet-recovery-btn:hover {
+  background: var(--ds-tier1-label);
+  color: var(--ds-bg-section);
+  box-shadow: 0 2px 6px var(--ds-shadow);
+}
+ 
+/* Respite button - rest/sleep theme */
+.sheet-respite-btn {
+  background: var(--ds-tier3-bg);
+  color: var(--ds-tier3-label);
+  border: 1px solid var(--ds-tier3-label);
+}
+ 
+.sheet-respite-btn:hover {
+  background: var(--ds-tier3-label);
+  color: var(--ds-bg-section);
   box-shadow: 0 2px 6px var(--ds-shadow);
 }
  
