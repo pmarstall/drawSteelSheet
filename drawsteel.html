@@ -192,8 +192,7 @@
             <input type="text" name="attr_atknamedisp" value="@{atkname}" class="" disabled="true">
             <input type="text" name="attr_atknamedisp" value="@{atksource}" class="" disabled="true">
             <input type="text" name="attr_atknamedisp" value="@{atkcost}" class="" disabled="true">
-            <button type="roll" class="sheet-roll-btn" name="roll_atkroll"
-              value="&{template:default} {{name=@{ability_name} — Power Roll}} {{Roll=[[2d10+@{pr_char_value}+@{pr_bonus}]]}} {{Tier 1 (11 or less)=@{pr_tier1}}} {{Tier 2 (12-16)=@{pr_tier2}}} {{Tier 3 (17+)=@{pr_tier3}}}">
+            <button type="action" class="sheet-roll-btn" name="roll_atkroll" id=""atkRollButton">
               &#x2B22; Roll
             </button>
             <button type="roll" class="sheet-roll-btn sheet-no-default-icon" name="roll_atkchat"
@@ -969,6 +968,15 @@
 ════════════════════════════════════════ -->
 <script type="text/worker">
  
+  // ── Helper: extract the row ID from a repeating section event ───────────────
+  // e.g. event.sourceAttribute = "repeating_actions_-Nabc123_pr_characteristic" → "-Nabc123"
+  function getRowId(event) {
+    const trigger = event.sourceAttribute.split('_');
+    const rowid = trigger[2];
+    console.log("Row ID: " + rowid);
+    return rowid;
+  }
+
   // ── Helper: update pr_char_value for a single repeating row ──────────────
   function resolveCharForRow(sourceAttr, charKey, charVals) {
     var val = parseInt(charVals[charKey]) || 0;
@@ -978,6 +986,91 @@
     setAttrs(update, { silent: true });
   }
  
+
+  // --- Helper - Given the long name for an attribute, return the short name (e.g. "stamina" → "sta") ---
+  function getAttribShortName(longName) {
+    var shortNames = {
+      'stamina': 'sta',
+      'might': 'mgt',
+      'agility': 'agi',
+      'reason': 'rea',
+      'intuition': 'inu',
+      'presence': 'prs'
+    };
+    return shortNames[longName] || longName;
+  }
+
+  // --- Helper: build a power roll text string for a repeating section row ---
+  // Returns a Promise that resolves with the complete rollText string.
+  function buildPowerRollText(sectionName, rowid) {
+    return new Promise((resolve) => {
+      getAttrs([
+        'edge_bane',
+        `${sectionName}_${rowid}_pr_char_value`,
+        `${sectionName}_${rowid}_atkname`,
+        `${sectionName}_${rowid}_atkcost`,
+        `${sectionName}_${rowid}_atkeffect`,
+        `${sectionName}_${rowid}_mods`,
+        `${sectionName}_${rowid}_atktier1dmg`,
+        `${sectionName}_${rowid}_atktier1desc`,
+        `${sectionName}_${rowid}_atktier2dmg`,
+        `${sectionName}_${rowid}_atktier2desc`,
+        `${sectionName}_${rowid}_atktier3dmg`,
+        `${sectionName}_${rowid}_atktier3desc`
+      ], function(values) {
+        console.log("Values for Power Roll:", values);
+
+        let rollText = "&{template:default}" +
+          "{{name=@{characterName}}}" +
+          `{{roll-type=@{${sectionName}_${rowid}_atkname}}}` +
+          `{{cost=@{${sectionName}_${rowid}_atkcost}}}` +
+          `{{effect=@{${sectionName}_${rowid}_atkeffect}}}` +
+          `{{tier1-damage=@{${sectionName}_${rowid}_atktier1dmg}}}` +
+          `{{tier2-damage=@{${sectionName}_${rowid}_atktier2dmg}}}` +
+          `{{tier3-damage=@{${sectionName}_${rowid}_atktier3dmg}}}` +
+          `{{tier1-effect=@{${sectionName}_${rowid}_atktier1desc}}}` +
+          `{{tier2-effect=@{${sectionName}_${rowid}_atktier2desc}}}` +
+          `{{tier3-effect=@{${sectionName}_${rowid}_atktier3desc}}}`;
+
+        // Add the die roll component
+        let rollVal = "[[2d10";
+
+        // Get the Attribute Bonus if any
+        const attribShort = getAttribShortName(values[`${sectionName}_${rowid}_mods`]);
+        console.log("Attribute for roll: " + attribShort);
+        if (attribShort) {
+          rollVal += ` + @{${attribShort}} [${attribShort}]`;
+        }
+
+        // Check for Edges or Banes
+        const edgeBane = values["edge_bane"];
+        if (edgeBane == "-2") {
+          rollText += "{{EdgeBane= Double Bane - Reduce the Tier by 1}}";
+        } else if (edgeBane == "-1") {
+          rollVal += " - 2 [Bane]";
+        } else if (edgeBane == "1") {
+          rollVal += " + 2 [Edge]";
+        } else if (edgeBane == "2") {
+          rollText += "{{EdgeBane= Double Edge - Increase the Tier by 1}}";
+        }
+
+        // Finalize the roll formula
+        rollVal += "]]";
+        rollText += "{{roll=" + rollVal + "}}";
+        console.log("Power Roll text = " + rollText);
+
+        startRoll(rollText, (results) => {
+            console.log("In Power Roll startRoll");
+            rolldata = {};
+            //rolldata.critical = isCrit(results.results.roll.dice[0], results.results.roll.dice[1]);
+            finishRoll(results.rollId, rolldata);
+        });
+
+        resolve(rollText);
+      });
+    });
+  }
+
   // ── Recovery Value (stamina_max / 3, rounded down) ────────────────────────
   on('change:stamina_max sheet:opened', function() {
     getAttrs(['stamina_max'], function(v) {
@@ -1206,5 +1299,26 @@
         });
 
     } 
+
+
+
+    ////////////////////////////////////////////////
+    // Power Roll action from repeating events
+    ////////////////////////////////////////////////
+     on ('clicked:repeating_actions', (event) => {
+        console.log("Starting event in repeating_actions");
+        console.log(event);
+
+        const rowid = getRowId(event);
+
+        buildPowerRollText("repeating_actions", rowid).then((rollText) => {
+            
+        });
+
+     });
+
+
+
+    
 
 </script>
