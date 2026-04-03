@@ -195,8 +195,7 @@
             <button type="action" class="sheet-roll-btn" name="roll_roll" id=""RollButton">
               &#x2B22; Roll
             </button>
-            <button type="roll" class="sheet-roll-btn sheet-no-default-icon" name="roll_chat"
-              value="&{template:default} {{name=@{ability_name} — Power Roll}} {{Roll=[[2d10+@{pr_char_value}+@{pr_bonus}]]}} {{Tier 1 (11 or less)=@{pr_tier1}}} {{Tier 2 (12-16)=@{pr_tier2}}} {{Tier 3 (17+)=@{pr_tier3}}}">
+            <button type="action" class="sheet-roll-btn" name="roll_chat" id="ChatButton">
               &#x1F5E8; Info
             </button>
           </summary>
@@ -967,7 +966,7 @@
     Templates
 -->
 <!-- Power Roll Template -->
-<rolltemplate class="sheet-rolltemplate-drawsteeltest">
+<rolltemplate class="sheet-rolltemplate-drawsteelpowerroll">
   <div class="sheet-rt-wrapper">
 
     <!-- ── Header: character name + ability name + cost ── -->
@@ -1030,8 +1029,60 @@
   </div>
 </rolltemplate>
 
-<rolltemplate class="sheet-rolltemplate-drawsteelsimple">
-  This is just a placeholder
+
+<!-- Description Template
+     Used to display summary information about an ability, including name, keywords, cost, source, distance, targets, tier effects, and overall effect.
+-->
+<rolltemplate class="sheet-rolltemplate-drawsteeldesc">
+  <div class="sheet-rt-wrapper">
+
+    <!-- ── Header: character name + ability name + cost ── -->
+    <div class="sheet-rt-header">
+      <div class="sheet-rt-char-name">Summary Information</div>
+      {{#name}}<div class="sheet-rt-char-name">{{name}}</div>{{/name}}
+      {{#roll-type}}<div class="sheet-rt-ability-name">{{roll-type}}</div>{{/roll-type}}
+      {{#keywords}}<div class="sheet-rt-char-name">{{keywords}}</div>{{/keywords}}
+      {{#category}}<div class="sheet-rt-cost">{{category}}</div>{{/category}}
+      {{#cost}}<div class="sheet-rt-cost">Cost: {{cost}}</div>{{/cost}}
+      {{#source}}<div class="sheet-rt-cost">Source: {{source}}</div>{{/source}}
+    </div>
+    <!-- ── Distance/Range ── -->
+    {{#distance}}
+      <div class="sheet-rt-overall-effect">
+        <span class="sheet-rt-field-label">Distance</span> {{distance}}
+      </div>
+    {{/distance}}
+    <!-- ── Targets ── -->
+    {{#target}}
+      <div class="sheet-rt-overall-effect">
+        <span class="sheet-rt-field-label">Target: </span> {{target}}
+      </div>
+    {{/target}}
+    <!-- Only show tier information if it's configured -->
+    {{#rollTotal() notierresults 0}}
+      <div class="sheet-rt-tier sheet-rt-tier1">
+        <div class="sheet-rt-tier-label">Tier I</div>
+        {{#tier1-damage}}<div class="sheet-rt-damage"><span class="sheet-rt-field-label">Damage</span> {{tier1-damage}}</div>{{/tier1-damage}}
+        {{#tier1-effect}}<div class="sheet-rt-tier-effect"><span class="sheet-rt-field-label">Effect</span> {{tier1-effect}}</div>{{/tier1-effect}}
+      </div>
+      <div class="sheet-rt-tier sheet-rt-tier2">
+        <div class="sheet-rt-tier-label">Tier II</div>
+        {{#tier2-damage}}<div class="sheet-rt-damage"><span class="sheet-rt-field-label">Damage</span> {{tier2-damage}}</div>{{/tier2-damage}}
+        {{#tier2-effect}}<div class="sheet-rt-tier-effect"><span class="sheet-rt-field-label">Effect</span> {{tier2-effect}}</div>{{/tier2-effect}}
+      </div>
+      <div class="sheet-rt-tier sheet-rt-tier3">
+        <div class="sheet-rt-tier-label">Tier III </div>
+        {{#tier3-damage}}<div class="sheet-rt-damage"><span class="sheet-rt-field-label">Damage</span> {{tier3-damage}}</div>{{/tier3-damage}}
+        {{#tier3-effect}}<div class="sheet-rt-tier-effect"><span class="sheet-rt-field-label">Effect</span> {{tier3-effect}}</div>{{/tier3-effect}}
+      </div>
+    {{/rollTotal() notierresults 0}}
+    <!-- ── Overall ability effect ── -->
+    {{#effect}}
+      <div class="sheet-rt-overall-effect">
+        <span class="sheet-rt-field-label">Effect</span> {{effect}}
+      </div>
+    {{/effect}}
+
 </rolltemplate>
  
 <!-- ═══════════════════════════════════════
@@ -1046,6 +1097,15 @@
     const rowid = trigger[2];
     console.log("Row ID: " + rowid);
     return rowid;
+  }
+
+  // ── Helper: extract the "name" attribute from an event's htmlAttributes ─────────
+  // Roll20 sets event.htmlAttributes to the DOM attributes of the clicked button.
+  // e.g. for <button name="act_atkroll"> this returns "act_atkroll"
+  function getButtonName(event) {
+    const buttonName = event.htmlAttributes && event.htmlAttributes.name;
+    console.log("Button Name: " + buttonName);
+    return buttonName;
   }
 
   // ── Helper: update pr_char_value for a single repeating row ──────────────
@@ -1436,15 +1496,29 @@
 
 
     ////////////////////////////////////////////////
-    // Power Roll action from repeating events
+    // Power Roll action from repeating actions events
     ////////////////////////////////////////////////
      on ('clicked:repeating_actions', (event) => {
         console.log("Starting event in repeating_actions");
         console.log(event);
 
+        // Get the button name to determine which roll template to use and what category to assign to the roll
+        const buttonName = getButtonName(event);
+        let templateName;
+        if(buttonName === "roll_roll"){
+            console.log("AbilitiesPower Roll button clicked");
+            templateName = "drawsteelpowerroll";
+        }else if(buttonName === "roll_chat"){
+            console.log("Abilities Chat clicked: " + buttonName);
+            templateName = "drawsteeldesc";
+        }else{
+            console.log("Unknown button clicked: " + buttonName);
+            return;
+        }
+
         const rowid = getRowId(event);
 
-        buildPowerRollText("repeating_actions", rowid, "drawsteeltest", "Ability").then((rollText) => {
+        buildPowerRollText("repeating_actions", rowid, templateName, "Ability").then((rollText) => {
             
         });
 

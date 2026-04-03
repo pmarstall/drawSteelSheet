@@ -1049,11 +1049,13 @@ button[type="roll"]::before {
 
 
 /* ══════════════════════════════════════════════════════════════════════
-   ROLL TEMPLATE: drawsteeltest — Power Roll
-   All selectors scoped to .sheet-rolltemplate-drawsteeltest
+   ROLL TEMPLATES — shared branding
+   drawsteelpowerroll : Power Roll (roll + tier results)
+   drawsteeldesc      : Ability Description (header + tiers, no roll row)
 ══════════════════════════════════════════════════════════════════════ */
 
-.sheet-rolltemplate-drawsteeltest .sheet-rt-wrapper {
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-wrapper,
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-wrapper {
   font-family: 'Segoe UI', Arial, sans-serif;
   font-size: 13px;
   color: #2a2218;
@@ -1067,13 +1069,15 @@ button[type="roll"]::before {
 }
 
 /* ── Header ── */
-.sheet-rolltemplate-drawsteeltest .sheet-rt-header {
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-header,
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-header {
   background: #f0e8d4;
   border-bottom: 2px solid #c8a84b;
   padding: 6px 10px 5px;
 }
 
-.sheet-rolltemplate-drawsteeltest .sheet-rt-char-name {
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-char-name,
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-char-name {
   font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
@@ -1081,7 +1085,8 @@ button[type="roll"]::before {
   color: #7a5820;
 }
 
-.sheet-rolltemplate-drawsteeltest .sheet-rt-ability-name {
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-ability-name,
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-ability-name {
   font-size: 15px;
   font-weight: 700;
   color: #2a2218;
@@ -1089,23 +1094,24 @@ button[type="roll"]::before {
   line-height: 1.2;
 }
 
-.sheet-rolltemplate-drawsteeltest .sheet-rt-cost {
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-cost,
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-cost {
   font-size: 11px;
   color: #6a5a48;
   font-style: italic;
 }
 
-/* ── Roll row ── */
-.sheet-rolltemplate-drawsteeltest .sheet-rt-roll-row {
+/* ── Roll row (power roll only) ── */
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-roll-row {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 15px 20px;
+  padding: 5px 10px;
   background: #ffffff;
   border-bottom: 1px solid #e0d4be;
 }
 
-.sheet-rolltemplate-drawsteeltest .sheet-rt-roll-label {
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-roll-label {
   font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
@@ -1113,13 +1119,13 @@ button[type="roll"]::before {
   color: #7a5820;
 }
 
-.sheet-rolltemplate-drawsteeltest .sheet-rt-roll-value {
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-roll-value {
   font-size: 18px;
   font-weight: 700;
   color: #2a2218;
 }
 
-.sheet-rolltemplate-drawsteeltest .sheet-rt-critical {
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-critical {
   font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
@@ -1130,8 +1136,8 @@ button[type="roll"]::before {
   border-radius: 3px;
 }
 
-/* ── Edge / Bane notice ── */
-.sheet-rolltemplate-drawsteeltest .sheet-rt-edgebane {
+/* ── Edge / Bane notice (power roll only) ── */
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-edgebane {
   padding: 3px 10px;
   font-size: 11px;
   font-style: italic;
@@ -1141,12 +1147,14 @@ button[type="roll"]::before {
 }
 
 /* ── Tier result blocks ── */
-.sheet-rolltemplate-drawsteeltest .sheet-rt-tier {
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier,
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier {
   padding: 6px 10px 7px 13px;
   border-bottom: 1px solid #e0d4be;
 }
 
-.sheet-rolltemplate-drawsteeltest .sheet-rt-tier-label {
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier-label,
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier-label {
   font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
@@ -1155,34 +1163,41 @@ button[type="roll"]::before {
 }
 
 /* Tier 1 — green */
-.sheet-rolltemplate-drawsteeltest .sheet-rt-tier1 {
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier1,
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier1 {
   background: #edf5ed;
   border-left: 4px solid #2e6b2e;
 }
-.sheet-rolltemplate-drawsteeltest .sheet-rt-tier1 .sheet-rt-tier-label {
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier1 .sheet-rt-tier-label,
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier1 .sheet-rt-tier-label {
   color: #2e6b2e;
 }
 
 /* Tier 2 — amber */
-.sheet-rolltemplate-drawsteeltest .sheet-rt-tier2 {
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier2,
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier2 {
   background: #f5f0e0;
   border-left: 4px solid #8a7a3a;
 }
-.sheet-rolltemplate-drawsteeltest .sheet-rt-tier2 .sheet-rt-tier-label {
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier2 .sheet-rt-tier-label,
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier2 .sheet-rt-tier-label {
   color: #6b5a10;
 }
 
 /* Tier 3 — purple */
-.sheet-rolltemplate-drawsteeltest .sheet-rt-tier3 {
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier3,
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier3 {
   background: #f0ecf5;
   border-left: 4px solid #7a3a8a;
 }
-.sheet-rolltemplate-drawsteeltest .sheet-rt-tier3 .sheet-rt-tier-label {
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier3 .sheet-rt-tier-label,
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier3 .sheet-rt-tier-label {
   color: #5a2e7a;
 }
 
 /* Damage value */
-.sheet-rolltemplate-drawsteeltest .sheet-rt-damage {
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-damage,
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-damage {
   font-size: 13px;
   font-weight: 600;
   color: #c0392b;
@@ -1190,14 +1205,16 @@ button[type="roll"]::before {
 }
 
 /* Tier effect text */
-.sheet-rolltemplate-drawsteeltest .sheet-rt-tier-effect {
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier-effect,
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier-effect {
   font-size: 12px;
   color: #2a2218;
   margin-top: 2px;
 }
 
 /* Inline "Damage" / "Effect" labels */
-.sheet-rolltemplate-drawsteeltest .sheet-rt-field-label {
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-field-label,
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-field-label {
   font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
@@ -1206,7 +1223,8 @@ button[type="roll"]::before {
 }
 
 /* ── Overall ability effect ── */
-.sheet-rolltemplate-drawsteeltest .sheet-rt-overall-effect {
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-overall-effect,
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-overall-effect {
   padding: 5px 10px 6px;
   font-size: 12px;
   color: #2a2218;
@@ -1215,92 +1233,108 @@ button[type="roll"]::before {
 }
 
 /* ── Dark mode (Roll20 night-mode) ── */
-body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-wrapper {
+body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-wrapper,
+body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-wrapper {
   color: #e8e4dc;
   background: #1a1a1a;
   border-color: #4a4030;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
 }
 
-body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-header {
+body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-header,
+body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-header {
   background: #2e2820;
   border-bottom-color: #c8a84b;
 }
 
-body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-char-name {
+body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-char-name,
+body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-char-name {
   color: #c8a84b;
 }
 
-body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-ability-name {
+body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-ability-name,
+body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-ability-name {
   color: #e8e4dc;
 }
 
-body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-cost {
+body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-cost,
+body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-cost {
   color: #a09080;
 }
 
-body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-roll-row {
+body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-roll-row {
   background: #252525;
   border-bottom-color: #383028;
 }
 
-body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-roll-label {
+body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-roll-label {
   color: #c8a84b;
 }
 
-body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-roll-value {
+body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-roll-value {
   color: #e8e4dc;
 }
 
-body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-critical {
+body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-critical {
   color: #1a1200;
   background: #c8a84b;
 }
 
-body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-edgebane {
+body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-edgebane {
   color: #a09080;
   background: #1e1e1e;
   border-bottom-color: #383028;
 }
 
-body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-tier {
+body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier,
+body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-tier {
   border-bottom-color: #383028;
 }
 
-body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-tier1 {
+body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier1,
+body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-tier1 {
   background: #162016;
   border-left-color: #6ab86a;
 }
-body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-tier1 .sheet-rt-tier-label {
+body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier1 .sheet-rt-tier-label,
+body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-tier1 .sheet-rt-tier-label {
   color: #6ab86a;
 }
 
-body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-tier2 {
+body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier2,
+body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-tier2 {
   background: #201c08;
   border-left-color: #c8b050;
 }
-body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-tier2 .sheet-rt-tier-label {
+body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier2 .sheet-rt-tier-label,
+body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-tier2 .sheet-rt-tier-label {
   color: #c8b050;
 }
 
-body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-tier3 {
+body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier3,
+body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-tier3 {
   background: #1c1428;
   border-left-color: #a87ac8;
 }
-body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-tier3 .sheet-rt-tier-label {
+body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier3 .sheet-rt-tier-label,
+body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-tier3 .sheet-rt-tier-label {
   color: #a87ac8;
 }
 
-body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-damage {
+body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-damage,
+body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-damage {
   color: #e05050;
 }
 
-body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-tier-effect,
-body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-overall-effect {
+body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier-effect,
+body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-overall-effect,
+body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-tier-effect,
+body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-overall-effect {
   color: #e8e4dc;
 }
 
-body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-overall-effect {
+body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-overall-effect,
+body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-overall-effect {
   background: #1e1e1e;
   border-top-color: #383028;
 }
