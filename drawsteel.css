@@ -1046,3 +1046,261 @@ button[type="roll"]::before {
 .sheet-eb-option:hover:has(:not(:checked)) {
   filter: brightness(1.1);
 }
+
+
+/* ══════════════════════════════════════════════════════════════════════
+   ROLL TEMPLATE: drawsteeltest — Power Roll
+   All selectors scoped to .sheet-rolltemplate-drawsteeltest
+══════════════════════════════════════════════════════════════════════ */
+
+.sheet-rolltemplate-drawsteeltest .sheet-rt-wrapper {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 13px;
+  color: #2a2218;
+  background: #f5f0e8;
+  border: 1px solid #c8b89a;
+  border-radius: 5px;
+  overflow: hidden;
+  min-width: 220px;
+  max-width: 380px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+}
+
+/* ── Header ── */
+.sheet-rolltemplate-drawsteeltest .sheet-rt-header {
+  background: #f0e8d4;
+  border-bottom: 2px solid #c8a84b;
+  padding: 6px 10px 5px;
+}
+
+.sheet-rolltemplate-drawsteeltest .sheet-rt-char-name {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #7a5820;
+}
+
+.sheet-rolltemplate-drawsteeltest .sheet-rt-ability-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #2a2218;
+  margin: 2px 0 1px;
+  line-height: 1.2;
+}
+
+.sheet-rolltemplate-drawsteeltest .sheet-rt-cost {
+  font-size: 11px;
+  color: #6a5a48;
+  font-style: italic;
+}
+
+/* ── Roll row ── */
+.sheet-rolltemplate-drawsteeltest .sheet-rt-roll-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 15px 20px;
+  background: #ffffff;
+  border-bottom: 1px solid #e0d4be;
+}
+
+.sheet-rolltemplate-drawsteeltest .sheet-rt-roll-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #7a5820;
+}
+
+.sheet-rolltemplate-drawsteeltest .sheet-rt-roll-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2a2218;
+}
+
+.sheet-rolltemplate-drawsteeltest .sheet-rt-critical {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #2a1e08;
+  background: #c8a84b;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+/* ── Edge / Bane notice ── */
+.sheet-rolltemplate-drawsteeltest .sheet-rt-edgebane {
+  padding: 3px 10px;
+  font-size: 11px;
+  font-style: italic;
+  color: #6a5a48;
+  background: #faf7f2;
+  border-bottom: 1px solid #e0d4be;
+}
+
+/* ── Tier result blocks ── */
+.sheet-rolltemplate-drawsteeltest .sheet-rt-tier {
+  padding: 6px 10px 7px 13px;
+  border-bottom: 1px solid #e0d4be;
+}
+
+.sheet-rolltemplate-drawsteeltest .sheet-rt-tier-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+
+/* Tier 1 — green */
+.sheet-rolltemplate-drawsteeltest .sheet-rt-tier1 {
+  background: #edf5ed;
+  border-left: 4px solid #2e6b2e;
+}
+.sheet-rolltemplate-drawsteeltest .sheet-rt-tier1 .sheet-rt-tier-label {
+  color: #2e6b2e;
+}
+
+/* Tier 2 — amber */
+.sheet-rolltemplate-drawsteeltest .sheet-rt-tier2 {
+  background: #f5f0e0;
+  border-left: 4px solid #8a7a3a;
+}
+.sheet-rolltemplate-drawsteeltest .sheet-rt-tier2 .sheet-rt-tier-label {
+  color: #6b5a10;
+}
+
+/* Tier 3 — purple */
+.sheet-rolltemplate-drawsteeltest .sheet-rt-tier3 {
+  background: #f0ecf5;
+  border-left: 4px solid #7a3a8a;
+}
+.sheet-rolltemplate-drawsteeltest .sheet-rt-tier3 .sheet-rt-tier-label {
+  color: #5a2e7a;
+}
+
+/* Damage value */
+.sheet-rolltemplate-drawsteeltest .sheet-rt-damage {
+  font-size: 13px;
+  font-weight: 600;
+  color: #c0392b;
+  margin-bottom: 2px;
+}
+
+/* Tier effect text */
+.sheet-rolltemplate-drawsteeltest .sheet-rt-tier-effect {
+  font-size: 12px;
+  color: #2a2218;
+  margin-top: 2px;
+}
+
+/* Inline "Damage" / "Effect" labels */
+.sheet-rolltemplate-drawsteeltest .sheet-rt-field-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-right: 3px;
+}
+
+/* ── Overall ability effect ── */
+.sheet-rolltemplate-drawsteeltest .sheet-rt-overall-effect {
+  padding: 5px 10px 6px;
+  font-size: 12px;
+  color: #2a2218;
+  background: #faf7f2;
+  border-top: 1px solid #e0d4be;
+}
+
+/* ── Dark mode (Roll20 night-mode) ── */
+body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-wrapper {
+  color: #e8e4dc;
+  background: #1a1a1a;
+  border-color: #4a4030;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+}
+
+body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-header {
+  background: #2e2820;
+  border-bottom-color: #c8a84b;
+}
+
+body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-char-name {
+  color: #c8a84b;
+}
+
+body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-ability-name {
+  color: #e8e4dc;
+}
+
+body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-cost {
+  color: #a09080;
+}
+
+body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-roll-row {
+  background: #252525;
+  border-bottom-color: #383028;
+}
+
+body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-roll-label {
+  color: #c8a84b;
+}
+
+body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-roll-value {
+  color: #e8e4dc;
+}
+
+body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-critical {
+  color: #1a1200;
+  background: #c8a84b;
+}
+
+body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-edgebane {
+  color: #a09080;
+  background: #1e1e1e;
+  border-bottom-color: #383028;
+}
+
+body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-tier {
+  border-bottom-color: #383028;
+}
+
+body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-tier1 {
+  background: #162016;
+  border-left-color: #6ab86a;
+}
+body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-tier1 .sheet-rt-tier-label {
+  color: #6ab86a;
+}
+
+body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-tier2 {
+  background: #201c08;
+  border-left-color: #c8b050;
+}
+body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-tier2 .sheet-rt-tier-label {
+  color: #c8b050;
+}
+
+body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-tier3 {
+  background: #1c1428;
+  border-left-color: #a87ac8;
+}
+body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-tier3 .sheet-rt-tier-label {
+  color: #a87ac8;
+}
+
+body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-damage {
+  color: #e05050;
+}
+
+body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-tier-effect,
+body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-overall-effect {
+  color: #e8e4dc;
+}
+
+body.night-mode .sheet-rolltemplate-drawsteeltest .sheet-rt-overall-effect {
+  background: #1e1e1e;
+  border-top-color: #383028;
+}

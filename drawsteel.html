@@ -962,6 +962,74 @@
  
 </div><!-- end .sheet-main -->
  
+
+<!-- =======================================
+    Templates
+-->
+<!-- Power Roll Template -->
+<rolltemplate class="sheet-rolltemplate-drawsteeltest">
+  <div class="sheet-rt-wrapper">
+
+    <!-- ── Header: character name + ability name + cost ── -->
+    <div class="sheet-rt-header">
+      {{#name}}<div class="sheet-rt-char-name">{{name}}</div>{{/name}}
+      {{#roll-type}}<div class="sheet-rt-ability-name">{{roll-type}}</div>{{/roll-type}}
+      {{#cost}}<div class="sheet-rt-cost">Cost: {{cost}}</div>{{/cost}}
+    </div>
+
+    <!-- Only show rolls and tier information  when the tier data is configured-->
+    {{#rollTotal() notierresults 0}}
+
+      <!-- ── Roll result row ── only when the tier data is configured-->
+      <div class="sheet-rt-roll-row">
+        <span class="sheet-rt-roll-label">Power Roll</span>
+        <span class="sheet-rt-roll-value">{{roll}}</span>
+        {{#rollTotal() computed::critical 1}}
+          <span class="sheet-rt-critical">Critical!</span>
+        {{/rollTotal() computed::critical 1}}
+      </div>
+
+      <!-- ── Edge / Bane notice ── -->
+      {{#EdgeBane}}
+        <div class="sheet-rt-edgebane">{{EdgeBane}}</div>
+      {{/EdgeBane}}
+
+      <!-- ── Tier Results (only when tier data is configured) ── -->
+      {{#rollTotal() computed::tierresult 1}}
+        <div class="sheet-rt-tier sheet-rt-tier1">
+          <div class="sheet-rt-tier-label">Tier I</div>
+          {{#tier1-damage}}<div class="sheet-rt-damage"><span class="sheet-rt-field-label">Damage</span> {{tier1-damage}}</div>{{/tier1-damage}}
+          {{#tier1-effect}}<div class="sheet-rt-tier-effect"><span class="sheet-rt-field-label">Effect</span> {{tier1-effect}}</div>{{/tier1-effect}}
+        </div>
+      {{/rollTotal() computed::tierresult 1}}
+      {{#rollTotal() computed::tierresult 2}}
+        <div class="sheet-rt-tier sheet-rt-tier2">
+          <div class="sheet-rt-tier-label">Tier II</div>
+          {{#tier2-damage}}<div class="sheet-rt-damage"><span class="sheet-rt-field-label">Damage</span> {{tier2-damage}}</div>{{/tier2-damage}}
+          {{#tier2-effect}}<div class="sheet-rt-tier-effect"><span class="sheet-rt-field-label">Effect</span> {{tier2-effect}}</div>{{/tier2-effect}}
+        </div>
+      {{/rollTotal() computed::tierresult 2}}
+      {{#rollTotal() computed::tierresult 3}}
+        <div class="sheet-rt-tier sheet-rt-tier3">
+          <div class="sheet-rt-tier-label">Tier III </div>
+          {{#tier3-damage}}<div class="sheet-rt-damage"><span class="sheet-rt-field-label">Damage</span> {{tier3-damage}}</div>{{/tier3-damage}}
+          {{#tier3-effect}}<div class="sheet-rt-tier-effect"><span class="sheet-rt-field-label">Effect</span> {{tier3-effect}}</div>{{/tier3-effect}}
+        </div>
+      {{/rollTotal() computed::tierresult 3}}
+    
+    {{/rollTotal() notierresults 0}}
+
+    <!-- ── Overall ability effect ── -->
+    {{#effect}}
+      <div class="sheet-rt-overall-effect">
+        <span class="sheet-rt-field-label">Effect</span> {{effect}}
+      </div>
+    {{/effect}}
+
+  </div>
+</rolltemplate>
+
+
  
 <!-- ═══════════════════════════════════════
      SHEET WORKERS
@@ -1033,9 +1101,27 @@
     return tier;
   }
 
+  // --- Helper: return true if all tier damage and effect fields are empty ---
+  // values: the getAttrs values object; sectionName and rowid identify the repeating row
+  function allTiersEmpty(values, sectionName, rowid) {
+    const tierFields = [
+      `${sectionName}_${rowid}_atktier1dmg`,
+      `${sectionName}_${rowid}_atktier1desc`,
+      `${sectionName}_${rowid}_atktier2dmg`,
+      `${sectionName}_${rowid}_atktier2desc`,
+      `${sectionName}_${rowid}_atktier3dmg`,
+      `${sectionName}_${rowid}_atktier3desc`,
+    ]; 
+    if(tierFields.every(field => !values[field] || values[field].trim() === '')){
+      return 1;
+    }else{
+      return 0;
+    }
+  }
+
   // --- Helper: build a power roll text string for a repeating section row ---
   // Returns a Promise that resolves with the complete rollText string.
-  function buildPowerRollText(sectionName, rowid) {
+  function buildPowerRollText(sectionName, rowid, templateName) {
     return new Promise((resolve) => {
       getAttrs([
         'edge_bane',
@@ -1053,7 +1139,7 @@
       ], function(values) {
         console.log("Values for Power Roll:", values);
 
-        let rollText = "&{template:default}" +
+        let rollText = "&{template:" + templateName + "}" +
           "{{name=@{characterName}}}" +
           `{{roll-type=@{${sectionName}_${rowid}_atkname}}}` +
           `{{cost=@{${sectionName}_${rowid}_atkcost}}}` +
@@ -1064,10 +1150,15 @@
           `{{tier1-effect=@{${sectionName}_${rowid}_atktier1desc}}}` +
           `{{tier2-effect=@{${sectionName}_${rowid}_atktier2desc}}}` +
           `{{tier3-effect=@{${sectionName}_${rowid}_atktier3desc}}}`+
-          `{{critical=0}}` +
-          `{{tierresult=0}}`;
+          `{{critical=[[0]]}}` +
+          `{{tierresult=[[0]]}}`;
 
-        // Add the die roll component
+        //See if all the damage and effects for the tiers are empty - if so, use the simpler roll template that doesn't have damage/effect fields
+        const noTier = allTiersEmpty(values, sectionName, rowid);
+        rollText = rollText +"{{notierresults=[[" + noTier + "]]}}";
+        
+
+          // Add the die roll component
         let rollVal = "[[2d10";
 
         // Get the Attribute Bonus if any
@@ -1080,13 +1171,13 @@
         // Check for Edges or Banes
         const edgeBane = values["edge_bane"];
         if (edgeBane == "-2") {
-          rollText += "{{EdgeBane= Double Bane - Reduce the Tier by 1}}";
+          rollText += "{{EdgeBane= Double Bane - Tier was decreased by 1}}";
         } else if (edgeBane == "-1") {
           rollVal += " - 2 [Bane]";
         } else if (edgeBane == "1") {
           rollVal += " + 2 [Edge]";
         } else if (edgeBane == "2") {
-          rollText += "{{EdgeBane= Double Edge - Increase the Tier by 1}}";
+          rollText += "{{EdgeBane= Double Edge - Tier was increased by 1}}";
         }
 
         // Finalize the roll formula
@@ -1349,7 +1440,7 @@
 
         const rowid = getRowId(event);
 
-        buildPowerRollText("repeating_actions", rowid).then((rollText) => {
+        buildPowerRollText("repeating_actions", rowid, "drawsteeltest").then((rollText) => {
             
         });
 
