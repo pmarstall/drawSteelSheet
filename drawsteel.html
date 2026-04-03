@@ -189,13 +189,13 @@
         <details class="sheet-action-details">
           <summary>
             &#9660; 
-            <input type="text" name="attr_atknamedisp" value="@{atkname}" class="" disabled="true">
-            <input type="text" name="attr_atknamedisp" value="@{atksource}" class="" disabled="true">
-            <input type="text" name="attr_atknamedisp" value="@{atkcost}" class="" disabled="true">
-            <button type="action" class="sheet-roll-btn" name="roll_atkroll" id=""atkRollButton">
+            <input type="text" name="attr_namedisp" value="@{name}" class="" disabled="true">
+            <input type="text" name="attr_namedisp" value="@{source}" class="" disabled="true">
+            <input type="text" name="attr_namedisp" value="@{cost}" class="" disabled="true">
+            <button type="action" class="sheet-roll-btn" name="roll_roll" id=""RollButton">
               &#x2B22; Roll
             </button>
-            <button type="roll" class="sheet-roll-btn sheet-no-default-icon" name="roll_atkchat"
+            <button type="roll" class="sheet-roll-btn sheet-no-default-icon" name="roll_chat"
               value="&{template:default} {{name=@{ability_name} — Power Roll}} {{Roll=[[2d10+@{pr_char_value}+@{pr_bonus}]]}} {{Tier 1 (11 or less)=@{pr_tier1}}} {{Tier 2 (12-16)=@{pr_tier2}}} {{Tier 3 (17+)=@{pr_tier3}}}">
               &#x1F5E8; Info
             </button>
@@ -203,22 +203,22 @@
           
           <div class="sheet-ability-row">
             <div class="sheet-ability-header">
-              <input type="text" name="attr_atkname" placeholder="Ability Name" class="sheet-ability-name">
-              <input type="text" name="attr_atkcost" placeholder="Cost" class="sheet-ability-cost">
-              <input type="text" name="attr_atkkeywords" placeholder="Keywords (Attack, Magic, Ranged...)" class="sheet-ability-keywords">
+              <input type="text" name="attr_name" placeholder="Ability Name" class="sheet-ability-name">
+              <input type="text" name="attr_cost" placeholder="Cost" class="sheet-ability-cost">
+              <input type="text" name="attr_keywords" placeholder="Keywords (Attack, Magic, Ranged...)" class="sheet-ability-keywords">
             </div>
             <div class="sheet-ability-meta">
               <div class="sheet-field">
                 <label>Distance</label>
-                <input type="text" name="attr_atkdistance" placeholder="Melee 1 / Ranged 10">
+                <input type="text" name="attr_distance" placeholder="Melee 1 / Ranged 10">
               </div>
               <div class="sheet-field">
                 <label>Target</label>
-                <input type="text" name="attr_atktarget" placeholder="1 creature">
+                <input type="text" name="attr_target" placeholder="1 creature">
               </div>
               <div class="sheet-field">
                 <label>Source</label>
-                    <select name="attr_atksource">
+                    <select name="attr_source">
                       <option value="None">None</option>
                       <option value="Signature">Signature</option>
                       <option value="Class">Class</option>
@@ -230,7 +230,7 @@
             </div>
             <div class="sheet-field">
               <label>Effect</label>
-              <textarea name="attr_atkeffect" placeholder="Ability effect text..."></textarea>
+              <textarea name="attr_effect" placeholder="Ability effect text..."></textarea>
             </div>
             <details class="sheet-powerroll-details">
               <summary>&#9660; Power Roll</summary>
@@ -253,18 +253,18 @@
                 <div class="sheet-pr-tiers">
                   <div class="sheet-pr-tier sheet-tier1">
                     <label>Tier I (&#8804;11)</label>
-                    <input type="text" name="attr_atktier1dmg" placeholder="Tier 1 Damage..." class="">
-                    <textarea name="attr_atktier1desc" placeholder="Tier 1 Special Effects..."></textarea>
+                    <input type="text" name="attr_tier1dmg" placeholder="Tier 1 Damage..." class="">
+                    <textarea name="attr_tier1desc" placeholder="Tier 1 Special Effects..."></textarea>
                   </div>
                   <div class="sheet-pr-tier sheet-tier2">
                     <label>Tier II (12-16)</label>
-                    <input type="text" name="attr_atktier2dmg" placeholder="Tier 2 Damage..." class="">
-                    <textarea name="attr_atktier2desc" placeholder="Tier 2 Special Effects..."></textarea>
+                    <input type="text" name="attr_tier2dmg" placeholder="Tier 2 Damage..." class="">
+                    <textarea name="attr_tier2desc" placeholder="Tier 2 Special Effects..."></textarea>
                   </div>
                   <div class="sheet-pr-tier sheet-tier3">
                     <label>Tier III (17+)</label>
-                    <input type="text" name="attr_atktier3dmg" placeholder="Tier 3 Damage..." class="">
-                    <textarea name="attr_atktier3desc" placeholder="Tier 3 Special Effects..."></textarea>
+                    <input type="text" name="attr_tier3dmg" placeholder="Tier 3 Damage..." class="">
+                    <textarea name="attr_tier3desc" placeholder="Tier 3 Special Effects..."></textarea>
                   </div>
                 </div>
               </div>
@@ -974,6 +974,7 @@
     <div class="sheet-rt-header">
       {{#name}}<div class="sheet-rt-char-name">{{name}}</div>{{/name}}
       {{#roll-type}}<div class="sheet-rt-ability-name">{{roll-type}}</div>{{/roll-type}}
+      {{#category}}<div class="sheet-rt-cost">{{category}}</div>{{/category}}
       {{#cost}}<div class="sheet-rt-cost">Cost: {{cost}}</div>{{/cost}}
     </div>
 
@@ -1029,7 +1030,9 @@
   </div>
 </rolltemplate>
 
-
+<rolltemplate class="sheet-rolltemplate-drawsteelsimple">
+  This is just a placeholder
+</rolltemplate>
  
 <!-- ═══════════════════════════════════════
      SHEET WORKERS
@@ -1105,12 +1108,12 @@
   // values: the getAttrs values object; sectionName and rowid identify the repeating row
   function allTiersEmpty(values, sectionName, rowid) {
     const tierFields = [
-      `${sectionName}_${rowid}_atktier1dmg`,
-      `${sectionName}_${rowid}_atktier1desc`,
-      `${sectionName}_${rowid}_atktier2dmg`,
-      `${sectionName}_${rowid}_atktier2desc`,
-      `${sectionName}_${rowid}_atktier3dmg`,
-      `${sectionName}_${rowid}_atktier3desc`,
+      `${sectionName}_${rowid}_tier1dmg`,
+      `${sectionName}_${rowid}_tier1desc`,
+      `${sectionName}_${rowid}_tier2dmg`,
+      `${sectionName}_${rowid}_tier2desc`,
+      `${sectionName}_${rowid}_tier3dmg`,
+      `${sectionName}_${rowid}_tier3desc`,
     ]; 
     if(tierFields.every(field => !values[field] || values[field].trim() === '')){
       return 1;
@@ -1121,35 +1124,36 @@
 
   // --- Helper: build a power roll text string for a repeating section row ---
   // Returns a Promise that resolves with the complete rollText string.
-  function buildPowerRollText(sectionName, rowid, templateName) {
+  function buildPowerRollText(sectionName, rowid, templateName, category) {
     return new Promise((resolve) => {
       getAttrs([
         'edge_bane',
         `${sectionName}_${rowid}_pr_char_value`,
-        `${sectionName}_${rowid}_atkname`,
-        `${sectionName}_${rowid}_atkcost`,
-        `${sectionName}_${rowid}_atkeffect`,
+        `${sectionName}_${rowid}_name`,
+        `${sectionName}_${rowid}_cost`,
+        `${sectionName}_${rowid}_effect`,
         `${sectionName}_${rowid}_mods`,
-        `${sectionName}_${rowid}_atktier1dmg`,
-        `${sectionName}_${rowid}_atktier1desc`,
-        `${sectionName}_${rowid}_atktier2dmg`,
-        `${sectionName}_${rowid}_atktier2desc`,
-        `${sectionName}_${rowid}_atktier3dmg`,
-        `${sectionName}_${rowid}_atktier3desc`
+        `${sectionName}_${rowid}_tier1dmg`,
+        `${sectionName}_${rowid}_tier1desc`,
+        `${sectionName}_${rowid}_tier2dmg`,
+        `${sectionName}_${rowid}_tier2desc`,
+        `${sectionName}_${rowid}_tier3dmg`,
+        `${sectionName}_${rowid}_tier3desc`
       ], function(values) {
         console.log("Values for Power Roll:", values);
 
         let rollText = "&{template:" + templateName + "}" +
           "{{name=@{characterName}}}" +
-          `{{roll-type=@{${sectionName}_${rowid}_atkname}}}` +
-          `{{cost=@{${sectionName}_${rowid}_atkcost}}}` +
-          `{{effect=@{${sectionName}_${rowid}_atkeffect}}}` +
-          `{{tier1-damage=@{${sectionName}_${rowid}_atktier1dmg}}}` +
-          `{{tier2-damage=@{${sectionName}_${rowid}_atktier2dmg}}}` +
-          `{{tier3-damage=@{${sectionName}_${rowid}_atktier3dmg}}}` +
-          `{{tier1-effect=@{${sectionName}_${rowid}_atktier1desc}}}` +
-          `{{tier2-effect=@{${sectionName}_${rowid}_atktier2desc}}}` +
-          `{{tier3-effect=@{${sectionName}_${rowid}_atktier3desc}}}`+
+          `{{roll-type=@{${sectionName}_${rowid}_name}}}` +
+          `{{category=` + category + `}}` +
+          `{{cost=@{${sectionName}_${rowid}_cost}}}` +
+          `{{effect=@{${sectionName}_${rowid}_effect}}}` +
+          `{{tier1-damage=@{${sectionName}_${rowid}_tier1dmg}}}` +
+          `{{tier2-damage=@{${sectionName}_${rowid}_tier2dmg}}}` +
+          `{{tier3-damage=@{${sectionName}_${rowid}_tier3dmg}}}` +
+          `{{tier1-effect=@{${sectionName}_${rowid}_tier1desc}}}` +
+          `{{tier2-effect=@{${sectionName}_${rowid}_tier2desc}}}` +
+          `{{tier3-effect=@{${sectionName}_${rowid}_tier3desc}}}`+
           `{{critical=[[0]]}}` +
           `{{tierresult=[[0]]}}`;
 
@@ -1440,7 +1444,7 @@
 
         const rowid = getRowId(event);
 
-        buildPowerRollText("repeating_actions", rowid, "drawsteeltest").then((rollText) => {
+        buildPowerRollText("repeating_actions", rowid, "drawsteeltest", "Ability").then((rollText) => {
             
         });
 
