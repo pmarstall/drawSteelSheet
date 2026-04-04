@@ -1039,22 +1039,26 @@
     <!-- ── Header: character name + ability name + cost ── -->
     <div class="sheet-rt-header">
       <div class="sheet-rt-char-name">Summary Information</div>
-      {{#name}}<div class="sheet-rt-char-name">{{name}}</div>{{/name}}
+      {{#name}}<div class="sheet-rt-char-name">From: {{name}}</div>{{/name}}
       {{#roll-type}}<div class="sheet-rt-ability-name">{{roll-type}}</div>{{/roll-type}}
       {{#keywords}}<div class="sheet-rt-char-name">{{keywords}}</div>{{/keywords}}
       {{#category}}<div class="sheet-rt-cost">{{category}}</div>{{/category}}
-      {{#cost}}<div class="sheet-rt-cost">Cost: {{cost}}</div>{{/cost}}
-      {{#source}}<div class="sheet-rt-cost">Source: {{source}}</div>{{/source}}
     </div>
-    <!-- ── Distance/Range ── -->
+    <div class="sheet-rt-description-row">
+      <span class="sheet-rt-field-label">Cost</span> {{cost}}
+    </div>
+    {{#source}}
+      <div class="sheet-rt-description-row">
+        <span class="sheet-rt-field-label">Source: </span> {{source}}
+      </div>
+    {{/source}}
     {{#distance}}
-      <div class="sheet-rt-overall-effect">
+      <div class="sheet-rt-description-row">
         <span class="sheet-rt-field-label">Distance</span> {{distance}}
       </div>
     {{/distance}}
-    <!-- ── Targets ── -->
     {{#target}}
-      <div class="sheet-rt-overall-effect">
+      <div class="sheet-rt-description-row">
         <span class="sheet-rt-field-label">Target: </span> {{target}}
       </div>
     {{/target}}
@@ -1190,6 +1194,10 @@
         'edge_bane',
         `${sectionName}_${rowid}_pr_char_value`,
         `${sectionName}_${rowid}_name`,
+        `${sectionName}_${rowid}_keywords`,
+        `${sectionName}_${rowid}_source`,
+        `${sectionName}_${rowid}_distance`,
+        `${sectionName}_${rowid}_target`,
         `${sectionName}_${rowid}_cost`,
         `${sectionName}_${rowid}_effect`,
         `${sectionName}_${rowid}_mods`,
@@ -1208,6 +1216,10 @@
           `{{category=` + category + `}}` +
           `{{cost=@{${sectionName}_${rowid}_cost}}}` +
           `{{effect=@{${sectionName}_${rowid}_effect}}}` +
+          `{{keywords=@{${sectionName}_${rowid}_keywords}}}` +
+          `{{source=@{${sectionName}_${rowid}_source}}}` +
+          `{{distance=@{${sectionName}_${rowid}_distance}}}` +
+          `{{target=@{${sectionName}_${rowid}_target}}}` +
           `{{tier1-damage=@{${sectionName}_${rowid}_tier1dmg}}}` +
           `{{tier2-damage=@{${sectionName}_${rowid}_tier2dmg}}}` +
           `{{tier3-damage=@{${sectionName}_${rowid}_tier3dmg}}}` +
