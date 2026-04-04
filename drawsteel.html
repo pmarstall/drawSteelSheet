@@ -1130,11 +1130,16 @@
       {{#category}}<div class="sheet-rt-cost">{{category}}</div>{{/category}}
     </div>
     <div class="sheet-rt-description-row">
-      <span class="sheet-rt-field-label">Cost</span> {{cost}}
+      <span class="sheet-rt-field-label">Cost: </span> {{cost}}
     </div>
+    {{#mods}}
+       <div class="sheet-rt-description-row">
+        <span class="sheet-rt-field-label">Modifiers: </span> {{mods}}
+      </div>
+    {{/mods}}
     {{#trigger}}
       <div class="sheet-rt-description-row">
-        <span class="sheet-rt-field-label">Triggered By</span> {{trigger}}
+        <span class="sheet-rt-field-label">Triggered By: </span> {{trigger}}
       </div>
     {{/trigger}}
     {{#source}}
@@ -1144,7 +1149,7 @@
     {{/source}}
     {{#distance}}
       <div class="sheet-rt-description-row">
-        <span class="sheet-rt-field-label">Distance</span> {{distance}}
+        <span class="sheet-rt-field-label">Distance: </span> {{distance}}
       </div>
     {{/distance}}
     {{#target}}
@@ -1395,6 +1400,7 @@
           `{{distance=@{${sectionName}_${rowid}_distance}}}` +
           `{{target=@{${sectionName}_${rowid}_target}}}` +
           `{{trigger=@{${sectionName}_${rowid}_trigger}}}` +
+          `{{mods=@{${sectionName}_${rowid}_mods}}}` +
           `{{tier1-damage=@{${sectionName}_${rowid}_tier1dmg}}}` +
           `{{tier2-damage=@{${sectionName}_${rowid}_tier2dmg}}}` +
           `{{tier3-damage=@{${sectionName}_${rowid}_tier3dmg}}}` +
