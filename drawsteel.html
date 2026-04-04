@@ -1234,6 +1234,7 @@
   // --- Helper - Given the long name for an attribute, return the short name (e.g. "stamina" → "sta") ---
   function getAttribShortName(longName) {
     var shortNames = {
+      'none': 'none',
       'stamina': 'sta',
       'might': 'mgt',
       'agility': 'agi',
@@ -1363,7 +1364,11 @@
         const attribShort = getAttribShortName(values[`${sectionName}_${rowid}_mods`]);
         console.log("Attribute for roll: " + attribShort);
         if (attribShort) {
-          rollVal += ` + @{${attribShort}} [${attribShort}]`;
+          if (attribShort === "none") {
+            // Do nothing since there is no attribute
+          } else {
+            rollVal += ` + @{${attribShort}} [${attribShort}]`;
+          }
         }
 
         // Check for Edges or Banes
