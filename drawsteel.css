@@ -38,8 +38,10 @@
   --ds-tier1-bg:        #edf5ed;
   --ds-tier1-label:     #2e6b2e;
   --ds-tier2-bg:        #f5f0e0;
+  --ds-tier2-border:    #8a7a3a;
   --ds-tier2-label:     #6b5a10;
   --ds-tier3-bg:        #f0ecf5;
+  --ds-tier3-border:    #7a3a8a;
   --ds-tier3-label:     #5a2e7a;
   --ds-tab-active:      #c8a84b;
   --ds-tab-bg:          #ece4d4;
@@ -50,17 +52,44 @@
   --ds-roll-btn-hover:  #b89438;
   /* Edge/Bane slider colors */
   --ds-highlight-double-negative: #cc2222;
-  --ds-highlight-single-negative: #e88888;  
+  --ds-highlight-single-negative: #e88888;
   --ds-highlight-neutral:         var(--ds-bg-section);
   --ds-highlight-single-positive: #88cc88;
   --ds-highlight-double-positive: #22aa22;
   --ds-highlight-border-double-negative: #aa1111;
-  --ds-highlight-border-single-negative: #cc5555; 
+  --ds-highlight-border-single-negative: #cc5555;
   --ds-highlight-border-neutral:         var(--ds-border);
   --ds-highlight-border-single-positive: #55aa55;
   --ds-highlight-border-double-positive: #118811;
 }
- 
+
+/* Roll template wrappers need their own variable scope (outside .sheet-main) */
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-wrapper,
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-wrapper,
+.sheet-rolltemplate-drawsteelabilitytest .sheet-rt-wrapper {
+  --ds-bg:           #f5f0e8;
+  --ds-bg-section:   #ffffff;
+  --ds-bg-inset:     #faf7f2;
+  --ds-bg-header:    #f0e8d4;
+  --ds-text:         #2a2218;
+  --ds-text-muted:   #6a5a48;
+  --ds-border:       #c8b89a;
+  --ds-border-light: #e0d4be;
+  --ds-accent:       #c8a84b;
+  --ds-accent-text:  #7a5820;
+  --ds-damage:       #c0392b;
+  --ds-rt-shadow:    rgba(0, 0, 0, 0.18);
+  --ds-roll-btn-text: #2a1e08;
+  --ds-tier1-bg:     #edf5ed;
+  --ds-tier1-label:  #2e6b2e;
+  --ds-tier2-bg:     #f5f0e0;
+  --ds-tier2-border: #8a7a3a;
+  --ds-tier2-label:  #6b5a10;
+  --ds-tier3-bg:     #f0ecf5;
+  --ds-tier3-border: #7a3a8a;
+  --ds-tier3-label:  #5a2e7a;
+}
+
 /* ── DARK MODE — Roll20 night-mode class ──────────────────────────────── */
 body.night-mode .sheet-main {
   --ds-bg:              #1a1a1a;
@@ -84,8 +113,10 @@ body.night-mode .sheet-main {
   --ds-tier1-bg:        #162016;
   --ds-tier1-label:     #6ab86a;
   --ds-tier2-bg:        #201c08;
+  --ds-tier2-border:    #c8b050;
   --ds-tier2-label:     #c8b050;
   --ds-tier3-bg:        #1c1428;
+  --ds-tier3-border:    #a87ac8;
   --ds-tier3-label:     #a87ac8;
   --ds-tab-active:      #c8a84b;
   --ds-tab-bg:          #2a2418;
@@ -95,7 +126,33 @@ body.night-mode .sheet-main {
   --ds-roll-btn-text:   #1a1200;
   --ds-roll-btn-hover:  #dab858;
 }
- 
+
+body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-wrapper,
+body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-wrapper,
+body.night-mode .sheet-rolltemplate-drawsteelabilitytest .sheet-rt-wrapper {
+  --ds-bg:           #1a1a1a;
+  --ds-bg-section:   #252525;
+  --ds-bg-inset:     #1e1e1e;
+  --ds-bg-header:    #2e2820;
+  --ds-text:         #e8e4dc;
+  --ds-text-muted:   #a09080;
+  --ds-border:       #4a4030;
+  --ds-border-light: #383028;
+  --ds-accent:       #c8a84b;
+  --ds-accent-text:  #c8a84b;
+  --ds-damage:       #e05050;
+  --ds-rt-shadow:    rgba(0, 0, 0, 0.45);
+  --ds-roll-btn-text: #1a1200;
+  --ds-tier1-bg:     #162016;
+  --ds-tier1-label:  #6ab86a;
+  --ds-tier2-bg:     #201c08;
+  --ds-tier2-border: #c8b050;
+  --ds-tier2-label:  #c8b050;
+  --ds-tier3-bg:     #1c1428;
+  --ds-tier3-border: #a87ac8;
+  --ds-tier3-label:  #a87ac8;
+}
+
 /* ── OS-LEVEL dark mode fallback (when Roll20 hasn't toggled) ─────────── */
 @media (prefers-color-scheme: dark) {
   .sheet-main {
@@ -120,8 +177,10 @@ body.night-mode .sheet-main {
     --ds-tier1-bg:        #162016;
     --ds-tier1-label:     #6ab86a;
     --ds-tier2-bg:        #201c08;
+    --ds-tier2-border:    #c8b050;
     --ds-tier2-label:     #c8b050;
     --ds-tier3-bg:        #1c1428;
+    --ds-tier3-border:    #a87ac8;
     --ds-tier3-label:     #a87ac8;
     --ds-tab-active:      #c8a84b;
     --ds-tab-bg:          #2a2418;
@@ -130,6 +189,32 @@ body.night-mode .sheet-main {
     --ds-roll-btn-bg:     #c8a84b;
     --ds-roll-btn-text:   #1a1200;
     --ds-roll-btn-hover:  #dab858;
+  }
+
+  .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-wrapper,
+  .sheet-rolltemplate-drawsteeldesc .sheet-rt-wrapper,
+  .sheet-rolltemplate-drawsteelabilitytest .sheet-rt-wrapper {
+    --ds-bg:           #1a1a1a;
+    --ds-bg-section:   #252525;
+    --ds-bg-inset:     #1e1e1e;
+    --ds-bg-header:    #2e2820;
+    --ds-text:         #e8e4dc;
+    --ds-text-muted:   #a09080;
+    --ds-border:       #4a4030;
+    --ds-border-light: #383028;
+    --ds-accent:       #c8a84b;
+    --ds-accent-text:  #c8a84b;
+    --ds-damage:       #e05050;
+    --ds-rt-shadow:    rgba(0, 0, 0, 0.45);
+    --ds-roll-btn-text: #1a1200;
+    --ds-tier1-bg:     #162016;
+    --ds-tier1-label:  #6ab86a;
+    --ds-tier2-bg:     #201c08;
+    --ds-tier2-border: #c8b050;
+    --ds-tier2-label:  #c8b050;
+    --ds-tier3-bg:     #1c1428;
+    --ds-tier3-border: #a87ac8;
+    --ds-tier3-label:  #a87ac8;
   }
 }
  
@@ -445,6 +530,15 @@ body.night-mode .sheet-main {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  align-items: stretch;
+}
+
+.sheet-stat-mini-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  flex: 2;
+  min-width: 180px;
 }
  
 .sheet-stat-block {
@@ -493,19 +587,67 @@ body.night-mode .sheet-main {
   gap: 6px;
 }
 
-/* Stamina current input - larger */
-.sheet-stat-stamina .sheet-fraction-vertical > input:first-of-type {
-  width: 48px !important;
-  font-size: 20px !important;
+/* Stamina two-column layout */
+.sheet-stamina-layout {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.sheet-stamina-cur {
+  width: 52px !important;
+  font-size: 28px !important;
   font-weight: 700 !important;
+  text-align: center;
+  padding: 4px !important;
+  flex-shrink: 0;
+}
+
+.sheet-stamina-right {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  flex: 1;
+}
+
+/* Buttons inside stamina-right need no top margin */
+.sheet-stamina-right .sheet-recovery-btn,
+.sheet-stamina-right .sheet-respite-btn {
+  margin-top: 0;
 }
 
 
-/* Stamina max input - smaller, below current */
-.sheet-stat-stamina .sheet-fraction-vertical input[name="attr_stamina_max"] {
-  width: 32px !important;
+/* Max / Temp sub-row */
+.sheet-stamina-sub {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+
+.sheet-stamina-sub-field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.sheet-stat-sublabel {
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ds-text-muted);
+}
+
+/* Stamina max/temp and recoveries max inputs - smaller */
+.sheet-stamina-sub input[type="number"],
+.sheet-stamina-right .sheet-stamina-sub-field input[type="number"] {
+  width: 36px !important;
   font-size: 11px !important;
   padding: 2px !important;
+  text-align: center;
 }
 
 /* Stamina winded state */
@@ -898,58 +1040,57 @@ button[type="roll"]::before {
  
  
 /* ══════════════════════════════════════════════════════════════════════
-   RECOVERY BUTTONS
+   RECOVERY BUTTONS (inside stat blocks)
 ══════════════════════════════════════════════════════════════════════ */
-.sheet-recovery-buttons {
-  display: flex;
-  gap: 8px;
-  margin: 12px 0;
-  justify-content: center;
-}
- 
 .sheet-recovery-btn,
 .sheet-respite-btn {
   -webkit-appearance: none;
   appearance: none;
-  border: none;
   border-radius: 6px;
-  padding: 8px 16px;
-  font-size: 12px;
+  padding: 4px 6px;
+  font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   cursor: pointer;
   white-space: nowrap;
   box-shadow: 0 1px 3px var(--ds-shadow);
   transition: background 0.15s, box-shadow 0.15s;
-  flex: 1;
-  max-width: 120px;
+  width: 100%;
+  margin-top: 8px;
 }
- 
+
 /* Recovery button - healing theme */
 .sheet-recovery-btn {
   background: var(--ds-tier1-bg);
   color: var(--ds-tier1-label);
   border: 1px solid var(--ds-tier1-label);
 }
- 
+
 .sheet-recovery-btn:hover {
   background: var(--ds-tier1-label);
   color: var(--ds-bg-section);
   box-shadow: 0 2px 6px var(--ds-shadow);
 }
- 
+
 /* Respite button - rest/sleep theme */
 .sheet-respite-btn {
   background: var(--ds-tier3-bg);
   color: var(--ds-tier3-label);
   border: 1px solid var(--ds-tier3-label);
 }
- 
+
 .sheet-respite-btn:hover {
   background: var(--ds-tier3-label);
   color: var(--ds-bg-section);
   box-shadow: 0 2px 6px var(--ds-shadow);
+}
+
+/* Stamina and Recoveries blocks are wider to fit their buttons */
+.sheet-stat-stamina,
+.sheet-stat-recoveries {
+  min-width: 120px;
+  flex: 2;
 }
  
  
@@ -1055,107 +1196,118 @@ button[type="roll"]::before {
 ══════════════════════════════════════════════════════════════════════ */
 
 .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-wrapper,
-.sheet-rolltemplate-drawsteeldesc .sheet-rt-wrapper {
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-wrapper,
+.sheet-rolltemplate-drawsteelabilitytest .sheet-rt-wrapper {
   font-family: 'Segoe UI', Arial, sans-serif;
-  font-size: 13px;
-  color: #2a2218;
-  background: #f5f0e8;
-  border: 1px solid #c8b89a;
+  font-size: 15px;
+  color: var(--ds-text);
+  background: var(--ds-bg);
+  border: 1px solid var(--ds-border);
   border-radius: 5px;
   overflow: hidden;
-  min-width: 220px;
-  max-width: 380px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  min-width: 250px;
+  max-width: 430px;
+  box-shadow: 0 2px 6px var(--ds-rt-shadow);
 }
 
 /* ── Header ── */
 .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-header,
-.sheet-rolltemplate-drawsteeldesc .sheet-rt-header {
-  background: #f0e8d4;
-  border-bottom: 2px solid #c8a84b;
-  padding: 6px 10px 5px;
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-header,
+.sheet-rolltemplate-drawsteelabilitytest .sheet-rt-header {
+  background: var(--ds-bg-header);
+  border-bottom: 2px solid var(--ds-accent);
+  padding: 8px 12px 7px;
 }
 
 .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-char-name,
-.sheet-rolltemplate-drawsteeldesc .sheet-rt-char-name {
-  font-size: 10px;
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-char-name,
+.sheet-rolltemplate-drawsteelabilitytest .sheet-rt-char-name {
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.07em;
-  color: #7a5820;
+  color: var(--ds-accent-text);
 }
 
 .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-ability-name,
-.sheet-rolltemplate-drawsteeldesc .sheet-rt-ability-name {
-  font-size: 15px;
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-ability-name,
+.sheet-rolltemplate-drawsteelabilitytest .sheet-rt-ability-name {
+  font-size: 17px;
   font-weight: 700;
-  color: #2a2218;
+  color: var(--ds-text);
   margin: 2px 0 1px;
   line-height: 1.2;
 }
 
 .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-cost,
 .sheet-rolltemplate-drawsteeldesc .sheet-rt-cost {
-  font-size: 11px;
-  color: #6a5a48;
+  font-size: 13px;
+  color: var(--ds-text-muted);
   font-style: italic;
 }
 
-/* ── Roll row (power roll only) ── */
-.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-roll-row {
+/* ── Roll row ── */
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-roll-row,
+.sheet-rolltemplate-drawsteelabilitytest .sheet-rt-roll-row {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 15px 20px;
-  background: #ffffff;
-  border-bottom: 1px solid #e0d4be;
+  padding: 17px 22px;
+  background: var(--ds-bg-section);
+  border-bottom: 1px solid var(--ds-border-light);
 }
 
-.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-roll-label {
-  font-size: 10px;
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-roll-label,
+.sheet-rolltemplate-drawsteelabilitytest .sheet-rt-roll-label {
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #7a5820;
+  color: var(--ds-accent-text);
 }
 
-.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-roll-value {
-  font-size: 18px;
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-roll-value,
+.sheet-rolltemplate-drawsteelabilitytest .sheet-rt-roll-value {
+  font-size: 20px;
   font-weight: 700;
-  color: #2a2218;
+  color: var(--ds-text);
 }
 
-.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-critical {
-  font-size: 10px;
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-critical,
+.sheet-rolltemplate-drawsteelabilitytest .sheet-rt-critical {
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #2a1e08;
-  background: #c8a84b;
-  padding: 2px 6px;
+  color: var(--ds-roll-btn-text);
+  background: var(--ds-accent);
+  padding: 2px 7px;
   border-radius: 3px;
 }
 
-/* ── Edge / Bane notice (power roll only) ── */
-.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-edgebane {
-  padding: 3px 10px;
-  font-size: 11px;
+/* ── Edge / Bane notice ── */
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-edgebane,
+.sheet-rolltemplate-drawsteelabilitytest .sheet-rt-edgebane {
+  padding: 5px 12px;
+  font-size: 13px;
   font-style: italic;
-  color: #6a5a48;
-  background: #faf7f2;
-  border-bottom: 1px solid #e0d4be;
+  color: var(--ds-text-muted);
+  background: var(--ds-bg-inset);
+  border-bottom: 1px solid var(--ds-border-light);
 }
 
 /* ── Tier result blocks ── */
 .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier,
-.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier {
-  padding: 6px 10px 7px 13px;
-  border-bottom: 1px solid #e0d4be;
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier,
+.sheet-rolltemplate-drawsteelabilitytest .sheet-rt-tier {
+  padding: 8px 12px 9px 15px;
+  border-bottom: 1px solid var(--ds-border-light);
 }
 
 .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier-label,
-.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier-label {
-  font-size: 10px;
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier-label,
+.sheet-rolltemplate-drawsteelabilitytest .sheet-rt-tier-label {
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -1164,58 +1316,66 @@ button[type="roll"]::before {
 
 /* Tier 1 — green */
 .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier1,
-.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier1 {
-  background: #edf5ed;
-  border-left: 4px solid #2e6b2e;
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier1,
+.sheet-rolltemplate-drawsteelabilitytest .sheet-rt-tier1 {
+  background: var(--ds-tier1-bg);
+  border-left: 4px solid var(--ds-tier1-label);
 }
 .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier1 .sheet-rt-tier-label,
-.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier1 .sheet-rt-tier-label {
-  color: #2e6b2e;
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier1 .sheet-rt-tier-label,
+.sheet-rolltemplate-drawsteelabilitytest .sheet-rt-tier1 .sheet-rt-tier-label {
+  color: var(--ds-tier1-label);
 }
 
 /* Tier 2 — amber */
 .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier2,
-.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier2 {
-  background: #f5f0e0;
-  border-left: 4px solid #8a7a3a;
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier2,
+.sheet-rolltemplate-drawsteelabilitytest .sheet-rt-tier2 {
+  background: var(--ds-tier2-bg);
+  border-left: 4px solid var(--ds-tier2-border);
 }
 .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier2 .sheet-rt-tier-label,
-.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier2 .sheet-rt-tier-label {
-  color: #6b5a10;
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier2 .sheet-rt-tier-label,
+.sheet-rolltemplate-drawsteelabilitytest .sheet-rt-tier2 .sheet-rt-tier-label {
+  color: var(--ds-tier2-label);
 }
 
 /* Tier 3 — purple */
 .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier3,
-.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier3 {
-  background: #f0ecf5;
-  border-left: 4px solid #7a3a8a;
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier3,
+.sheet-rolltemplate-drawsteelabilitytest .sheet-rt-tier3 {
+  background: var(--ds-tier3-bg);
+  border-left: 4px solid var(--ds-tier3-border);
 }
 .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier3 .sheet-rt-tier-label,
-.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier3 .sheet-rt-tier-label {
-  color: #5a2e7a;
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier3 .sheet-rt-tier-label,
+.sheet-rolltemplate-drawsteelabilitytest .sheet-rt-tier3 .sheet-rt-tier-label {
+  color: var(--ds-tier3-label);
 }
 
 /* Damage value */
 .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-damage,
 .sheet-rolltemplate-drawsteeldesc .sheet-rt-damage {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
-  color: #c0392b;
+  color: var(--ds-damage);
   margin-bottom: 2px;
 }
 
 /* Tier effect text */
 .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier-effect,
-.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier-effect {
-  font-size: 12px;
-  color: #2a2218;
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-tier-effect,
+.sheet-rolltemplate-drawsteelabilitytest .sheet-rt-tier-effect {
+  font-size: 14px;
+  color: var(--ds-text);
   margin-top: 2px;
 }
 
 /* Inline "Damage" / "Effect" labels */
 .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-field-label,
-.sheet-rolltemplate-drawsteeldesc .sheet-rt-field-label {
-  font-size: 10px;
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-field-label,
+.sheet-rolltemplate-drawsteelabilitytest .sheet-rt-field-label {
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -1225,127 +1385,21 @@ button[type="roll"]::before {
 /* ── Overall ability effect ── */
 .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-overall-effect,
 .sheet-rolltemplate-drawsteeldesc .sheet-rt-overall-effect {
-  padding: 5px 10px 6px;
-  font-size: 12px;
-  color: #2a2218;
-  background: #faf7f2;
-  border-top: 1px solid #e0d4be;
+  padding: 7px 12px 8px;
+  font-size: 14px;
+  color: var(--ds-text);
+  background: var(--ds-bg-inset);
+  border-top: 1px solid var(--ds-border-light);
 }
 
 /* ── Description row ── */
 .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-description-row,
-.sheet-rolltemplate-drawsteeldesc .sheet-rt-description-row {
-  padding: 5px 10px 6px;
-  font-size: 12px;
-  color: #2a2218;
-  background: #faf7f2;
-  border-top: 1px solid #e0d4be;
-  border-bottom: 1px solid #e0d4be;
-}
-
-/* ── Dark mode (Roll20 night-mode) ── */
-body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-wrapper,
-body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-wrapper {
-  color: #e8e4dc;
-  background: #1a1a1a;
-  border-color: #4a4030;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
-}
-
-body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-header,
-body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-header {
-  background: #2e2820;
-  border-bottom-color: #c8a84b;
-}
-
-body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-char-name,
-body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-char-name {
-  color: #c8a84b;
-}
-
-body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-ability-name,
-body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-ability-name {
-  color: #e8e4dc;
-}
-
-body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-cost,
-body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-cost {
-  color: #a09080;
-}
-
-body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-roll-row {
-  background: #252525;
-  border-bottom-color: #383028;
-}
-
-body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-roll-label {
-  color: #c8a84b;
-}
-
-body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-roll-value {
-  color: #e8e4dc;
-}
-
-body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-critical {
-  color: #1a1200;
-  background: #c8a84b;
-}
-
-body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-edgebane {
-  color: #a09080;
-  background: #1e1e1e;
-  border-bottom-color: #383028;
-}
-
-body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier,
-body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-tier {
-  border-bottom-color: #383028;
-}
-
-body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier1,
-body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-tier1 {
-  background: #162016;
-  border-left-color: #6ab86a;
-}
-body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier1 .sheet-rt-tier-label,
-body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-tier1 .sheet-rt-tier-label {
-  color: #6ab86a;
-}
-
-body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier2,
-body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-tier2 {
-  background: #201c08;
-  border-left-color: #c8b050;
-}
-body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier2 .sheet-rt-tier-label,
-body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-tier2 .sheet-rt-tier-label {
-  color: #c8b050;
-}
-
-body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier3,
-body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-tier3 {
-  background: #1c1428;
-  border-left-color: #a87ac8;
-}
-body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier3 .sheet-rt-tier-label,
-body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-tier3 .sheet-rt-tier-label {
-  color: #a87ac8;
-}
-
-body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-damage,
-body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-damage {
-  color: #e05050;
-}
-
-body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-tier-effect,
-body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-overall-effect,
-body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-tier-effect,
-body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-overall-effect {
-  color: #e8e4dc;
-}
-
-body.night-mode .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-overall-effect,
-body.night-mode .sheet-rolltemplate-drawsteeldesc .sheet-rt-overall-effect {
-  background: #1e1e1e;
-  border-top-color: #383028;
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-description-row,
+.sheet-rolltemplate-drawsteelabilitytest .sheet-rt-description-row {
+  padding: 7px 12px 8px;
+  font-size: 14px;
+  color: var(--ds-text);
+  background: var(--ds-bg-inset);
+  border-top: 1px solid var(--ds-border-light);
+  border-bottom: 1px solid var(--ds-border-light);
 }

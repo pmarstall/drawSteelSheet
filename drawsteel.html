@@ -133,54 +133,75 @@
           <label>Stamina</label>
           <span class="sheet-stamina-winded">(Winded)</span>
           <span class="sheet-stamina-dying">(Dying)</span>
-          <div class="sheet-fraction sheet-fraction-vertical">
-            <input type="text" name="attr_stamina" value="0" min="-999" placeholder="Cur" aria-label="Current stamina">
-            <input type="number" name="attr_stamina_max" value="0" min="0" placeholder="Max">
+          <div class="sheet-stamina-layout">
+            <div class="sheet-stamina-sub-field">
+              <span class="sheet-stat-sublabel">Cur</span>
+              <input type="text" name="attr_stamina" value="0" min="-999" aria-label="Current stamina" class="sheet-stamina-cur">
+            </div>
+            <div class="sheet-stamina-right">
+              <div class="sheet-stamina-sub">
+                <div class="sheet-stamina-sub-field">
+                  <span class="sheet-stat-sublabel">Max</span>
+                  <input type="number" name="attr_stamina_max" value="0" min="0">
+                </div>
+                <div class="sheet-stamina-sub-field">
+                  <span class="sheet-stat-sublabel">Temp</span>
+                  <input type="number" name="attr_stamina_temp" value="0" min="0">
+                </div>
+              </div>
+              <button type="action" name="act_recovery" class="sheet-recovery-btn">Recovery</button>
+            </div>
             <input type="checkbox" name="attr_iswinded" class="sheet-main-hidden">
             <input type="checkbox" name="attr_isdying" class="sheet-main-hidden">
           </div>
         </div>
         <div class="sheet-stat-block sheet-stat-recoveries">
           <label>Recoveries</label>
-          <div class="sheet-fraction sheet-fraction-vertical">
-            <input type="text" name="attr_recoveries" value="0" min="0" placeholder="Cur">
-            <input type="number" name="attr_recoveries_max" value="0" min="0" placeholder="Max">
+          <div class="sheet-stamina-layout">
+            <div class="sheet-stamina-sub-field">
+              <span class="sheet-stat-sublabel">Cur</span>
+              <input type="text" name="attr_recoveries" value="0" min="0" aria-label="Current recoveries" class="sheet-stamina-cur">
+            </div>
+            <div class="sheet-stamina-right">
+              <div class="sheet-stamina-sub-field">
+                <span class="sheet-stat-sublabel">Max</span>
+                <input type="number" name="attr_recoveries_max" value="0" min="0">
+              </div>
+              <button type="action" name="act_respite" class="sheet-respite-btn">Respite</button>
+            </div>
           </div>
         </div>
-        <div class="sheet-stat-block">
-          <label>Resources</label>
-          <div class="sheet-fraction sheet-fraction-vertical">
-            <input type="text" name="attr_resources" value="0" min="0" placeholder="Cur">
+        <div class="sheet-stat-mini-grid">
+          <div class="sheet-stat-block">
+            <label>Resources</label>
+            <div class="sheet-fraction sheet-fraction-vertical">
+              <input type="text" name="attr_resources" value="0" min="0" placeholder="Cur">
+            </div>
           </div>
-        </div>
-        <div class="sheet-stat-block">
-          <label>Surges</label>
-          <div class="sheet-fraction sheet-fraction-vertical">
-            <input type="text" name="attr_surges" value="0" min="0" placeholder="Cur">
+          <div class="sheet-stat-block">
+            <label>Surges</label>
+            <div class="sheet-fraction sheet-fraction-vertical">
+              <input type="text" name="attr_surges" value="0" min="0" placeholder="Cur">
+            </div>
           </div>
-        </div>
-        <div class="sheet-stat-block">
-          <label>Victories</label>
-          <div class="sheet-fraction sheet-fraction-vertical">
-            <input type="text" name="attr_victories" value="0" min="0" placeholder="Cur">
+          <div class="sheet-stat-block">
+            <label>Victories</label>
+            <div class="sheet-fraction sheet-fraction-vertical">
+              <input type="text" name="attr_victories" value="0" min="0" placeholder="Cur">
+            </div>
           </div>
-        </div>
-        <div class="sheet-stat-block">
-          <label>Experience</label>
-          <div class="sheet-fraction sheet-fraction-vertical">
-            <input type="text" name="attr_xp" value="0" min="0" placeholder="Cur">
+          <div class="sheet-stat-block">
+            <label>Experience</label>
+            <div class="sheet-fraction sheet-fraction-vertical">
+              <input type="text" name="attr_xp" value="0" min="0" placeholder="Cur">
+            </div>
           </div>
         </div>
       </div>
     </div>
  
-    <!-- RECOVERY BUTTONS -->
-    <div class="sheet-recovery-buttons">
-      <button type="action" name="act_recovery" class="sheet-recovery-btn">Recovery</button>
-      <button type="action" name="act_respite" class="sheet-respite-btn">Respite</button>
-    </div>
- 
-    
+
+
  
     <!-- ───────────── ACTIONS ───────────── -->
     <div class="sheet-section sheet-abilities-section">
@@ -1086,7 +1107,76 @@
         <span class="sheet-rt-field-label">Effect</span> {{effect}}
       </div>
     {{/effect}}
+</rolltemplate>
 
+<!-- Abilities Test Template
+     Used to display the results of tests related to ability scores.
+-->
+<rolltemplate class="sheet-rolltemplate-drawsteelabilitytest">
+  <div class="sheet-rt-wrapper">
+
+    <!-- ── Header: character name + roll type ── -->
+    <div class="sheet-rt-header">
+      {{#char-name}}<div class="sheet-rt-char-name">{{char-name}}</div>{{/char-name}}
+      {{#roll-type}}<div class="sheet-rt-ability-name">{{roll-type}}</div>{{/roll-type}}
+    </div>
+
+    <!-- ── Difficulty row ── -->
+    <div class="sheet-rt-description-row">
+      <span class="sheet-rt-field-label">Test Type: </span>
+      {{#rollTotal() difficulty 0}}Basic{{/rollTotal() difficulty 0}}
+      {{#rollTotal() difficulty 1}}Easy{{/rollTotal() difficulty 1}}
+      {{#rollTotal() difficulty 2}}Moderate{{/rollTotal() difficulty 2}}
+      {{#rollTotal() difficulty 3}}Hard{{/rollTotal() difficulty 3}}
+    </div>
+
+    <!-- ── Roll result row ── -->
+    <div class="sheet-rt-roll-row">
+      <span class="sheet-rt-roll-label">Roll</span>
+      <span class="sheet-rt-roll-value">{{roll}}</span>
+      {{#rollGreater() computed::critical 0}}
+        <span class="sheet-rt-critical">Critical!</span>
+      {{/rollGreater() computed::critical 0}}
+    </div>
+
+    <!-- ── Edge / Bane notice ── -->
+    {{#EdgeBane}}
+      <div class="sheet-rt-edgebane">{{EdgeBane}}</div>
+    {{/EdgeBane}}
+
+    <!-- ── Tier Results ── -->
+    {{#rollTotal() computed::tierresult 1}}
+      <div class="sheet-rt-tier sheet-rt-tier1">
+        <div class="sheet-rt-tier-label">Tier I</div>
+        <div class="sheet-rt-tier-effect">
+          {{#rollTotal() difficulty 1}}You succeed on the task but incur a consequence.{{/rollTotal() difficulty 1}}
+          {{#rollTotal() difficulty 2}}You fail the task.{{/rollTotal() difficulty 2}}
+          {{#rollTotal() difficulty 3}}You fail the task and incur a consequence.{{/rollTotal() difficulty 3}}
+        </div>
+      </div>
+    {{/rollTotal() computed::tierresult 1}}
+    {{#rollTotal() computed::tierresult 2}}
+      <div class="sheet-rt-tier sheet-rt-tier2">
+        <div class="sheet-rt-tier-label">Tier II</div>
+        <div class="sheet-rt-tier-effect">
+          {{#rollTotal() difficulty 1}}You succeed on the task.{{/rollTotal() difficulty 1}}
+          {{#rollTotal() difficulty 2}}You succeed on the task but incur a consequence.{{/rollTotal() difficulty 2}}
+          {{#rollTotal() difficulty 3}}You fail the task.{{/rollTotal() difficulty 3}}
+        </div>
+      </div>
+    {{/rollTotal() computed::tierresult 2}}
+    {{#rollTotal() computed::tierresult 3}}
+      <div class="sheet-rt-tier sheet-rt-tier3">
+        <div class="sheet-rt-tier-label">Tier III</div>
+        <div class="sheet-rt-tier-effect">
+          {{#rollTotal() difficulty 1}}You succeed on the task with a reward.{{/rollTotal() difficulty 1}}
+          {{#rollTotal() difficulty 2}}You succeed on the task.{{/rollTotal() difficulty 2}}
+          {{#rollTotal() difficulty 3}}You succeed on the task.{{/rollTotal() difficulty 3}}
+        </div>
+      </div>
+    {{/rollTotal() computed::tierresult 3}}
+
+  </div>
 </rolltemplate>
  
 <!-- ═══════════════════════════════════════
@@ -1133,6 +1223,19 @@
       'presence': 'prs'
     };
     return shortNames[longName] || longName;
+  }
+
+  // --- Helper - Given the short name for an attribute, return the long name (e.g. "sta" → "stamina") ---
+  function getAttribLongName(shortName) {
+    var longNames = {
+      'STA': 'Stamina',
+      'MGT': 'Might',
+      'AGI': 'Agility',
+      'REA': 'Reason',
+      'INU': 'Intuition',
+      'PRS': 'Presence'
+    };
+    return longNames[shortName] || shortName;
   }
 
   // --- Helper: determine if a roll is a critical success or failure (two 10s = crit success, two 1s = crit failure) ---
@@ -1452,8 +1555,8 @@
   });
 
   ////////////////////////////////////////////////////////////////
-    //  Abilities Test Roll!
-    ////////////////////////////////////////////////////////////////
+  //  Abilities Test Roll!
+  ////////////////////////////////////////////////////////////////
 
     on ('clicked:abilitiestest', (event) => {
         testRoll(event.htmlAttributes.value);
@@ -1463,6 +1566,7 @@
     const testRoll = (rollExp) => {
 
         console.log(rollExp);
+        
 
         // construct the die roll
         let rollVal = "[[2d10 + @{"+rollExp+"} ["+rollExp+"]";
@@ -1470,14 +1574,23 @@
         let edgeVal = "";
         let totalRoll = "";
         let diffMod ="";
+        let edgeBaneText = "";
+        const attLong = getAttribLongName(rollExp);
+        console.log("Long attribute name: " + attLong);
 
         getAttrs(["edge_bane"], 
         function(values) {
-            if(values["edge_bane"] == "-1"){
-                rollVal = rollVal + " + 2 [Edge]"
-            } else if (values["edge_bane"] == "1"){
-                rollVal = rollVal + " - 2 [Bane]";
-            } 
+            // Check for Edges or Banes
+            const edgeBane = values["edge_bane"];
+            if (edgeBane == "-2") {
+              edgeBaneText= "{{EdgeBane= Double Bane - Tier was decreased by 1}}";
+            } else if (edgeBane == "-1") {
+              rollVal += " - 2 [Bane]";
+            } else if (edgeBane == "1") {
+              rollVal += " + 2 [Edge]";
+            } else if (edgeBane == "2") {
+              edgeBaneText = "{{EdgeBane= Double Edge - Tier was increased by 1}}";
+            }
             
             // Add the Skill Modifier
             rollVal = rollVal + " + ?{Appropriate Skill? | No,0 | Yes,2 }[Skill]";
@@ -1487,18 +1600,26 @@
             diffMod = "?{Difficulty | None, [[0]] | Easy, [[1]] | Medium, [[2]] | Hard, [[3]]}";
     
             // Construct the roll
-            totalRoll = "&{template:default}{{char-name=@{characterName}}}{{roll-type="+rollExp+" Test}}{{roll="+rollVal+"}}{{difficulty="+diffMod+"}}{{critical=[[0]]}}";
+            totalRoll = "&{template:drawsteelabilitytest}" +
+              "{{char-name=@{characterName}}}" +
+              "{{roll-type=" + attLong + " Test}}" +
+              "{{roll=" + rollVal + "}}" +
+              "{{difficulty=" + diffMod + "}}" +
+              "{{tierresult=[[0]]}}" +
+              "{{critical=[[0]]}}";
+            
+            totalRoll += edgeBaneText;
     
             console.log("Roll text = " + totalRoll);
 
             // Get rid of edge and bane
-            // TODO: make this cleaner by not including edge/bane in the roll at all and just applying it as a modifier in the results processing 
-            //edgeOff();
+            // edgeOff();
 
             startRoll(totalRoll, (results) => {
                 console.log("In Generic startRoll");
                 rolldata = {};
-                //rolldata.critical = isCrit(results.results.roll.dice[0], results.results.roll.dice[1]);
+                rolldata.critical = isCrit(results.results.roll.dice[0], results.results.roll.dice[1]);
+                rolldata.tierresult = getTier(results.results.roll.result, edgeBane);
                 finishRoll(results.rollId, rolldata);
             });
         });
