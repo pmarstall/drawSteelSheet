@@ -1398,6 +1398,11 @@
     update[destAttr] = val;
     setAttrs(update, { silent: true });
   }
+
+    // ── Helper: reset edge/bane to None ──────────────────────────────────────────
+  function edgeOff() {
+    setAttrs({ edge_bane: 0 });
+  }
  
 
   // --- Helper - Given the long name for an attribute, return the short name (e.g. "stamina" → "sta") ---
@@ -1906,7 +1911,7 @@
             console.log("Roll text = " + totalRoll);
 
             // Get rid of edge and bane
-            //edgeOff();
+            edgeOff();
 
             startRoll(totalRoll, (results) => {
                 console.log("In Generic startRoll");
@@ -1965,10 +1970,11 @@
 
         const rowid = getRowId(event);
 
-        buildPowerRollText(repeatingSection, rowid, templateName, sectionText).then((rollText) => {
-        
-        });
+        buildPowerRollText(repeatingSection, rowid, templateName, sectionText).then((rollText) => { });
 
+        if(buttonName === "roll_roll"){
+          edgeOff();
+        }
      });
 
     ////////////////////////////////////////////////
