@@ -248,6 +248,14 @@
                       <option value="Other">Other</option>
                     </select>
               </div>
+              <div class="sheet-field">
+                <label>Kit</label>
+                    <select name="attr_kit">
+                      <option value="None">None</option>
+                      <option value="Melee">Melee</option>
+                      <option value="Ranged">Ranged</option>
+                    </select>
+              </div>
             </div>
             <div class="sheet-field">
               <label>Effect</label>
@@ -314,6 +322,7 @@
           </summary>
           <!-- Hidden Fields  -->
           <input type="text" name="attr_trigger" class="sheet-main-hidden">
+          <input type="text" name="attr_kit" class="sheet-main-hidden">
           <div class="sheet-ability-row">
             <div class="sheet-ability-header">
               <input type="text" name="attr_name" placeholder="Maneuver Name" class="sheet-ability-name">
@@ -404,7 +413,8 @@
               &#x1F5E8; Info
             </button>
           </summary>
-          
+          <!-- Hidden Fields  -->
+          <input type="text" name="attr_kit" class="sheet-main-hidden">
           <div class="sheet-ability-row">
             <div class="sheet-ability-header">
               <input type="text" name="attr_name" placeholder="Trigger Name" class="sheet-ability-name">
@@ -501,6 +511,7 @@
           </summary>
           <!-- Hidden Fields  -->
           <input type="text" name="attr_trigger" class="sheet-main-hidden">
+          <input type="text" name="attr_kit" class="sheet-main-hidden">
           <div class="sheet-ability-row">
             <div class="sheet-ability-header">
               <input type="text" name="attr_name" placeholder="Ability Name" class="sheet-ability-name">
@@ -621,7 +632,78 @@
       <textarea name="attr_notes" placeholder="Campaign notes, backstory, connections..."></textarea>
     </div>
 
-    <!-- TODO - Add Kit Section-->
+    <!-- ───────────── KIT ───────────── -->
+    <div class="sheet-section">
+      <h2>Kit</h2>
+      <div class="sheet-field-row">
+        <div class="sheet-field sheet-field-name">
+          <label>Kit Name</label>
+          <input type="text" name="attr_kit_name" placeholder="Kit Name">
+        </div>
+        <div class="sheet-field">
+          <label>Armor</label>
+          <input type="text" name="attr_kit_armor" placeholder="Light, Medium, Heavy...">
+        </div>
+        <div class="sheet-field">
+          <label>Weapon</label>
+          <input type="text" name="attr_kit_weapon" placeholder="Unarmed, Light, Heavy...">
+        </div>
+      </div>
+      <div class="sheet-field-row">
+        <div class="sheet-stat-block">
+          <label>Stamina Bonus</label>
+          <input type="number" name="attr_kit_stamina_bonus" value="0">
+        </div>
+        <div class="sheet-stat-block">
+          <label>Speed Bonus</label>
+          <input type="number" name="attr_kit_speed_bonus" value="0">
+        </div>
+        <div class="sheet-stat-block">
+          <label>Stability Bonus</label>
+          <input type="number" name="attr_kit_stability_bonus" value="0">
+        </div>
+        <div class="sheet-stat-block">
+          <label>Disengage Bonus</label>
+          <input type="number" name="attr_kit_disengage_bonus" value="0">
+        </div>
+        <div class="sheet-stat-block">
+          <label>Distance Bonus</label>
+          <input type="number" name="attr_kit_distance_bonus" value="0">
+        </div>
+      </div>
+      <div class="sheet-pr-tiers">
+        <div class="sheet-pr-tier sheet-tier1">
+          <label>Melee Damage Bonus Tier I (&#8804;11)</label>
+          <input type="text" name="attr_kit_dmg_melee_tier1" placeholder="0">
+        </div>
+        <div class="sheet-pr-tier sheet-tier2">
+          <label>Melee Damage Bonus Tier II (12–16)</label>
+          <input type="text" name="attr_kit_dmg_melee_tier2" placeholder="0">
+        </div>
+        <div class="sheet-pr-tier sheet-tier3">
+          <label>Melee Damage Bonus Tier III (17+)</label>
+          <input type="text" name="attr_kit_dmg_melee_tier3" placeholder="0">
+        </div>
+      </div>
+      <div class="sheet-pr-tiers">
+        <div class="sheet-pr-tier sheet-tier1">
+          <label>Ranged Damage Bonus Tier I (&#8804;11)</label>
+          <input type="text" name="attr_kit_dmg_ranged_tier1" placeholder="0">
+        </div>
+        <div class="sheet-pr-tier sheet-tier2">
+          <label>Ranged Damage Bonus Tier II (12–16)</label>
+          <input type="text" name="attr_kit_dmg_ranged_tier2" placeholder="0">
+        </div>
+        <div class="sheet-pr-tier sheet-tier3">
+          <label>Ranged Damage Bonus Tier III (17+)</label>
+          <input type="text" name="attr_kit_dmg_ranged_tier3" placeholder="0">
+        </div>
+      </div>
+      <div class="sheet-field">
+        <label>Kit Features</label>
+        <textarea name="attr_kit_features" placeholder="Describe the kit and any special features..."></textarea>
+      </div>
+    </div>
 
   </div><!-- end .sheet-pc-tab -->
  
@@ -1266,6 +1348,11 @@
         <span class="sheet-rt-field-label">Target: </span> {{target}}
       </div>
     {{/target}}
+    {{#kit}}
+      <div class="sheet-rt-description-row">
+        <span class="sheet-rt-field-label">Kit Bonus: </span> {{kit}}
+      </div>
+    {{/kit}}
     <!-- Only show tier information if it's configured -->
     {{#rollTotal() notierresults 0}}
       <div class="sheet-rt-tier sheet-rt-tier1">
@@ -1498,6 +1585,7 @@
         `${sectionName}_${rowid}_keywords`,
         `${sectionName}_${rowid}trigger`,
         `${sectionName}_${rowid}_source`,
+        `${sectionName}_${rowid}kit`,
         `${sectionName}_${rowid}_distance`,
         `${sectionName}_${rowid}_target`,
         `${sectionName}_${rowid}_cost`,
@@ -1524,6 +1612,7 @@
           `{{target=@{${sectionName}_${rowid}_target}}}` +
           `{{trigger=@{${sectionName}_${rowid}_trigger}}}` +
           `{{mods=@{${sectionName}_${rowid}_mods}}}` +
+          `{{kit=@{${sectionName}_${rowid}_kit}}}` +
           `{{tier1-damage=@{${sectionName}_${rowid}_tier1dmg}}}` +
           `{{tier2-damage=@{${sectionName}_${rowid}_tier2dmg}}}` +
           `{{tier3-damage=@{${sectionName}_${rowid}_tier3dmg}}}` +
@@ -1584,7 +1673,7 @@
     });
   }
 
-  // --- Helper: build a power roll text string for a repeating section row ---
+  // --- Helper: NPC - build a power roll text string for a repeating section row ---
   // Returns a Promise that resolves with the complete rollText string.
   function buildNPCPowerRollText(sectionName, rowid, templateName, category) {
     return new Promise((resolve) => {

@@ -1398,6 +1398,7 @@ button[type="roll"]::before {
 .sheet-rolltemplate-drawsteelabilitytest .sheet-rt-description-row {
   padding: 7px 12px 8px;
   font-size: 14px;
+  text-transform: capitalize;
   color: var(--ds-text);
   background: var(--ds-bg-inset);
   border-top: 1px solid var(--ds-border-light);
