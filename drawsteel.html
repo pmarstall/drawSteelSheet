@@ -248,14 +248,6 @@
                       <option value="Other">Other</option>
                     </select>
               </div>
-              <div class="sheet-field">
-                <label>Kit</label>
-                    <select name="attr_kit">
-                      <option value="None">None</option>
-                      <option value="Melee">Melee</option>
-                      <option value="Ranged">Ranged</option>
-                    </select>
-              </div>
             </div>
             <div class="sheet-field">
               <label>Effect</label>
@@ -265,7 +257,7 @@
               <summary>&#9660; Power Roll</summary>
               <div class="sheet-powerroll-body">
                 <div class="sheet-pr-config-row">
-                  <div class="sheet-pr-config">
+                  <div class="sheet-field">
                     <label>Characteristic</label>
                     <select name="attr_mods">
                       <option value="none">None</option>
@@ -275,6 +267,14 @@
                       <option value="intuition">Intuition</option>
                       <option value="presence">Presence</option>
                     </select>
+                  </div>
+                  <div class="sheet-field">
+                    <label>Kit</label>
+                        <select name="attr_kit">
+                          <option value="None">None</option>
+                          <option value="Melee">Melee</option>
+                          <option value="Ranged">Ranged</option>
+                        </select>
                   </div>
                   <input type="hidden" name="attr_pr_char_value" value="0">
                   
@@ -1574,18 +1574,24 @@
     }
   }
 
-  // --- Helper: build a power roll text string for a repeating section row ---
+  // --- Helper: build a power roll text string for a repeating PC section row ---
   // Returns a Promise that resolves with the complete rollText string.
   function buildPowerRollText(sectionName, rowid, templateName, category) {
     return new Promise((resolve) => {
       getAttrs([
-        'edge_bane',
+        `edge_bane`,
+        `kit_dmg_melee_tier1`,
+        `kit_dmg_melee_tier2`,
+        `kit_dmg_melee_tier3`,
+        `kit_dmg_ranged_tier1`,
+        `kit_dmg_ranged_tier2`,
+        `kit_dmg_ranged_tier3`,
         `${sectionName}_${rowid}_pr_char_value`,
         `${sectionName}_${rowid}_name`,
         `${sectionName}_${rowid}_keywords`,
-        `${sectionName}_${rowid}trigger`,
+        `${sectionName}_${rowid}_trigger`,
         `${sectionName}_${rowid}_source`,
-        `${sectionName}_${rowid}kit`,
+        `${sectionName}_${rowid}_kit`,
         `${sectionName}_${rowid}_distance`,
         `${sectionName}_${rowid}_target`,
         `${sectionName}_${rowid}_cost`,
@@ -1600,6 +1606,40 @@
       ], function(values) {
         console.log("Values for Power Roll:", values);
 
+        // Calculate the tier damage with the appropriate Kit taken into account
+        const kitVal = values[`${sectionName}_${rowid}_kit`];
+        console.log("Kit Value: " + kitVal);
+        let t1Dmg = "";
+        if (values[`${sectionName}_${rowid}_tier1dmg`] !=="") {
+          t1Dmg = "[[" + values[`${sectionName}_${rowid}_tier1dmg`];
+        }
+        let t2Dmg = "";
+        if (values[`${sectionName}_${rowid}_tier2dmg`] !=="") {
+          t2Dmg = "[[" + values[`${sectionName}_${rowid}_tier2dmg`];
+        }
+        let t3Dmg = "";
+        if (values[`${sectionName}_${rowid}_tier3dmg`] !=="") {
+          t3Dmg = "[[" + values[`${sectionName}_${rowid}_tier3dmg`];
+        }
+
+        console.log("Base Tier Damages 1:", {t1Dmg, t2Dmg, t3Dmg});
+
+        if (kitVal === "Melee") {
+          t1Dmg += ` [Base] + ${values['kit_dmg_melee_tier1']} [Kit Bonus]`;
+          t2Dmg += ` [Base] + ${values['kit_dmg_melee_tier2']} [Kit Bonus]`;
+          t3Dmg += ` [Base] + ${values['kit_dmg_melee_tier3']} [Kit Bonus]`;
+        } else if (kitVal === "Ranged") {
+          t1Dmg += ` [Base] + ${values['kit_dmg_ranged_tier1']} [Kit Bonus]`;
+          t2Dmg += ` [Base] + ${values['kit_dmg_ranged_tier2']} [Kit Bonus]`;
+          t3Dmg += ` [Base] + ${values['kit_dmg_ranged_tier3']} [Kit Bonus]`;
+        }
+        console.log("Base Tier Damages 2:", {t1Dmg, t2Dmg, t3Dmg});
+
+        if (t1Dmg !== ""){t1Dmg+= "]]";}
+        if (t2Dmg !== ""){t2Dmg+= "]]";}
+        if (t3Dmg !== ""){t3Dmg+= "]]";}
+        console.log("Base Tier Damages 3:", {t1Dmg, t2Dmg, t3Dmg});
+
         let rollText = "&{template:" + templateName + "}" +
           "{{name=@{characterName}}}" +
           `{{roll-type=@{${sectionName}_${rowid}_name}}}` +
@@ -1613,9 +1653,9 @@
           `{{trigger=@{${sectionName}_${rowid}_trigger}}}` +
           `{{mods=@{${sectionName}_${rowid}_mods}}}` +
           `{{kit=@{${sectionName}_${rowid}_kit}}}` +
-          `{{tier1-damage=@{${sectionName}_${rowid}_tier1dmg}}}` +
-          `{{tier2-damage=@{${sectionName}_${rowid}_tier2dmg}}}` +
-          `{{tier3-damage=@{${sectionName}_${rowid}_tier3dmg}}}` +
+          `{{tier1-damage=${t1Dmg}}}` +
+          `{{tier2-damage=${t2Dmg}}}` +
+          `{{tier3-damage=${t3Dmg}}}` +
           `{{tier1-effect=@{${sectionName}_${rowid}_tier1desc}}}` +
           `{{tier2-effect=@{${sectionName}_${rowid}_tier2desc}}}` +
           `{{tier3-effect=@{${sectionName}_${rowid}_tier3desc}}}`+
@@ -1682,7 +1722,7 @@
         `${sectionName}_${rowid}_pr_char_value`,
         `${sectionName}_${rowid}_name`,
         `${sectionName}_${rowid}_keywords`,
-        `${sectionName}_${rowid}trigger`,
+        `${sectionName}_${rowid}_trigger`,
         `${sectionName}_${rowid}_source`,
         `${sectionName}_${rowid}_distance`,
         `${sectionName}_${rowid}_target`,
