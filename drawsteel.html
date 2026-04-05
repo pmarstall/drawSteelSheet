@@ -1362,7 +1362,7 @@
      SHEET WORKERS
 ════════════════════════════════════════ -->
 <script type="text/worker">
- 
+
   // ── Helper: extract the row ID from a repeating section event ───────────────
   // e.g. event.sourceAttribute = "repeating_actions_-Nabc123_pr_characteristic" → "-Nabc123"
   function getRowId(event) {
@@ -1906,7 +1906,7 @@
             console.log("Roll text = " + totalRoll);
 
             // Get rid of edge and bane
-            // edgeOff();
+            //edgeOff();
 
             startRoll(totalRoll, (results) => {
                 console.log("In Generic startRoll");
@@ -1966,7 +1966,7 @@
         const rowid = getRowId(event);
 
         buildPowerRollText(repeatingSection, rowid, templateName, sectionText).then((rollText) => {
-            
+        
         });
 
      });
