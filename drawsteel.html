@@ -589,36 +589,40 @@
     <!-- SKILLS -->
     <div class="sheet-section">
       <h2>Skills</h2>
-      <div class="sheet-skills-grid">
-        <div class="sheet-skill-block">
-          <label>Might Skills</label>
-          <textarea name="attr_skills_might" placeholder="Lift, Climb, Endure..."></textarea>
+      <textarea name="attr_skills" placeholder="Lift, Climb, Endure..."></textarea>
+    </div>
+ 
+    <!-- BACKGROUND -->
+    <div class="sheet-section">
+      <h2>Background</h2>
+      <div class="sheet-field-row">
+        <div class="sheet-field sheet-field-narrow">
+          <label>Wealth</label>
+          <input type="number" name="attr_wealth" value="0" min="0">
         </div>
-        <div class="sheet-skill-block">
-          <label>Agility Skills</label>
-          <textarea name="attr_skills_agility" placeholder="Hide, Jump, Tumble..."></textarea>
+        <div class="sheet-field sheet-field-narrow">
+          <label>Renown</label>
+          <input type="number" name="attr_renown" value="0" min="0">
         </div>
-        <div class="sheet-skill-block">
-          <label>Reason Skills</label>
-          <textarea name="attr_skills_reason" placeholder="Lore, Monsters, Magic..."></textarea>
+        <div class="sheet-field">
+          <label>Career</label>
+          <input type="text" name="attr_career" placeholder="Career...">
         </div>
-        <div class="sheet-skill-block">
-          <label>Intuition Skills</label>
-          <textarea name="attr_skills_intuition" placeholder="Alertness, Nature, Track..."></textarea>
-        </div>
-        <div class="sheet-skill-block">
-          <label>Presence Skills</label>
-          <textarea name="attr_skills_presence" placeholder="Brag, Lie, Lead..."></textarea>
+        <div class="sheet-field">
+          <label>Languages</label>
+          <input type="text" name="attr_languages" placeholder="Caelian, Szetch...">
         </div>
       </div>
     </div>
- 
+
     <!-- NOTES -->
     <div class="sheet-section">
       <h2>Notes</h2>
       <textarea name="attr_notes" placeholder="Campaign notes, backstory, connections..."></textarea>
     </div>
- 
+
+    <!-- TODO - Add Kit Section-->
+
   </div><!-- end .sheet-pc-tab -->
  
  
@@ -682,27 +686,27 @@
       <div class="sheet-char-grid">
         <div class="sheet-char-cell">
           <label>MGT</label>
-          <input type="number" name="attr_npc_might" value="0" min="-5" max="5">
+          <input type="number" name="attr_npc_mgt" value="0" min="-5" max="5">
           <span class="sheet-char-label-full">Might</span>
         </div>
         <div class="sheet-char-cell">
           <label>AGL</label>
-          <input type="number" name="attr_npc_agility" value="0" min="-5" max="5">
+          <input type="number" name="attr_npc_agl" value="0" min="-5" max="5">
           <span class="sheet-char-label-full">Agility</span>
         </div>
         <div class="sheet-char-cell">
           <label>REA</label>
-          <input type="number" name="attr_npc_reason" value="0" min="-5" max="5">
+          <input type="number" name="attr_npc_rea" value="0" min="-5" max="5">
           <span class="sheet-char-label-full">Reason</span>
         </div>
         <div class="sheet-char-cell">
           <label>INU</label>
-          <input type="number" name="attr_npc_intuition" value="0" min="-5" max="5">
+          <input type="number" name="attr_npc_inu" value="0" min="-5" max="5">
           <span class="sheet-char-label-full">Intuition</span>
         </div>
         <div class="sheet-char-cell">
           <label>PRS</label>
-          <input type="number" name="attr_npc_presence" value="0" min="-5" max="5">
+          <input type="number" name="attr_npc_prs" value="0" min="-5" max="5">
           <span class="sheet-char-label-full">Presence</span>
         </div>
       </div>
@@ -1606,7 +1610,7 @@
         console.log("Values for Power Roll:", values);
 
         let rollText = "&{template:" + templateName + "}" +
-          "{{name=@{characterName}}}" +
+          "{{name=@{npc_Name}}}" +
           `{{roll-type=@{${sectionName}_${rowid}_name}}}` +
           `{{category=` + category + `}}` +
           `{{cost=@{${sectionName}_${rowid}_cost}}}` +
@@ -1641,7 +1645,7 @@
           if (attribShort === "none") {
             // Do nothing since there is no attribute
           } else {
-            rollVal += ` + @{${attribShort}} [${attribShort}]`;
+            rollVal += ` + @{npc_${attribShort}} [${attribShort}]`;
           }
         }
 
