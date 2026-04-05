@@ -773,7 +773,7 @@
  
     <!-- ───────────── NPC ACTIONS ───────────── -->
     <div class="sheet-section sheet-abilities-section">
-      <h2>Actions</h2>
+      <h2>NPC Actions</h2>
       <fieldset class="repeating_npcactions">
         <details class="sheet-action-details">
           <summary>
@@ -865,7 +865,7 @@
  
     <!-- ───────────── NPC MANEUVERS ───────────── -->
     <div class="sheet-section sheet-abilities-section">
-      <h2>Maneuvers</h2>
+      <h2>NPC Maneuvers</h2>
       <fieldset class="repeating_npcmaneuvers">
         <details class="sheet-action-details">
           <summary>
@@ -957,8 +957,102 @@
  
     <!-- ───────────── NPC TRIGGERED ACTIONS ───────────── -->
     <div class="sheet-section sheet-abilities-section">
-      <h2>Triggered Actions</h2>
+      <h2>NPC Triggered Actions</h2>
       <fieldset class="repeating_npctriggered">
+        <details class="sheet-action-details">
+          <summary>
+            &#9660; 
+            <input type="text" name="attr_namedisp" value="@{name}" class="" disabled="true">
+            <input type="text" name="attr_namedisp" value="@{source}" class="" disabled="true">
+            <input type="text" name="attr_namedisp" value="@{cost}" class="" disabled="true">
+            <button type="action" class="sheet-roll-btn" name="roll_roll" id=""RollButton">
+              &#x2B22; Roll
+            </button>
+            <button type="action" class="sheet-roll-btn" name="roll_chat" id="ChatButton">
+              &#x1F5E8; Info
+            </button>
+          </summary>
+          <div class="sheet-ability-row">
+            <div class="sheet-ability-header">
+              <input type="text" name="attr_name" placeholder="Ability Name" class="sheet-ability-name">
+              <input type="text" name="attr_cost" placeholder="Cost" class="sheet-ability-cost">
+              <input type="text" name="attr_keywords" placeholder="Keywords (Attack, Magic, Ranged...)" class="sheet-ability-keywords">
+            </div>
+            <div class="sheet-ability-meta">
+              <div class="sheet-field">
+                <label>Triggered By</label>
+                <input type="text" name="attr_trigger" placeholder="Ally takes damage within 10">
+              </div>
+              <div class="sheet-field">
+                <label>Distance</label>
+                <input type="text" name="attr_distance" placeholder="Melee 1 / Ranged 10">
+              </div>
+              <div class="sheet-field">
+                <label>Target</label>
+                <input type="text" name="attr_target" placeholder="1 creature">
+              </div>
+              <div class="sheet-field">
+                <label>Source</label>
+                    <select name="attr_source">
+                      <option value="None">None</option>
+                      <option value="Signature">Signature</option>
+                      <option value="Class">Class</option>
+                      <option value="Equipment">Equipment</option>
+                      <option value="Race">Race</option>
+                      <option value="Other">Other</option>
+                    </select>
+              </div>
+            </div>
+            <div class="sheet-field">
+              <label>Effect</label>
+              <textarea name="attr_effect" placeholder="Ability effect text..."></textarea>
+            </div>
+            <details class="sheet-powerroll-details">
+              <summary>&#9660; Power Roll</summary>
+              <div class="sheet-powerroll-body">
+                <div class="sheet-pr-config-row">
+                  <div class="sheet-pr-config">
+                    <label>Characteristic</label>
+                    <select name="attr_mods">
+                      <option value="none">None</option>
+                      <option value="might">Might</option>
+                      <option value="agility">Agility</option>
+                      <option value="reason">Reason</option>
+                      <option value="intuition">Intuition</option>
+                      <option value="presence">Presence</option>
+                    </select>
+                  </div>
+                  <input type="hidden" name="attr_pr_char_value" value="0">
+                  
+                </div>
+                <div class="sheet-pr-tiers">
+                  <div class="sheet-pr-tier sheet-tier1">
+                    <label>Tier I (&#8804;11)</label>
+                    <input type="text" name="attr_tier1dmg" placeholder="Tier 1 Damage..." class="">
+                    <textarea name="attr_tier1desc" placeholder="Tier 1 Special Effects..."></textarea>
+                  </div>
+                  <div class="sheet-pr-tier sheet-tier2">
+                    <label>Tier II (12-16)</label>
+                    <input type="text" name="attr_tier2dmg" placeholder="Tier 2 Damage..." class="">
+                    <textarea name="attr_tier2desc" placeholder="Tier 2 Special Effects..."></textarea>
+                  </div>
+                  <div class="sheet-pr-tier sheet-tier3">
+                    <label>Tier III (17+)</label>
+                    <input type="text" name="attr_tier3dmg" placeholder="Tier 3 Damage..." class="">
+                    <textarea name="attr_tier3desc" placeholder="Tier 3 Special Effects..."></textarea>
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+        </details>
+      </fieldset>
+    </div>
+ 
+    <!-- ───────────── NPC Traits ───────────── -->
+    <div class="sheet-section sheet-abilities-section">
+      <h2>NPC Abilities and Traits</h2>
+      <fieldset class="repeating_npctraits">
         <details class="sheet-action-details">
           <summary>
             &#9660; 
@@ -1044,78 +1138,6 @@
             </details>
           </div>
         </details>
-      </fieldset>
-    </div>
- 
-    <!-- ───────────── NPC FREE TRIGGERED ACTIONS ───────────── -->
-    <div class="sheet-section sheet-abilities-section">
-      <h2>Free Triggered Actions</h2>
-      <fieldset class="repeating_npcfreetriggered">
-        <div class="sheet-ability-row">
-          <div class="sheet-ability-header">
-            <input type="text" name="attr_ability_name" placeholder="Ability Name" class="sheet-ability-name">
-            <input type="text" name="attr_ability_cost" placeholder="Cost" class="sheet-ability-cost">
-            <input type="text" name="attr_ability_keywords" placeholder="Keywords" class="sheet-ability-keywords">
-          </div>
-          <div class="sheet-ability-meta">
-            <div class="sheet-field-inline">
-              <label>Distance</label>
-              <input type="text" name="attr_ability_distance" placeholder="Melee 1 / Ranged 10">
-            </div>
-            <div class="sheet-field-inline">
-              <label>Target</label>
-              <input type="text" name="attr_ability_target" placeholder="1 creature">
-            </div>
-            <div class="sheet-field-inline sheet-field-trigger">
-              <label>Trigger</label>
-              <input type="text" name="attr_ability_trigger" placeholder="When does this trigger?">
-            </div>
-          </div>
-          <div class="sheet-field">
-            <label>Effect</label>
-            <textarea name="attr_ability_effect" placeholder="Ability effect text..."></textarea>
-          </div>
-          <details class="sheet-powerroll-details">
-            <summary>&#9660; Power Roll</summary>
-            <div class="sheet-powerroll-body">
-              <div class="sheet-pr-config-row">
-                <div class="sheet-pr-config">
-                  <label>Characteristic</label>
-                  <select name="attr_pr_characteristic">
-                    <option value="npc_might">MGT — Might</option>
-                    <option value="npc_agility">AGL — Agility</option>
-                    <option value="npc_reason">REA — Reason</option>
-                    <option value="npc_intuition">INU — Intuition</option>
-                    <option value="npc_presence">PRS — Presence</option>
-                  </select>
-                </div>
-                <div class="sheet-pr-config">
-                  <label>Extra Bonus</label>
-                  <input type="number" name="attr_pr_bonus" value="0">
-                </div>
-                <input type="hidden" name="attr_pr_char_value" value="0">
-                <button type="roll" class="sheet-roll-btn no-dice-icon" name="roll_powerroll"
-                  value="&{template:default} {{name=@{ability_name} — Power Roll}} {{Roll=[[2d10+@{pr_char_value}+@{pr_bonus}]]}} {{Tier 1 (11 or less)=@{pr_tier1}}} {{Tier 2 (12-16)=@{pr_tier2}}} {{Tier 3 (17+)=@{pr_tier3}}}">
-                  Roll 2d10
-                </button>
-              </div>
-              <div class="sheet-pr-tiers">
-                <div class="sheet-pr-tier sheet-tier1">
-                  <label>&#8804;11 — Tier 1</label>
-                  <textarea name="attr_pr_tier1" placeholder="Tier 1 result..."></textarea>
-                </div>
-                <div class="sheet-pr-tier sheet-tier2">
-                  <label>12–16 — Tier 2</label>
-                  <textarea name="attr_pr_tier2" placeholder="Tier 2 result..."></textarea>
-                </div>
-                <div class="sheet-pr-tier sheet-tier3">
-                  <label>17+ — Tier 3</label>
-                  <textarea name="attr_pr_tier3" placeholder="Tier 3 result..."></textarea>
-                </div>
-              </div>
-            </div>
-          </details>
-        </div>
       </fieldset>
     </div>
  
@@ -1553,6 +1575,103 @@
     });
   }
 
+  // --- Helper: build a power roll text string for a repeating section row ---
+  // Returns a Promise that resolves with the complete rollText string.
+  function buildNPCPowerRollText(sectionName, rowid, templateName, category) {
+    return new Promise((resolve) => {
+      getAttrs([
+        'npc_edge_bane',
+        `${sectionName}_${rowid}_pr_char_value`,
+        `${sectionName}_${rowid}_name`,
+        `${sectionName}_${rowid}_keywords`,
+        `${sectionName}_${rowid}trigger`,
+        `${sectionName}_${rowid}_source`,
+        `${sectionName}_${rowid}_distance`,
+        `${sectionName}_${rowid}_target`,
+        `${sectionName}_${rowid}_cost`,
+        `${sectionName}_${rowid}_effect`,
+        `${sectionName}_${rowid}_mods`,
+        `${sectionName}_${rowid}_tier1dmg`,
+        `${sectionName}_${rowid}_tier1desc`,
+        `${sectionName}_${rowid}_tier2dmg`,
+        `${sectionName}_${rowid}_tier2desc`,
+        `${sectionName}_${rowid}_tier3dmg`,
+        `${sectionName}_${rowid}_tier3desc`
+      ], function(values) {
+        console.log("Values for Power Roll:", values);
+
+        let rollText = "&{template:" + templateName + "}" +
+          "{{name=@{characterName}}}" +
+          `{{roll-type=@{${sectionName}_${rowid}_name}}}` +
+          `{{category=` + category + `}}` +
+          `{{cost=@{${sectionName}_${rowid}_cost}}}` +
+          `{{effect=@{${sectionName}_${rowid}_effect}}}` +
+          `{{keywords=@{${sectionName}_${rowid}_keywords}}}` +
+          `{{source=@{${sectionName}_${rowid}_source}}}` +
+          `{{distance=@{${sectionName}_${rowid}_distance}}}` +
+          `{{target=@{${sectionName}_${rowid}_target}}}` +
+          `{{trigger=@{${sectionName}_${rowid}_trigger}}}` +
+          `{{mods=@{${sectionName}_${rowid}_mods}}}` +
+          `{{tier1-damage=@{${sectionName}_${rowid}_tier1dmg}}}` +
+          `{{tier2-damage=@{${sectionName}_${rowid}_tier2dmg}}}` +
+          `{{tier3-damage=@{${sectionName}_${rowid}_tier3dmg}}}` +
+          `{{tier1-effect=@{${sectionName}_${rowid}_tier1desc}}}` +
+          `{{tier2-effect=@{${sectionName}_${rowid}_tier2desc}}}` +
+          `{{tier3-effect=@{${sectionName}_${rowid}_tier3desc}}}`+
+          `{{critical=[[0]]}}` +
+          `{{tierresult=[[0]]}}`;
+
+        //See if all the damage and effects for the tiers are empty - if so, use the simpler roll template that doesn't have damage/effect fields
+        const noTier = allTiersEmpty(values, sectionName, rowid);
+        rollText = rollText +"{{notierresults=[[" + noTier + "]]}}";
+        
+
+          // Add the die roll component
+        let rollVal = "[[2d10";
+
+        // Get the Attribute Bonus if any
+        const attribShort = getAttribShortName(values[`${sectionName}_${rowid}_mods`]);
+        console.log("Attribute for roll: " + attribShort);
+        if (attribShort) {
+          if (attribShort === "none") {
+            // Do nothing since there is no attribute
+          } else {
+            rollVal += ` + @{${attribShort}} [${attribShort}]`;
+          }
+        }
+
+        // Check for Edges or Banes
+        const edgeBane = values["npc_edge_bane"];
+        if (edgeBane == "-2") {
+          rollText += "{{EdgeBane= Double Bane - Tier was decreased by 1}}";
+        } else if (edgeBane == "-1") {
+          rollVal += " - 2 [Bane]";
+        } else if (edgeBane == "1") {
+          rollVal += " + 2 [Edge]";
+        } else if (edgeBane == "2") {
+          rollText += "{{EdgeBane= Double Edge - Tier was increased by 1}}";
+        }
+
+        // Finalize the roll formula
+        rollVal += "]]";
+        rollText += "{{roll=" + rollVal + "}}";
+        console.log("Power Roll text = " + rollText);
+
+        startRoll(rollText, (results) => {
+            console.log("In Power Roll startRoll");
+            console.log("Results: " + JSON.stringify(results));
+            rolldata = {};
+            rolldata.critical = isCrit(results.results.roll.dice[0], results.results.roll.dice[1]);
+            rolldata.tierresult = getTier(results.results.roll.result, edgeBane);
+            finishRoll(results.rollId, rolldata);
+            console.log("Rolldata: " + JSON.stringify(rolldata));
+        });
+
+        resolve(rollText);
+      });
+    });
+  }
+
   // ── Recovery Value (stamina_max / 3, rounded down) ────────────────────────
   on('change:stamina_max sheet:opened', function() {
     getAttrs(['stamina_max'], function(v) {
@@ -1803,7 +1922,7 @@
 
 
     ////////////////////////////////////////////////
-    // Power Roll action from repeating actions events
+    // CAPTURE BUTTON CLICKS IN PC REPEATING SECTIONS 
     ////////////////////////////////////////////////
      on ('clicked:repeating_actions clicked:repeating_traits clicked:repeating_maneuvers clicked:repeating_triggered', (event) => {
         console.log("Starting event in Repeating actions click handler");
@@ -1852,7 +1971,55 @@
 
      });
 
+    ////////////////////////////////////////////////
+    // CAPTURE BUTTON CLICKS IN NPC REPEATING SECTIONS
+    ////////////////////////////////////////////////
+     on ('clicked:repeating_npcactions clicked:repeating_npctraits clicked:repeating_npcmaneuvers clicked:repeating_npctriggered', (event) => {
+        console.log("Starting event in Repeating actions click handler");
+        console.log(event);
+
+        // Get the button name to determine which roll template to use and what category to assign to the roll
+        const repeatingSection = getRepeatingSection(event);
+
+        let sectionText;
      
+        if (repeatingSection === "repeating_npcactions") {
+            sectionText = "Action";
+        } else if (repeatingSection === "repeating_npcmaneuvers") {
+            sectionText = "Maneuver";
+        } else if (repeatingSection === "repeating_npctriggered") {
+            sectionText = "Triggered Action";
+        } else if (repeatingSection === "repeating_npcfreetriggered") {
+            sectionText = "Free Triggered Action";
+        } else if (repeatingSection === "repeating_npctraits") {
+            sectionText = "Trait";
+        } else {
+            console.log("Unknown repeating section: " + repeatingSection);
+            return;
+        }
+
+        const buttonName = getButtonName(event);
+
+        let templateName;
+
+        if(buttonName === "roll_roll"){
+            console.log("AbilitiesPower Roll button clicked");
+            templateName = "drawsteelpowerroll";
+        }else if(buttonName === "roll_chat"){
+            console.log("Abilities Chat clicked: " + buttonName);
+            templateName = "drawsteeldesc";
+        }else{
+            console.log("Unknown button clicked: " + buttonName);
+            return;
+        }
+
+        const rowid = getRowId(event);
+
+        buildNPCPowerRollText(repeatingSection, rowid, templateName, sectionText).then((rollText) => {
+            
+        });
+
+     });
     
 
 </script>
