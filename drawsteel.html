@@ -241,7 +241,10 @@
                 <label>Source</label>
                     <select name="attr_source">
                       <option value="None">None</option>
+                      <option value="Basic">Basic</option>
                       <option value="Signature">Signature</option>
+                      <option value="Heroic">Heroic</option>
+                      <option value="Kit">Kit</option>
                       <option value="Class">Class</option>
                       <option value="Equipment">Equipment</option>
                       <option value="Race">Race</option>
@@ -342,7 +345,10 @@
                 <label>Source</label>
                     <select name="attr_source">
                       <option value="None">None</option>
+                      <option value="Basic">Basic</option>
                       <option value="Signature">Signature</option>
+                      <option value="Heroic">Heroic</option>
+                      <option value="Kit">Kit</option>
                       <option value="Class">Class</option>
                       <option value="Equipment">Equipment</option>
                       <option value="Race">Race</option>
@@ -438,7 +444,10 @@
                 <label>Source</label>
                     <select name="attr_source">
                       <option value="None">None</option>
+                      <option value="Basic">Basic</option>
                       <option value="Signature">Signature</option>
+                      <option value="Heroic">Heroic</option>
+                      <option value="Kit">Kit</option>
                       <option value="Class">Class</option>
                       <option value="Equipment">Equipment</option>
                       <option value="Race">Race</option>
@@ -531,10 +540,14 @@
                 <label>Source</label>
                     <select name="attr_source">
                       <option value="None">None</option>
+                      <option value="Basic">Basic</option>
                       <option value="Signature">Signature</option>
+                      <option value="Heroic">Heroic</option>
+                      <option value="Kit">Kit</option>
                       <option value="Class">Class</option>
                       <option value="Equipment">Equipment</option>
                       <option value="Race">Race</option>
+                      <option value="Performance">Performance</option>
                       <option value="Other">Other</option>
                     </select>
               </div>
@@ -841,6 +854,10 @@
         <div class="sheet-stat-block">
           <label>Size</label>
           <input type="text" name="attr_npc_size" placeholder="1M">
+        </div>
+        <div class="sheet-stat-block">
+          <button type="roll"  class="free-strike-button" value="&{template:drawsteelpowerroll}{{name=@{npc_name}}}{{roll-type=Free Strike}}{{effect=Damage: [[@{npc_free_strike}]]}}">Free Strike</button>
+          <input type="text" name="attr_npc_free_strike" placeholder="Free strike...">
         </div>
       </div>
     </div>
@@ -1320,9 +1337,11 @@
       {{#keywords}}<div class="sheet-rt-char-name">{{keywords}}</div>{{/keywords}}
       {{#category}}<div class="sheet-rt-cost">{{category}}</div>{{/category}}
     </div>
+    {{#cost}}
     <div class="sheet-rt-description-row">
       <span class="sheet-rt-field-label">Cost: </span> {{cost}}
     </div>
+    {{/cost}}
     {{#mods}}
        <div class="sheet-rt-description-row">
         <span class="sheet-rt-field-label">Modifiers: </span> {{mods}}
@@ -1448,6 +1467,9 @@
 
   </div>
 </rolltemplate>
+
+<!-- TODO drawsteelprayer Templat-->
+<!-- TODO drawsteelnpcfreestrike Templat-->
  
 <!-- ═══════════════════════════════════════
      SHEET WORKERS
@@ -1502,7 +1524,7 @@
       'none': 'none',
       'stamina': 'sta',
       'might': 'mgt',
-      'agility': 'agi',
+      'agility': 'agl',
       'reason': 'rea',
       'intuition': 'inu',
       'presence': 'prs'
