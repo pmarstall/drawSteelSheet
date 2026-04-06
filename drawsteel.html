@@ -1263,6 +1263,12 @@
   <div class="sheet-rt-wrapper">
 
     <!-- ── Header: character name + ability name + cost ── -->
+    {{#npc-name}}
+    <div class="sheet-rt-npc-header">
+      <div class="sheet-rt-npc-name">{{npc-name}}</div>
+    </div>
+    {{/npc-name}}
+
     <div class="sheet-rt-header">
       {{#name}}<div class="sheet-rt-char-name">{{name}}</div>{{/name}}
       {{#roll-type}}<div class="sheet-rt-ability-name">{{roll-type}}</div>{{/roll-type}}
@@ -1464,6 +1470,37 @@
         </div>
       </div>
     {{/rollTotal() computed::tierresult 3}}
+
+  </div>
+</rolltemplate>
+
+<!-- Saving Throw Template -->
+<rolltemplate class="sheet-rolltemplate-drawsteelsave">
+  <div class="sheet-save-wrapper">
+
+    <!-- ── Header ── -->
+    <div class="sheet-save-header">
+      <div class="sheet-save-title">{{roll-type}}</div>
+      {{#char-name}}<div class="sheet-save-char-name">{{char-name}}</div>{{/char-name}}
+    </div>
+
+    <!-- ── Roll result ── -->
+    <div class="sheet-save-roll-row">
+      <span class="sheet-save-roll-label">Roll</span>
+      <span class="sheet-save-roll-value">{{roll}}</span>
+    </div>
+
+    <!-- ── Outcome ── -->
+    {{#rollLess() roll 6}}
+    <div class="sheet-save-outcome sheet-save-outcome-fail">
+      <div class="sheet-save-outcome-label">Failure!</div>
+    </div>
+    {{/rollLess() roll 6}}
+    {{#rollGreater() roll 5}}
+    <div class="sheet-save-outcome sheet-save-outcome-success">
+      <div class="sheet-save-outcome-label">Success!</div>
+    </div>
+    {{/rollGreater() roll 5}}
 
   </div>
 </rolltemplate>
@@ -1828,7 +1865,7 @@
         console.log("Values for Power Roll:", values);
 
         let rollText = "&{template:" + templateName + "}" +
-          "{{name=@{npc_Name}}}" +
+          "{{npc-name=@{npc_Name}}}" +
           `{{roll-type=@{${sectionName}_${rowid}_name}}}` +
           `{{category=` + category + `}}` +
           `{{cost=@{${sectionName}_${rowid}_cost}}}` +

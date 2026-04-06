@@ -88,6 +88,8 @@
   --ds-tier3-bg:     #f0ecf5;
   --ds-tier3-border: #7a3a8a;
   --ds-tier3-label:  #5a2e7a;
+  --ds-bg-npc:       #2a2218;
+  --ds-text-npc:     #ffecea;
 }
 
 /* ── DARK MODE — Roll20 night-mode class ──────────────────────────────── */
@@ -1219,6 +1221,16 @@ button[type="roll"]::before {
   padding: 8px 12px 7px;
 }
 
+/* ── NPC Header ── */
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-npc-header,
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-npc-header,
+.sheet-rolltemplate-drawsteelabilitytest .sheet-rt-npc-header {
+  background: var(--ds-bg-npc);
+  color: var(--ds-text-npc);
+  border-bottom: 2px solid var(--ds-accent);
+  padding: 8px 12px 7px;
+}
+
 .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-char-name,
 .sheet-rolltemplate-drawsteeldesc .sheet-rt-char-name,
 .sheet-rolltemplate-drawsteelabilitytest .sheet-rt-char-name {
@@ -1227,6 +1239,16 @@ button[type="roll"]::before {
   text-transform: uppercase;
   letter-spacing: 0.07em;
   color: var(--ds-accent-text);
+}
+
+.sheet-rolltemplate-drawsteelpowerroll .sheet-rt-npc-name,
+.sheet-rolltemplate-drawsteeldesc .sheet-rt-npc-name,
+.sheet-rolltemplate-drawsteelabilitytest .sheet-rt-npc-name {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--ds-text-npc);
 }
 
 .sheet-rolltemplate-drawsteelpowerroll .sheet-rt-ability-name,
@@ -1773,4 +1795,172 @@ body.night-mode .sheet-rolltemplate-drawsteelinitiative .sheet-init-wrapper {
 }
 .sheet-rolltemplate-drawsteelinitiative .sheet-init-outcome-good .sheet-init-outcome-label {
   color: var(--in-good-label);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   SAVING THROW TEMPLATE — drawsteelsave
+   Clean and decisive: neutral header, red failure, green success
+══════════════════════════════════════════════════════════════════════ */
+
+/* Light-mode variable scope */
+.sheet-rolltemplate-drawsteelsave .sheet-save-wrapper {
+  --sv-bg:              #f4f4f4;
+  --sv-header-bg:       #2e2e2e;
+  --sv-header-text:     #f0f0f0;
+  --sv-header-sub:      #a0a0a0;
+  --sv-accent:          #606060;
+  --sv-text:            #1a1a1a;
+  --sv-border:          #909090;
+  --sv-border-light:    #d0d0d0;
+  --sv-roll-bg:         #fafafa;
+  --sv-roll-label:      #505050;
+  --sv-roll-value:      #1a1a1a;
+  --sv-shadow:          rgba(0, 0, 0, 0.15);
+  /* Failure — red */
+  --sv-fail-bg:         #faeaea;
+  --sv-fail-border:     #b03030;
+  --sv-fail-label:      #8a1a1a;
+  /* Success — green */
+  --sv-success-bg:      #eaf5ea;
+  --sv-success-border:  #2a8040;
+  --sv-success-label:   #1a5c2a;
+}
+
+/* Dark-mode overrides */
+body.night-mode .sheet-rolltemplate-drawsteelsave .sheet-save-wrapper {
+  --sv-bg:              #1e1e1e;
+  --sv-header-bg:       #121212;
+  --sv-header-text:     #e0e0e0;
+  --sv-header-sub:      #707070;
+  --sv-accent:          #808080;
+  --sv-text:            #d0d0d0;
+  --sv-border:          #3a3a3a;
+  --sv-border-light:    #2a2a2a;
+  --sv-roll-bg:         #181818;
+  --sv-roll-label:      #909090;
+  --sv-roll-value:      #f0f0f0;
+  --sv-shadow:          rgba(0, 0, 0, 0.5);
+  --sv-fail-bg:         #2a0e0e;
+  --sv-fail-border:     #c04040;
+  --sv-fail-label:      #e07070;
+  --sv-success-bg:      #0a1e0e;
+  --sv-success-border:  #3aaa58;
+  --sv-success-label:   #60cc80;
+}
+
+@media (prefers-color-scheme: dark) {
+  .sheet-rolltemplate-drawsteelsave .sheet-save-wrapper {
+    --sv-bg:              #1e1e1e;
+    --sv-header-bg:       #121212;
+    --sv-header-text:     #e0e0e0;
+    --sv-header-sub:      #707070;
+    --sv-accent:          #808080;
+    --sv-text:            #d0d0d0;
+    --sv-border:          #3a3a3a;
+    --sv-border-light:    #2a2a2a;
+    --sv-roll-bg:         #181818;
+    --sv-roll-label:      #909090;
+    --sv-roll-value:      #f0f0f0;
+    --sv-shadow:          rgba(0, 0, 0, 0.5);
+    --sv-fail-bg:         #2a0e0e;
+    --sv-fail-border:     #c04040;
+    --sv-fail-label:      #e07070;
+    --sv-success-bg:      #0a1e0e;
+    --sv-success-border:  #3aaa58;
+    --sv-success-label:   #60cc80;
+  }
+}
+
+/* ── Wrapper ── */
+.sheet-rolltemplate-drawsteelsave .sheet-save-wrapper {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 15px;
+  color: var(--sv-text);
+  background: var(--sv-bg);
+  border: 2px solid var(--sv-border);
+  border-radius: 4px;
+  overflow: hidden;
+  min-width: 250px;
+  max-width: 380px;
+  box-shadow: 0 3px 10px var(--sv-shadow);
+}
+
+/* ── Header ── */
+.sheet-rolltemplate-drawsteelsave .sheet-save-header {
+  background: var(--sv-header-bg);
+  border-bottom: 3px solid var(--sv-accent);
+  padding: 10px 14px 9px;
+  text-align: center;
+}
+
+.sheet-rolltemplate-drawsteelsave .sheet-save-title {
+  font-size: 14px;
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: 0.12em;
+  color: var(--sv-header-text);
+}
+
+.sheet-rolltemplate-drawsteelsave .sheet-save-char-name {
+  font-size: 12px;
+  color: var(--sv-header-sub);
+  font-style: italic;
+  margin-top: 3px;
+  letter-spacing: 0.04em;
+}
+
+/* ── Roll row ── */
+.sheet-rolltemplate-drawsteelsave .sheet-save-roll-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  background: var(--sv-roll-bg);
+  border-bottom: 1px solid var(--sv-border-light);
+  justify-content: center;
+}
+
+.sheet-rolltemplate-drawsteelsave .sheet-save-roll-label {
+  font-size: 12px;
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: 0.1em;
+  color: var(--sv-roll-label);
+}
+
+.sheet-rolltemplate-drawsteelsave .sheet-save-roll-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--sv-roll-value);
+}
+
+/* ── Outcome banner ── */
+.sheet-rolltemplate-drawsteelsave .sheet-save-outcome {
+  padding: 10px 16px;
+  text-align: center;
+}
+
+.sheet-rolltemplate-drawsteelsave .sheet-save-outcome-label {
+  font-size: 13px;
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: 0.1em;
+}
+
+/* Failure */
+.sheet-rolltemplate-drawsteelsave .sheet-save-outcome-fail {
+  background: var(--sv-fail-bg);
+  border-top: 3px solid var(--sv-fail-border);
+}
+.sheet-rolltemplate-drawsteelsave .sheet-save-outcome-fail .sheet-save-outcome-label {
+  color: var(--sv-fail-label);
+}
+
+/* Success */
+.sheet-rolltemplate-drawsteelsave .sheet-save-outcome-success {
+  background: var(--sv-success-bg);
+  border-top: 3px solid var(--sv-success-border);
+}
+.sheet-rolltemplate-drawsteelsave .sheet-save-outcome-success .sheet-save-outcome-label {
+  color: var(--sv-success-label);
 }
