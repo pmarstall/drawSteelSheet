@@ -1468,7 +1468,44 @@
   </div>
 </rolltemplate>
 
-<!-- TODO drawsteelprayer Templat-->
+<!-- Prayer Check -->
+<rolltemplate class="sheet-rolltemplate-drawsteelprayer">
+  <div class="sheet-prayer-wrapper">
+
+    <!-- ── Header ── -->
+    <div class="sheet-prayer-header">
+      <div class="sheet-prayer-title">Prayer to the Gods</div>
+      {{#name}}<div class="sheet-prayer-char-name">{{name}}</div>{{/name}}
+    </div>
+
+    <!-- ── Roll result ── -->
+    <div class="sheet-prayer-roll-row">
+      <span class="sheet-prayer-roll-label">Roll</span>
+      <span class="sheet-prayer-roll-value">{{roll}}</span>
+    </div>
+
+    <!-- ── Outcomes ── -->
+    {{#rollTotal() roll 1}}
+    <div class="sheet-prayer-outcome sheet-prayer-outcome-1">
+      <div class="sheet-prayer-outcome-label">Anger the Gods</div>
+      <div class="sheet-prayer-outcome-text">Gain 2 Piety but take {{damroll}} damage.</div>
+    </div>
+    {{/rollTotal() roll 1}}
+    {{#rollTotal() roll 2}}
+    <div class="sheet-prayer-outcome sheet-prayer-outcome-2">
+      <div class="sheet-prayer-outcome-label">Blessed</div>
+      <div class="sheet-prayer-outcome-text">Gain 3 Piety.</div>
+    </div>
+    {{/rollTotal() roll 2}}
+    {{#rollTotal() roll 3}}
+    <div class="sheet-prayer-outcome sheet-prayer-outcome-3">
+      <div class="sheet-prayer-outcome-label">Divinely Favored</div>
+      <div class="sheet-prayer-outcome-text">Gain 5 Piety and can activate a domain effect of your choice.</div>
+    </div>
+    {{/rollTotal() roll 3}}
+
+  </div>
+</rolltemplate>
 <!-- TODO drawsteelnpcfreestrike Templat-->
  
 <!-- ═══════════════════════════════════════

@@ -1404,3 +1404,204 @@ button[type="roll"]::before {
   border-top: 1px solid var(--ds-border-light);
   border-bottom: 1px solid var(--ds-border-light);
 }
+
+
+/* ══════════════════════════════════════════════════════════════════════
+   PRAYER ROLL TEMPLATE — drawsteelprayer
+   Religious aesthetic: deep indigo vestments, sacred gold, warm parchment
+══════════════════════════════════════════════════════════════════════ */
+
+/* Light-mode variable scope */
+.sheet-rolltemplate-drawsteelprayer .sheet-prayer-wrapper {
+  --pr-bg:              #f5efd8;
+  --pr-bg-section:      #fdf8ef;
+  --pr-header-bg:       #221050;
+  --pr-header-text:     #f0d878;
+  --pr-header-sub:      #b8a8e0;
+  --pr-accent:          #b8902a;
+  --pr-text:            #2a1e0e;
+  --pr-text-muted:      #6a5840;
+  --pr-border:          #c0a040;
+  --pr-border-light:    #e0cc88;
+  --pr-roll-bg:         #fffbf0;
+  --pr-roll-label:      #7a5820;
+  --pr-roll-value:      #2a1e0e;
+  --pr-shadow:          rgba(34, 16, 80, 0.18);
+  /* Outcome 1 — mixed (piety + damage): subdued amber */
+  --pr-out1-bg:         #f2e4cc;
+  --pr-out1-border:     #8a5c28;
+  --pr-out1-label:      #7a3c10;
+  /* Outcome 2 — blessed: warm gold */
+  --pr-out2-bg:         #f5f0d0;
+  --pr-out2-border:     #a88030;
+  --pr-out2-label:      #6a5010;
+  /* Outcome 3 — divinely favored: radiant gold */
+  --pr-out3-bg:         #fdf5c0;
+  --pr-out3-border:     #c8a010;
+  --pr-out3-label:      #705800;
+}
+
+/* Dark-mode overrides */
+body.night-mode .sheet-rolltemplate-drawsteelprayer .sheet-prayer-wrapper {
+  --pr-bg:              #18102e;
+  --pr-bg-section:      #201840;
+  --pr-header-bg:       #0e0820;
+  --pr-header-text:     #e8cc60;
+  --pr-header-sub:      #9888c8;
+  --pr-accent:          #c8a030;
+  --pr-text:            #e8e0d0;
+  --pr-text-muted:      #a09080;
+  --pr-border:          #6a5020;
+  --pr-border-light:    #3a2c10;
+  --pr-roll-bg:         #1e1830;
+  --pr-roll-label:      #c8a830;
+  --pr-roll-value:      #f0e8c0;
+  --pr-shadow:          rgba(0, 0, 0, 0.45);
+  --pr-out1-bg:         #2c1808;
+  --pr-out1-border:     #8a5828;
+  --pr-out1-label:      #c88050;
+  --pr-out2-bg:         #241c04;
+  --pr-out2-border:     #a08028;
+  --pr-out2-label:      #c8a850;
+  --pr-out3-bg:         #281e00;
+  --pr-out3-border:     #c8a010;
+  --pr-out3-label:      #e0c040;
+}
+
+@media (prefers-color-scheme: dark) {
+  .sheet-rolltemplate-drawsteelprayer .sheet-prayer-wrapper {
+    --pr-bg:              #18102e;
+    --pr-bg-section:      #201840;
+    --pr-header-bg:       #0e0820;
+    --pr-header-text:     #e8cc60;
+    --pr-header-sub:      #9888c8;
+    --pr-accent:          #c8a030;
+    --pr-text:            #e8e0d0;
+    --pr-text-muted:      #a09080;
+    --pr-border:          #6a5020;
+    --pr-border-light:    #3a2c10;
+    --pr-roll-bg:         #1e1830;
+    --pr-roll-label:      #c8a830;
+    --pr-roll-value:      #f0e8c0;
+    --pr-shadow:          rgba(0, 0, 0, 0.45);
+    --pr-out1-bg:         #2c1808;
+    --pr-out1-border:     #8a5828;
+    --pr-out1-label:      #c88050;
+    --pr-out2-bg:         #241c04;
+    --pr-out2-border:     #a08028;
+    --pr-out2-label:      #c8a850;
+    --pr-out3-bg:         #281e00;
+    --pr-out3-border:     #c8a010;
+    --pr-out3-label:      #e0c040;
+  }
+}
+
+/* ── Wrapper ── */
+.sheet-rolltemplate-drawsteelprayer .sheet-prayer-wrapper {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 15px;
+  color: var(--pr-text);
+  background: var(--pr-bg);
+  border: 2px solid var(--pr-border);
+  border-radius: 4px;
+  overflow: hidden;
+  min-width: 250px;
+  max-width: 430px;
+  box-shadow: 0 3px 10px var(--pr-shadow);
+}
+
+/* ── Header: deep indigo with gold text ── */
+.sheet-rolltemplate-drawsteelprayer .sheet-prayer-header {
+  background: var(--pr-header-bg);
+  border-bottom: 3px solid var(--pr-accent);
+  padding: 10px 14px 9px;
+  text-align: center;
+}
+
+.sheet-rolltemplate-drawsteelprayer .sheet-prayer-title {
+  font-size: 14px;
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: 0.12em;
+  color: var(--pr-header-text);
+}
+
+.sheet-rolltemplate-drawsteelprayer .sheet-prayer-char-name {
+  font-size: 12px;
+  color: var(--pr-header-sub);
+  font-style: italic;
+  margin-top: 3px;
+  letter-spacing: 0.04em;
+}
+
+/* ── Roll row ── */
+.sheet-rolltemplate-drawsteelprayer .sheet-prayer-roll-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  background: var(--pr-roll-bg);
+  border-bottom: 1px solid var(--pr-border-light);
+  justify-content: center;
+}
+
+.sheet-rolltemplate-drawsteelprayer .sheet-prayer-roll-label {
+  font-size: 12px;
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: 0.1em;
+  color: var(--pr-roll-label);
+}
+
+.sheet-rolltemplate-drawsteelprayer .sheet-prayer-roll-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--pr-roll-value);
+}
+
+/* ── Outcome blocks ── */
+.sheet-rolltemplate-drawsteelprayer .sheet-prayer-outcome {
+  padding: 9px 14px 10px 18px;
+  border-bottom: 1px solid var(--pr-border-light);
+}
+
+.sheet-rolltemplate-drawsteelprayer .sheet-prayer-outcome-label {
+  font-size: 12px;
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: 0.08em;
+  margin-bottom: 3px;
+}
+
+.sheet-rolltemplate-drawsteelprayer .sheet-prayer-outcome-text {
+  font-size: 14px;
+  color: var(--pr-text);
+  line-height: 1.4;
+}
+
+/* Outcome 1 — Partial Blessing (mixed: piety + penalty) */
+.sheet-rolltemplate-drawsteelprayer .sheet-prayer-outcome-1 {
+  background: var(--pr-out1-bg);
+  border-left: 4px solid var(--pr-out1-border);
+}
+.sheet-rolltemplate-drawsteelprayer .sheet-prayer-outcome-1 .sheet-prayer-outcome-label {
+  color: var(--pr-out1-label);
+}
+
+/* Outcome 2 — Blessed */
+.sheet-rolltemplate-drawsteelprayer .sheet-prayer-outcome-2 {
+  background: var(--pr-out2-bg);
+  border-left: 4px solid var(--pr-out2-border);
+}
+.sheet-rolltemplate-drawsteelprayer .sheet-prayer-outcome-2 .sheet-prayer-outcome-label {
+  color: var(--pr-out2-label);
+}
+
+/* Outcome 3 — Divinely Favored */
+.sheet-rolltemplate-drawsteelprayer .sheet-prayer-outcome-3 {
+  background: var(--pr-out3-bg);
+  border-left: 4px solid var(--pr-out3-border);
+}
+.sheet-rolltemplate-drawsteelprayer .sheet-prayer-outcome-3 .sheet-prayer-outcome-label {
+  color: var(--pr-out3-label);
+}
