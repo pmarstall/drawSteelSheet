@@ -1605,3 +1605,172 @@ body.night-mode .sheet-rolltemplate-drawsteelprayer .sheet-prayer-wrapper {
 .sheet-rolltemplate-drawsteelprayer .sheet-prayer-outcome-3 .sheet-prayer-outcome-label {
   color: var(--pr-out3-label);
 }
+
+/* ══════════════════════════════════════════════════════════════════════
+   INITIATIVE ROLL TEMPLATE — drawsteelinitiative
+   Tactical aesthetic: steel blue header, red/green outcome banners
+══════════════════════════════════════════════════════════════════════ */
+
+/* Light-mode variable scope */
+.sheet-rolltemplate-drawsteelinitiative .sheet-init-wrapper {
+  --in-bg:              #eef2f7;
+  --in-header-bg:       #1c2e4a;
+  --in-header-text:     #d0e8ff;
+  --in-header-sub:      #8ab4d8;
+  --in-accent:          #3a6fa0;
+  --in-text:            #1a2535;
+  --in-border:          #7a9ec0;
+  --in-border-light:    #c0d4e8;
+  --in-roll-bg:         #f4f8fc;
+  --in-roll-label:      #3a5a80;
+  --in-roll-value:      #1a2535;
+  --in-shadow:          rgba(28, 46, 74, 0.18);
+  /* Bad guys first — danger red */
+  --in-bad-bg:          #faeaea;
+  --in-bad-border:      #b03030;
+  --in-bad-label:       #8a1a1a;
+  /* Heroes first — victory green */
+  --in-good-bg:         #eaf5ea;
+  --in-good-border:     #2a8040;
+  --in-good-label:      #1a5c2a;
+}
+
+/* Dark-mode overrides */
+body.night-mode .sheet-rolltemplate-drawsteelinitiative .sheet-init-wrapper {
+  --in-bg:              #111c2a;
+  --in-header-bg:       #0a1220;
+  --in-header-text:     #a8d0f0;
+  --in-header-sub:      #5888b0;
+  --in-accent:          #4a80b8;
+  --in-text:            #c8d8e8;
+  --in-border:          #2a4060;
+  --in-border-light:    #1a2c40;
+  --in-roll-bg:         #0e1828;
+  --in-roll-label:      #7aaad0;
+  --in-roll-value:      #d8ecff;
+  --in-shadow:          rgba(0, 0, 0, 0.5);
+  --in-bad-bg:          #2a0e0e;
+  --in-bad-border:      #c04040;
+  --in-bad-label:       #e07070;
+  --in-good-bg:         #0a1e0e;
+  --in-good-border:     #3aaa58;
+  --in-good-label:      #60cc80;
+}
+
+@media (prefers-color-scheme: dark) {
+  .sheet-rolltemplate-drawsteelinitiative .sheet-init-wrapper {
+    --in-bg:              #111c2a;
+    --in-header-bg:       #0a1220;
+    --in-header-text:     #a8d0f0;
+    --in-header-sub:      #5888b0;
+    --in-accent:          #4a80b8;
+    --in-text:            #c8d8e8;
+    --in-border:          #2a4060;
+    --in-border-light:    #1a2c40;
+    --in-roll-bg:         #0e1828;
+    --in-roll-label:      #7aaad0;
+    --in-roll-value:      #d8ecff;
+    --in-shadow:          rgba(0, 0, 0, 0.5);
+    --in-bad-bg:          #2a0e0e;
+    --in-bad-border:      #c04040;
+    --in-bad-label:       #e07070;
+    --in-good-bg:         #0a1e0e;
+    --in-good-border:     #3aaa58;
+    --in-good-label:      #60cc80;
+  }
+}
+
+/* ── Wrapper ── */
+.sheet-rolltemplate-drawsteelinitiative .sheet-init-wrapper {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 15px;
+  color: var(--in-text);
+  background: var(--in-bg);
+  border: 2px solid var(--in-border);
+  border-radius: 4px;
+  overflow: hidden;
+  min-width: 250px;
+  max-width: 380px;
+  box-shadow: 0 3px 10px var(--in-shadow);
+}
+
+/* ── Header ── */
+.sheet-rolltemplate-drawsteelinitiative .sheet-init-header {
+  background: var(--in-header-bg);
+  border-bottom: 3px solid var(--in-accent);
+  padding: 10px 14px 9px;
+  text-align: center;
+}
+
+.sheet-rolltemplate-drawsteelinitiative .sheet-init-title {
+  font-size: 14px;
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: 0.14em;
+  color: var(--in-header-text);
+  text-transform: uppercase;
+}
+
+.sheet-rolltemplate-drawsteelinitiative .sheet-init-char-name {
+  font-size: 12px;
+  color: var(--in-header-sub);
+  font-style: italic;
+  margin-top: 3px;
+  letter-spacing: 0.04em;
+}
+
+/* ── Roll row ── */
+.sheet-rolltemplate-drawsteelinitiative .sheet-init-roll-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  background: var(--in-roll-bg);
+  border-bottom: 1px solid var(--in-border-light);
+  justify-content: center;
+}
+
+.sheet-rolltemplate-drawsteelinitiative .sheet-init-roll-label {
+  font-size: 12px;
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: 0.1em;
+  color: var(--in-roll-label);
+}
+
+.sheet-rolltemplate-drawsteelinitiative .sheet-init-roll-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--in-roll-value);
+}
+
+/* ── Outcome banner ── */
+.sheet-rolltemplate-drawsteelinitiative .sheet-init-outcome {
+  padding: 10px 16px;
+  text-align: center;
+}
+
+.sheet-rolltemplate-drawsteelinitiative .sheet-init-outcome-label {
+  font-size: 13px;
+  font-weight: 700;
+  font-variant: small-caps;
+  letter-spacing: 0.1em;
+}
+
+/* Bad guys first */
+.sheet-rolltemplate-drawsteelinitiative .sheet-init-outcome-bad {
+  background: var(--in-bad-bg);
+  border-top: 3px solid var(--in-bad-border);
+}
+.sheet-rolltemplate-drawsteelinitiative .sheet-init-outcome-bad .sheet-init-outcome-label {
+  color: var(--in-bad-label);
+}
+
+/* Heroes first */
+.sheet-rolltemplate-drawsteelinitiative .sheet-init-outcome-good {
+  background: var(--in-good-bg);
+  border-top: 3px solid var(--in-good-border);
+}
+.sheet-rolltemplate-drawsteelinitiative .sheet-init-outcome-good .sheet-init-outcome-label {
+  color: var(--in-good-label);
+}

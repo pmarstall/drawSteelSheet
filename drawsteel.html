@@ -1506,7 +1506,37 @@
 
   </div>
 </rolltemplate>
-<!-- TODO drawsteelnpcfreestrike Templat-->
+
+<!-- Initiative Roll Template -->
+<rolltemplate class="sheet-rolltemplate-drawsteelinitiative">
+  <div class="sheet-init-wrapper">
+
+    <!-- ── Header ── -->
+    <div class="sheet-init-header">
+      <div class="sheet-init-title">Initiative</div>
+      {{#name}}<div class="sheet-init-char-name">{{name}}</div>{{/name}}
+    </div>
+
+    <!-- ── Roll result ── -->
+    <div class="sheet-init-roll-row">
+      <span class="sheet-init-roll-label">Roll</span>
+      <span class="sheet-init-roll-value">{{roll}}</span>
+    </div>
+
+    <!-- ── Outcome ── -->
+    {{#rollLess() roll 6}}
+    <div class="sheet-init-outcome sheet-init-outcome-bad">
+      <div class="sheet-init-outcome-label">The Bad Guys go first!</div>
+    </div>
+    {{/rollLess() roll 6}}
+    {{#rollGreater() roll 5}}
+    <div class="sheet-init-outcome sheet-init-outcome-good">
+      <div class="sheet-init-outcome-label">The Heroes go first!</div>
+    </div>
+    {{/rollGreater() roll 5}}
+
+  </div>
+</rolltemplate>
  
 <!-- ═══════════════════════════════════════
      SHEET WORKERS
